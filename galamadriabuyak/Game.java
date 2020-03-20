@@ -2,14 +2,19 @@ package galamadriabuyak;
 
 public class Game {
     
+    public Game() {
+        Parser parser = new Parser();
+        IPlayer player = new Player();
+    }
     
-    private void startFight(ICharacter c1, ICharacter c2) {
-        
+    private void startFight(IPlayer player, ICharacter enemy) {
+        while (!player.isDead() && !enemy.isDead()) {
+            player.waitForInput();
+            //...
+        }
     }
     
     public static void main(String[] args) {
-        IPlayer p = new Player();
-        IMonster m = new Monster();
-        startFight(p, m);
+        new Game();
     }
 }

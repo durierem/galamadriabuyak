@@ -1,28 +1,20 @@
-# LEJEU
+# GALAMADRIABUYAK
 
 ## Synopsis
-Un dungeon crowler simple et textuel dans lequel le joueur combat des monstres
-de plus en plus puissant.
-Le but est d'arriver le plus loin possible.
+A simple dungeon crowler in which the player fights increasingly powerful
+ennemies with the power of magic cards!
 
-## Déroulement du jeu
-Le joueur commence au niveau 1 et avec 0 crédits.
-Après chaque combat victorieux, il gagne de le l'expérience et des crédits.
-Il peut alors achter des objets à la boutique disponible. Lorsqu'il monte de
-niveau, il choisit une compétence supplémentaire parmi un choix de 3 compétences
-aléatoires, ou choisi d'augmenter le niveau d'une de ses compétences.
+## Gameplay
+The player starts at level 1 and 0 credits. After each victorious fight, he
+earns experience and credits he can then spend in the shop.
 
-## Système de combat / duel
+## Combat system
+The player has a unique basic attack that can be cast once per round. Throughout
+his journey, he gets magic cards with various effects and targets that can be
+cast only once. Play wisely!
 
-Le joueur dispose d'une attaque basique qui être affectée par l'effet de cartes
-de compétences. Au début du jeu, le joueur reçoit un certain nombre de cartes
-de compétences.
-
-Les cartes ne coûtent pas de mana, sont à utilisation unique et leur niveau de
-puissance est fixé.
-
-## Interface textuelle
-
+## Textual interface
+```
 ============================ C'EST VOTRE TOUR ! ================================
 
 Tapez 'help [numéro de carte]' pour plus d'informations sur une carte.
@@ -30,22 +22,22 @@ Tapez 'use [numéro de carte]' pour utiliser une carte.
 
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
-[NOM DE L'ENNEMI]
+[CURSED SOUL]
 
 PV : 5
-Deck (2) / Main (1)
+Deck (2) / Hand (1)
 
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-[NOM DU JOUEUR]
+[PLAYER]
 
 PV: 15
-Deck (7) / Main (3)
-  1 - Âme des morts
-  2 - Marteau maniaque
-  3 - Angélique, l'ange angélique
+Deck (7) / Hand (3)
+  1 - Dead's souls
+  2 - Fussy Hammer
+  3 - Angelic, the angelic angel
 
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 > use 1
-
+```

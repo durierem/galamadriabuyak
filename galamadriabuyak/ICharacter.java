@@ -1,42 +1,41 @@
 package galamadriabuyak;
    
 /**
- * Modélise un personnage du jeu.
- * Les personnages peuvent être des ennemis ou le joueur.
+ * Represents a character of the game.
  */
 public interface ICharacter {
     
     // REQUÊTES
 
     /**
-     * Le nom du personnage.
+     * The name of this character.
      */
     String getName();
     
     /**
-     * Le nombre de points de vie restant du personnage
+     * The remaining health of this character.
      */
     int getHealth();
 
     /**
-     * Le deck du personnage.
+     * The current deck of this character.
      */
     IDeck getDeck();
 
     /**
-     * L'attaque de base du personnage.
+     * The basic attack of this character.
      */
     IBasicAttack getBasicAttack();
 
     /**
-     * Indique si le personnage est vivant.
+     * Tells if this character is dead.
      */
     boolean isDead();
 
     // COMMANDES
     
     /**
-     * Définit les points du vie du personnage à q.
+     * Sets the health of this character to q.
      * @pre
      *      q >= 0
      * @post
@@ -45,7 +44,7 @@ public interface ICharacter {
     void setHealthTo(int q);
 
     /**
-     * Augmente de q les points de vie du personnage.
+     * Increase the health of this character by q.
      * @pre
      *      q >= 0
      * @post
@@ -54,7 +53,7 @@ public interface ICharacter {
     void setHealthUp(int q);
 
     /**
-     * Diminue de q les points de vie du personnage.
+     * Lowers the health of this character by q.
      * @pre
      *      q >= 0
      * @post
