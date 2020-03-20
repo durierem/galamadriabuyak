@@ -15,10 +15,10 @@ cast only once. Play wisely!
 
 ## Textual interface
 ```
-============================ C'EST VOTRE TOUR ! ================================
+================================ YOUR TURN! ====================================
 
-Tapez 'help [numéro de carte]' pour plus d'informations sur une carte.
-Tapez 'use [numéro de carte]' pour utiliser une carte.
+Type 'help [card number] for detailed informations about a card.
+Type 'use [card number] to use a card.
 
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
