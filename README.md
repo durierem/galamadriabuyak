@@ -17,8 +17,8 @@ cast only once. Play wisely!
 ```
 ================================ YOUR TURN! ====================================
 
-Type 'help [card number] for detailed informations about a card.
-Type 'use [card number] to use a card.
+Type 'help [card number]' for detailed informations about a card.
+Type 'use [card number]' to use a card.
 
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 

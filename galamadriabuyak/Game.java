@@ -1,9 +1,11 @@
 package galamadriabuyak;
 
+import galamadriabuyak.util.*;
+
 public class Game {
     
     public Game() {
-        Parser parser = new Parser();
+        IParser parser = new Parser();
         IPlayer player = new Player();
     }
     
