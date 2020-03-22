@@ -20,43 +20,40 @@ public class Parser implements IParser {
     // COMMANDS
     
     public String getLastCommand() {
+        if (!isLastCommandLegal()) {
+            throw new AssertionError();
+        }
         return command;
     }
     
     public int getLastTargetID() {
+        if (!isLastCommandLegal()) {
+            throw new AssertionError();
+        }
         return targetID;
+    }
+    
+    public boolean isLastCommandLegal() {
+        return (command.equals(CMD_USE) || command.equals(CMD_HELP))
+            && targetID > 0;
     }
     
     public void parseInput(String input) {
         if (input == null || input.trim().equals("")) {
-            throw new AssertionError("Empty input");
+            throw new AssertionError();
         }
         StringTokenizer st = new StringTokenizer(input);
         try {
-            String cmd = st.nextToken();
-            if (!isCmdLegal(cmd)) {
-                throw new AssertionError("Unknown command");
-            } else {
-               command = cmd; 
-            }
+            command = st.nextToken(); 
             try {
-                int id = Integer.parseInt(st.nextToken());
-                if (id <= 0) {
-                    throw new AssertionError("Invalid target");
-                } else {
-                    targetID = id;
-                }
+                targetID = Integer.parseInt(st.nextToken());
             } catch (NumberFormatException e) {
-                throw new AssertionError("Not a number");
+                command = "";
+                targetID = 0;
             }
         } catch (NoSuchElementException e) {
-            throw new AssertionError("Not enough arguments");
+            command = "";
+            targetID = 0;
         }
-    }
-    
-    // TOOLS
-    
-    private boolean isCmdLegal(String cmd) {
-        return cmd.equals(CMD_USE) || cmd.equals(CMD_HELP);
     }
 }
