@@ -1,4 +1,4 @@
-package galamadriabuak;
+package galamadriabuyak;
 
 
 public interface IHand

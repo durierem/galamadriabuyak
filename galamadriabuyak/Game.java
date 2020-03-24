@@ -1,8 +1,4 @@
-package galamadriabuak;
-
- 
-
- 
+package galamadriabuyak;
 
 import galamadriabuyak.util.*;
 
