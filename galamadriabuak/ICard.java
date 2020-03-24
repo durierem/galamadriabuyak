@@ -1,33 +1,34 @@
-
-/**
- * Décrivez votre classe ICard ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class ICard
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
+public interface ICard {
+    
+    // Requests
     /**
-     * Constructeur d'objets de classe ICard
+     * Returns the name of the card.
      */
-    public ICard()
-    {
-        // initialisation des variables d'instance
-        x = 0;
-    }
-
+    String getName();
+    
     /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
+     * Returns the description of the card.
      */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
-    }
+    String getDescription();
+    
+    /**
+     * Returns trivias's card.
+     */
+    String getTrivia();
+    
+    /**
+     * Returns the array of effects.
+     */
+    IEffect[] getEffects();
+    
+    // Commands 
+    /**
+     * Apply the different effects of the cards on the different targets.
+     * 
+     * @pre
+     *      getEffects() != null 
+     *      game != null
+     * @post
+     */
+    void applyEffects(Game game);
 }

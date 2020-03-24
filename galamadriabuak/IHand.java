@@ -12,7 +12,7 @@ public interface IHand
     /**
      * Returns the nth card of the hand.
      */
-    ICard getCard(n);
+    ICard getCard(int n);
     
     
 }
