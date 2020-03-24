@@ -1,4 +1,4 @@
-package galamadriabuyak;
+ 
 
 import galamadriabuyak.util.*;
 

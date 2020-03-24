@@ -1,4 +1,4 @@
-package galamadriabuyak;
+ 
 
 /**
  * Reprensents a player.

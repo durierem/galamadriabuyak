@@ -1,4 +1,4 @@
-package galamadriabuyak.util;
+package util;
 
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;

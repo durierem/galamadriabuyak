@@ -1,4 +1,4 @@
-package galamadriabuyak;
+ 
 
 /**
  * Models a deck of size getSize(). 

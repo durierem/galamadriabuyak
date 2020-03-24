@@ -1,4 +1,4 @@
-package galamadriabuyak;
+ 
    
 /**
  * Represents a character of the game.
