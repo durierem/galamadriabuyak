@@ -1,3 +1,5 @@
+package galamadriabuak;
+
 /**
  * Models a deck of size getSizeDeck(). 
  * You can shuffle it or draw the top card.

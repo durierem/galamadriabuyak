@@ -1,4 +1,4 @@
-package util;
+package galamadriabuak.util;
 
 /**
  * A simple parser able to handle 2 commands: "use" and "help".

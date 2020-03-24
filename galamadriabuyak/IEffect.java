@@ -1,3 +1,5 @@
+package galamadriabuak;
+
 
 public interface IEffect {
     // Constants
