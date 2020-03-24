@@ -1,17 +1,15 @@
- 
-
 /**
- * Models a deck of size getSize(). 
- * You can shuffle it or draw a maximum of MAX_DRAW number of cards. 
- * Notice that getNbCard is the current number of cards.
+ * Models a deck of size getSizeDeck(). 
+ * You can shuffle it or draw the top card.
  * 
  * @inv <pre>
- *      getSize() >= 0;
- *      0 <= getNbCard() <= getSize()
+ *      getSizeDeck() >= 0;
+ *      0 <= getSizeDeck() <= MAX_CARD
  */
 public interface IDeck {
-    
     // Constants
+    
+    int MAX_CARD = 100;
     
     // Requests
     
@@ -19,36 +17,30 @@ public interface IDeck {
      * Gives the size of the deck.
      */
     int getSizeDeck();
-    
-    /**
-     * Gives the current card number in the deck.
-     */
-    int getNbCard();
-    
-    
+   
     // Commands
     
     /**
      * Shuffle the deck.
      * 
      * @pre <pre>
-     *      getNbCard() != 0
+     *      getSizeDeck() != 0
      *      
      * @post <pre>
-     *      getNbCard() = old getNbCard()
+     *      getSizeDeck() = old getSizeDeck()
      */
     void shuffleDeck();
     
     /**
-     * Draw one card of the deck.
+     * Put the top card in the given hand.
      * 
      * @pre <pre>
-     *      getNbCard() > 0
+     *      getSizeDeck() > 0
      *      
      * @post <pre>
-     *      getNbCard() = old getNbCard - 1
+     *      getSizeDeck() = old getSizeDeck - 1
      */
-    ICard drawCard();
+    void drawCard(IHand hand);
     
     /**
      * Add the given card to the deck.
@@ -57,7 +49,7 @@ public interface IDeck {
      *      c != null
      *      
      * @post <pre>
-     *      getNbCard() = old getNbCard + 1
+     *      getSizeDeck() = old getSizeDeck + 1
      */
     void addCard(ICard c);
     
@@ -65,10 +57,10 @@ public interface IDeck {
      * Remove from the deck an occurence of the card named by m.
      * 
      * @pre <pre>
-     *      m != null
+     *      getSizeDeck() > 0
      *      
      * @post <pre>
-     *      getNbCard() = old getNbCard - 1
+     *      getSizeDeck() = old getSizeDeck() - 1
      */
-    void rmCard(String m);
+    void rmTopCard();
 }

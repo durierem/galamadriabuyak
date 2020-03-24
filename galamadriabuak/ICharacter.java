@@ -1,4 +1,6 @@
  
+
+ 
    
 /**
  * Represents a character of the game.
