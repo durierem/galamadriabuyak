@@ -13,19 +13,24 @@ public interface ICharacter {
     String getName();
     
     /**
+     * The level of this character.
+     */
+    int getLevel();
+    
+    /**
      * The remaining health of this character.
      */
     int getHealth();
-
+    
+    /**
+     * The hand of this character.
+     */
+    IHand getHand();
+    
     /**
      * The current deck of this character.
      */
     IDeck getDeck();
-
-    /**
-     * The basic attack of this character.
-     */
-    IBasicAttack getBasicAttack();
 
     /**
      * Tells if this character is dead.
