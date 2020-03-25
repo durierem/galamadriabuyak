@@ -15,7 +15,7 @@ package galamadriabuyak.util;
  *          !isLastCommandLegal()
  */
 
-public interface IParser {
+public interface ICombatParser {
     
     // CONSTANTS
     /**

@@ -1,12 +1,14 @@
 package galamadriabuyak;
 
 /**
- * Reprensents a player.
+ * Represents a player.
  */
 public interface IPlayer extends ICharacter {
     
+    // REQUESTS
+    
     /**
-     * Wait for the player to give a command.
+     * The money of this player.
      */
-    void waitForInput();
+    int getMoney();
 }
