@@ -50,16 +50,16 @@ public interface ICharacter {
      * The remaining health of this character.
      */
     int getHealth();
-
-    /**
-     * The current deck of this character.
-     */
-    IDeck getDeck();
     
     /**
-     * The current hand of this character.
+     * The hand of this character.
      */
     IHand getHand();
+    
+    /**
+     * The deck of this character.
+     */
+    IDeck getDeck();
 
     /**
      * Tells if this character is dead.
