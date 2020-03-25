@@ -3,7 +3,7 @@ package galamadriabuyak.util;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
 
-public class Parser implements IParser {
+public class CombatParser implements ICombatParser {
     
     // ATTRIBUTES
     
@@ -12,7 +12,7 @@ public class Parser implements IParser {
     
     // CONSTRUCTOR
     
-    public Parser() {
+    public ComabatParser() {
         command = "";
         targetID = -1;
     }
