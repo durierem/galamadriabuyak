@@ -1,11 +1,13 @@
 package galamadriabuyak.util;
 
 /**
- * A simple parser able to handle 2 commands: "use" and "help".
+ * A simple parser able to handle a basic command syntax:
+ * A correct command is made of a keyword and a target ID when necessary.
  * @inv
  *      x := ((getLastCommand().equals(CMD_USE)
-*       || getLastCommand().equals(CMD_HELP))
-*       && getLastTargetID() >= 1) 
+*       || getLastCommand().equals(CMD_HELP)
+*       || getLastCommand().equals(CMD_ENDTURN))
+*       && getLastTargetID() >= 0) 
  *      x <==> isLastCommandLegal()
  * @cons
  *      $DESC$ An empty parser.
@@ -21,20 +23,21 @@ public interface IParser {
      */
     public static final String CMD_USE = "use";
     public static final String CMD_HELP = "help";
+    public static final String CMD_ENDTURN = "endturn";
    
     // REQUESTS
     
     /**
      * The last player command.
      * @pre
-     *      isLastInputLegal()
+     *      isLastCommandLegal()
      */
     String getLastCommand();
   
     /**
      * The card ID associated with the last command.
      * @pre
-     *      isLastInputLegal()
+     *      isLastCommandLegal()
      */
     int getLastTargetID();
     
@@ -52,7 +55,7 @@ public interface IParser {
      * @post
      *      !isLastCommandLegal() ==>
      *          getLastCommand().equals("")
-     *          && getLastTargetID() == 0
+     *          && getLastTargetID() == -1
      */
     void parseInput(String input);
 }

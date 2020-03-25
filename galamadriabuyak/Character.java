@@ -30,10 +30,6 @@ public abstract class Character implements ICharacter {
         return deck;
     }
 
-    public IBasicAttack getBasicAttack() {
-        return basicAttack;
-    }
-
     public boolean isDead() {
         return getHealth() <= 0;
     }
@@ -60,5 +56,4 @@ public abstract class Character implements ICharacter {
         }
         health -= q;
     }
-
 }

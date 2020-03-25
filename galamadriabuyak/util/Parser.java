@@ -14,7 +14,7 @@ public class Parser implements IParser {
     
     public Parser() {
         command = "";
-        targetID = 0;
+        targetID = -1;
     }
     
     // COMMANDS
@@ -34,8 +34,10 @@ public class Parser implements IParser {
     }
     
     public boolean isLastCommandLegal() {
-        return (command.equals(CMD_USE) || command.equals(CMD_HELP))
-            && targetID > 0;
+        return (command.equals(CMD_USE)
+            || command.equals(CMD_HELP)
+            || command.equals(CMD_ENDTURN))
+            && targetID >= 0;
     }
     
     public void parseInput(String input) {
@@ -49,11 +51,11 @@ public class Parser implements IParser {
                 targetID = Integer.parseInt(st.nextToken());
             } catch (NumberFormatException e) {
                 command = "";
-                targetID = 0;
+                targetID = -1;
             }
         } catch (NoSuchElementException e) {
             command = "";
-            targetID = 0;
+            targetID = -1;
         }
     }
 }
