@@ -7,7 +7,6 @@ public abstract class Character implements ICharacter {
     private final String name;
     private int health;
     private IDeck deck;
-    private IBasicAttack basicAccack;
 
     // CONSTRUCTEUR
 
@@ -15,7 +14,6 @@ public abstract class Character implements ICharacter {
         name = "";
         health = 0;
         deck = null;
-        basicAttack = null;
     }
 
     // REQUÊTES
