@@ -12,7 +12,7 @@ public class CombatParser implements ICombatParser {
     
     // CONSTRUCTOR
     
-    public ComabatParser() {
+    public CombatParser() {
         command = "";
         targetID = -1;
     }

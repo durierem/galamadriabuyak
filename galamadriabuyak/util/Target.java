@@ -1,9 +1,9 @@
 package galamadriabuyak.util;
 
 public enum Target {
-    Player("player"),
-    Enemy("enemy"),
-    BasicAttack("basicAttack");
+    PLAYER("player"),
+    ENEMY("enemy"),
+    BASIC_ATTACK("basicAttack");
     
     private String name;
     
