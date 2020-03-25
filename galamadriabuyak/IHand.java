@@ -20,11 +20,6 @@ public interface IHand
     int getSize();
     
     /**
-     * Returns the basicAttack of the hand.
-     */
-    IBasicAttack getBasicAttack();
-    
-    /**
      * Returns the nth card of the hand.
      * 
      * @pre 

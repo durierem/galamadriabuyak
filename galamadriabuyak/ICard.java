@@ -1,5 +1,14 @@
 package galamadriabuyak;
 
+/**
+ * Models a card.
+ * 
+ * @pre
+ *      name != null
+ *      description != null
+ *      trivia != null
+ *      arrayEffect != null
+ */
 public interface ICard {
     
     // Requests

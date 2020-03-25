@@ -11,13 +11,15 @@ public class Card implements ICard {
    
     // Constructor
     
-    public Card(String n, String d, String t, IEffect[] arrayEffect) {
-        if (n == null || d == null || t == null || arrayEffect == null) {
+    public Card(String name, String description, String trivia, 
+                    IEffect[] arrayEffect) {
+        if (name == null || description == null 
+            || trivia == null || arrayEffect == null) {
             throw new AssertionError();
         }
-        name = n;
-        description = d;
-        trivia = t;
+        this.name = name;
+        this.description = description;
+        this.trivia = trivia;
         effects = arrayEffect;
     }
     

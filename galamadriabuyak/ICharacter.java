@@ -52,6 +52,11 @@ public interface ICharacter {
     int getHealth();
     
     /**
+     * Returns the basicAttack of the hand.
+     */
+    IBasicAttack getBasicAttack();
+    
+    /**
      * The hand of this character.
      */
     IHand getHand();
