@@ -12,7 +12,7 @@ public class Game {
     public Game() {
         scanner = new Scanner(System.in);
         combatParser = new CombatParser();
-        player = new Player();
+        player = new Player(0);
     }
     
     /**

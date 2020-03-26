@@ -47,7 +47,7 @@ public class Hand implements IHand {
     }
     
     public void deleteCard(int n){
-        if (0 > n || getSize() - 1 > n){
+        if (n < 0 || getSize() - 1 > n){
             throw new AssertionError();
         }
         for(int i = n ; i < MAX_SIZE ; i++){
@@ -55,5 +55,14 @@ public class Hand implements IHand {
         }
         handTab[getSize()] = null;
         size = getSize() - 1;
+    }
+    
+    public void addCard(ICard card) {
+        if (size >= MAX_SIZE || card == null) {
+            throw new AssertionError();
+        }
+        
+        handTab[size - 1] = card;
+        size += 1;
     }
 }

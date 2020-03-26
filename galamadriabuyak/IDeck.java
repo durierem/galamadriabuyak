@@ -23,28 +23,6 @@ public interface IDeck {
     // Commands
     
     /**
-     * Shuffle the deck.
-     * 
-     * @pre <pre>
-     *      getSizeDeck() != 0
-     *      
-     * @post <pre>
-     *      getSizeDeck() = old getSizeDeck()
-     */
-    void shuffleDeck();
-    
-    /**
-     * Put the top card in the given hand.
-     * 
-     * @pre <pre>
-     *      getSizeDeck() > 0
-     *      
-     * @post <pre>
-     *      getSizeDeck() = old getSizeDeck - 1
-     */
-    void drawCard(IHand hand);
-    
-    /**
      * Add the given card to the deck.
      * 
      * @pre <pre>
@@ -59,10 +37,34 @@ public interface IDeck {
      * Remove from the deck an occurence of the card named by m.
      * 
      * @pre <pre>
-     *      getSizeDeck() > 0
+     *      getSize() > 0
      *      
      * @post <pre>
-     *      getSizeDeck() = old getSizeDeck() - 1
+     *      getSize() = old getSizeDeck() - 1
      */
     void rmTopCard();
+    
+    /**
+     * Put the top card in the given hand.
+     * 
+     * @pre <pre>
+     *      hand != null
+     *      getSize() > 0
+     *      hand.getSize() < IHand.MAX_SIZE
+     * @post <pre>
+     *      getSizeDeck() = old getSizeDeck - 1
+     *      hand.getSize() = old hand.getSize() + 1
+     */
+    void drawCard(IHand hand);
+    
+    /**
+     * Shuffle the deck.
+     * 
+     * @pre <pre>
+     *      getSize() != 0
+     *      
+     * @post <pre>
+     *      getSize() = old getSizeDeck()
+     */
+    void shuffleDeck();
 }

@@ -57,4 +57,16 @@ public interface IHand
     *       the Cards at positon Nth + x in handTab was reposition on Nth + x - 1
     */
     void deleteCard(int n);
+    
+    /**
+     *  Add card to the hand. At the first available position.
+     *  
+     *  @pre 
+     *      card != null
+     *      getSize() <= 2
+     *      
+     *  @post
+     *      getSize() = old getSize() + 1
+     */
+    public void addCard(ICard card);
 }
