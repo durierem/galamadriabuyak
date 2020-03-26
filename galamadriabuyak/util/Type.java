@@ -1,8 +1,8 @@
 package galamadriabuyak.util;
 
 public enum Type {
-    Heal("heal"),
-    Hit("hit");
+    HEAL("heal"),
+    HIT("hit");
     
     private String name;
     

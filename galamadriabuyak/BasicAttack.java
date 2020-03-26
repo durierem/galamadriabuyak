@@ -1,5 +1,5 @@
 package galamadriabuyak;
 
-public class BasicAttack extends ICard implements IBasicAttack {
+public class BasicAttack extends Card implements IBasicAttack {
     
 }
