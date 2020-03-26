@@ -18,7 +18,7 @@ public interface IDeck {
     /**
      * Gives the size of the deck.
      */
-    int getSizeDeck();
+    int getSize();
    
     // Commands
     
