@@ -4,7 +4,8 @@ import galamadriabuyak.util.*;
 public class Game {
     
     public Game() {
-        ICombatParser Combatparser = new CombatParser();
+        Scanner scanner = new Scanner(System.in);
+        ICombatParser combatParser = new CombatParser();
         IPlayer player = new Player();
     }
     
@@ -16,15 +17,16 @@ public class Game {
         //enemy.getDeck().shuffleDeck();
         while (!player.isDead() && !enemy.isDead()) {
             player.draw(3 - player.getHand().getSize());
-            while(combatParser.getLastCommand() != combatParser.CMD_ENDTURN && !player.isDead()) {
+            while (combatParser.getLastCommand() != combatParser.CMD_ENDTURN
+            && !player.isDead()) {
                 waitForInput();
-                while(!combatParser.isLastCommandLegal()){
+                while (!combatParser.isLastCommandLegal()) {
                     waitForInput();
                 }
-                if(combatParser.getLastCommand() == CMD_USE){
+                if (combatParser.getLastCommand() == CMD_USE) {
                     player.GetHand().getCard().applyEffects(this);
                 }
-                if(combatParser.getLastCommand() == CMD_HELP){
+                if (combatParser.getLastCommand() == CMD_HELP) {
                     player.GetHand().getCard().getDescription();
                     player.GetHand().getCard().getTrivia();
                 }
@@ -34,11 +36,17 @@ public class Game {
         }
     }
     
+   
+    private String waitForInput(){
+        StringBuffer result = new StringBuffer();
+        while (scanner.hasNext()) {
+            result.append(scanner.next());
+        }
+        return result.toString();
+    }
+    
     public static void main(String[] args) {
         new Game();
     }
     
-    private String waitForInput(){
-        
-    }
 }
