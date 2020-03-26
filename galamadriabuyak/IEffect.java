@@ -4,9 +4,24 @@ import galamadriabuyak.util.Type;
 
 /**
  * Models an effect.
- * 
- * @pre
- *      
+ * An effect is the combination of a Type, a Target and a power value.
+ * @inv
+ *      getType() != null
+ *      getTarget() != null
+ *      getPower() >= 0
+ * @cons
+ *      $DESC$
+ *          Creates an effect from the attributes given in arguments.
+ *      $ARGS$ 
+ *          Type type, Target target, int power
+ *      $PRE$ 
+ *          type != null
+ *          target != null
+ *          power >= 0
+ *      $POST$
+ *          getType() == type
+ *          geTarget() == target
+ *          getPower() == power
  */
 
 public interface IEffect {
@@ -31,8 +46,9 @@ public interface IEffect {
      * Apply the effect on the game.
      * 
      * @pre
-     *      effect != null
      *      game != null
+     * @post
+     *      The internal state of getTarget() has been altered by this effect
      */
     void applyEffect(Game game);
 }
