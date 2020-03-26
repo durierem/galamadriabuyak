@@ -51,8 +51,21 @@ public class Game {
         return result.toString();
     }
     
-    public static void main(String[] args) {
-        new Game();
+    private void draw() {
+        clear();
+        System.out.println(makeStringOfGame());
     }
     
+    private String makeStringOfGame() {
+        return this.toString(); // temporary test
+    }
+    
+    private void clear() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
+    }
+    
+    public static void main(String[] args) {
+        new Game();
+    } 
 }
