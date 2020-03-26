@@ -1,7 +1,4 @@
-
-
 package galamadriabuyak;
-
 
 public class Hand implements IHand {
 
@@ -12,13 +9,13 @@ public class Hand implements IHand {
     
     // CONSTRUCTEUR
     
-    public Hand(){
+    public Hand() {
         size = 0;
     }
     
     // REQUETES
     
-    public int getSize(){
+    public int getSize() {
         return size;
     }
     
@@ -30,7 +27,7 @@ public class Hand implements IHand {
      * @post
      *      getSize() = old getSize()
      */
-    public ICard getCard(int n){
+    public ICard getCard(int n) {
         if (0 > n || getSize() - 1 > n){
             throw new AssertionError();
         }
@@ -39,18 +36,18 @@ public class Hand implements IHand {
     
     // COMMANDES
    
-    public int setSize(int n){
+    public void setSize(int n) {
         if (0 > n || MAX_SIZE > n){
             throw new AssertionError();
         }
         size = n;
     }
     
-    public void deleteCard(int n){
+    public void deleteCard(int n) {
         if (n < 0 || getSize() - 1 > n){
             throw new AssertionError();
         }
-        for(int i = n ; i < MAX_SIZE ; i++){
+        for(int i = n; i < MAX_SIZE; i++){
             handTab[i] = handTab[i+1];
         }
         handTab[getSize()] = null;

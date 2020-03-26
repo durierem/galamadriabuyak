@@ -44,7 +44,7 @@ public interface IHand
      * @pre 
      *      0 <= n <= MAX_SIZE
      */
-    public int setSize(int n);
+    void setSize(int n);
     
     /**
     *  Delete the Nth card of the deck
