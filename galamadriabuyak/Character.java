@@ -5,6 +5,7 @@ public abstract class Character implements ICharacter {
     // ATTRIBUTS
 
     private final String name;
+    private int level;
     private int health;
     private IDeck deck;
     private IHand hand;
@@ -23,6 +24,10 @@ public abstract class Character implements ICharacter {
     
     public String getName() {
         return name;
+    }
+    
+    public int getLevel() {
+        return level;
     }
 
     public int getHealth() {

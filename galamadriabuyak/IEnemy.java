@@ -1,6 +1,6 @@
 package galamadriabuyak;
 
-public class IEnemy extends ICharacter {
+public interface IEnemy extends ICharacter {
     
     // COMMANDS
     
