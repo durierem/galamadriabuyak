@@ -1,5 +1,4 @@
-. 
-
+package galamadriabuyak;
 import galamadriabuyak.util.*;
 
 public class Game {

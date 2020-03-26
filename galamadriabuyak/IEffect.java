@@ -1,13 +1,15 @@
 package galamadriabuyak;
 import galamadriabuyak.util.Target;
 import galamadriabuyak.util.Type;
+
 /**
  * Models an effect.
+ * 
+ * @pre
+ *      
  */
 
 public interface IEffect {
-    // Constants
-    
     // Requests
     /**
      * Returns the type of the effect.
@@ -26,11 +28,11 @@ public interface IEffect {
     
     // Commands
     /**
-     * Apply the given effect on the game.
+     * Apply the effect on the game.
      * 
      * @pre
      *      effect != null
      *      game != null
      */
-    void applyEffect(IEffect effect, Game game);
+    void applyEffect(Game game);
 }
