@@ -1,14 +1,6 @@
 package galamadriabuyak;
 
-
-/**
- * Décrivez votre classe Enemy ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class Enemy extends Character implements IEnemy
-{
+public class Enemy extends Character implements IEnemy {
     
     // Constructor
     
@@ -18,10 +10,10 @@ public class Enemy extends Character implements IEnemy
     
     // COMMANDS
     
-    void performTurn(Game game){
+    public void performTurn(Game game){
         for (int i = alea(0,2) ; i < this.getHand().getSize() ; i++){
-            this.getHand().getCard().applyEffects(game);
-        }    
+            this.getHand().getCard(i).applyEffects(game);
+        }
     }
     
     // Outils
@@ -31,6 +23,5 @@ public class Enemy extends Character implements IEnemy
      */
     private int alea(int min,int max) {
         return min + (int) (Math.random() * (max - min + 1));
-    }
-    
+    }  
 }

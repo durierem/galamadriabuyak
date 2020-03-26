@@ -52,7 +52,7 @@ public class Deck implements IDeck {
     }
     
     /**
-     * Un nombre aléatoire compris entre a et b (au sens large).
+     * Returns a random number between a and b inclusive.
      * @pre <pre>
      *     0 < a <= b </pre>
      * @post <pre>

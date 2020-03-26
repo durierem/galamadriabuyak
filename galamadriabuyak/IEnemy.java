@@ -4,5 +4,5 @@ public interface IEnemy extends ICharacter {
     
     // COMMANDS
     
-    void performTurn();
+    void performTurn(Game game);
 }

@@ -8,14 +8,16 @@ public class Game {
     private Scanner scanner;
     private ICombatParser combatParser;
     private IPlayer player;
+    private IEnemy enemy;
     
     public Game() {
         scanner = new Scanner(System.in);
         combatParser = new CombatParser();
-        player = new Player(0);
+        player = new Player(0); // NON SENS
+        enemy = new Enemy(); // NON SENS
     }
     
-    /**
+    /*
      * !!! NE GERE PAS ENCORE L'AFFICHAGE !!!
      */
     private void startFight(IPlayer player, ICharacter enemy) {
@@ -30,15 +32,18 @@ public class Game {
                     waitForInput();
                 }
                 if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
-                    player.getHand().getCard().applyEffects(this);
+                    player.getHand().getCard(combatParser.getLastTargetID())
+                    .applyEffects(this);
                 }
                 if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
-                    player.getHand().getCard().getDescription();
-                    player.getHand().getCard().getTrivia();
+                    player.getHand().getCard(combatParser.getLastTargetID())
+                        .getDescription();
+                    player.getHand().getCard(combatParser.getLastTargetID())
+                        .getTrivia();
                 }
             }
             enemy.draw(3 - player.getHand().getSize());
-            enemy.performTurn();
+            enemy.performTurn(this);
         }
     }
     
