@@ -5,6 +5,13 @@ package galamadriabuyak;
  * 
  * @pre 
  *      0 >= getSize() >= MAX_SIZE
+ *      
+ * @cons
+ *      $DESC$ A new empty  hand
+ *      $ARGS$
+ *      $PRE$
+ *      $POST$
+ *          getSize() == 0
  */
 public interface IHand
 {
@@ -29,4 +36,25 @@ public interface IHand
      */
     ICard getCard(int n);
     
+    // COMMANDES
+    
+    /**
+     * Set the size of hand
+     * 
+     * @pre 
+     *      0 <= n <= MAX_SIZE
+     */
+    public int setSize(int n);
+    
+    /**
+    *  Delete the Nth card of the deck
+    *  
+    *  @pre
+    *       0 <= n <= getSize() - 1
+    *  @post
+    *       getSize() = old getSize() - 1
+    *       the Nth card was deleted
+    *       the Cards at positon Nth + x in handTab was reposition on Nth + x - 1
+    */
+    void deleteCard(int n);
 }
