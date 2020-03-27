@@ -54,7 +54,7 @@ public interface ICharacter {
     /**
      * Returns the basicAttack of the hand.
      */
-    IBasicAttack getBasicAttack();
+    ICard getBasicAttack();
     
     /**
      * The hand of this character.

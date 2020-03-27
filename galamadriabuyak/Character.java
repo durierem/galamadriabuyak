@@ -9,7 +9,7 @@ public abstract class Character implements ICharacter {
     private int health;
     private IDeck deck;
     private IHand hand;
-    private IBasicAttack basicAttack;
+    private ICard basicAttack;
     
 
     // CONSTRUCTEUR
@@ -46,7 +46,7 @@ public abstract class Character implements ICharacter {
         return getHealth() <= 0;
     }
     
-    public IBasicAttack getBasicAttack(){
+    public ICard getBasicAttack(){
         return basicAttack;
     }
 

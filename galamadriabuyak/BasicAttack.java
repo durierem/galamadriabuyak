@@ -3,7 +3,7 @@ package galamadriabuyak;
 import galamadriabuyak.util.Type;
 import galamadriabuyak.util.Target;
 
-public class BasicAttack extends Card implements IBasicAttack {
+public class BasicAttack extends Card implements ICard {
     
     // CONSTRUCTOR
     
