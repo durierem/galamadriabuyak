@@ -20,7 +20,7 @@ public class Game {
     /*
      * !!! NE GERE PAS ENCORE L'AFFICHAGE !!!
      */
-    private void startFight(IPlayer player, ICharacter enemy) {
+    private void startFight(IPlayer player, IEnemy enemy) {
         player.getDeck().shuffleDeck();
         //enemy.getDeck().shuffleDeck();
         while (!player.isDead() && !enemy.isDead()) {

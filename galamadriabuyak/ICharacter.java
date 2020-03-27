@@ -7,8 +7,8 @@ package galamadriabuyak;
  * When a character's health points fall under zero, he dies.
  * @inv
  *      getName() = name
- *      getHealth <= 0 ==> isDead()
- *      getHealth > 0 ==> !isDead()
+ *      getHealth() <= 0 ==> isDead()
+ *      getHealth() > 0 ==> !isDead()
  *      getLevel() > 0
  *      getDeck != null
  *      getHand != null
