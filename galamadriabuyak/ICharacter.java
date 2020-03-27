@@ -6,29 +6,32 @@ package galamadriabuyak;
  * current level, his deck and his hand.
  * When a character's health points fall under zero, he dies.
  * @inv
- *      getName() = name
+ *      getName() != null
  *      getHealth() <= 0 ==> isDead()
  *      getHealth() > 0 ==> !isDead()
  *      getLevel() > 0
- *      getDeck != null
- *      getHand != null
+ *      getDeck() != null
+ *      getHand() != null
  * @cons
  *      $DESC$ A new character with given arguments
  *      $ARGS$
  *          String name
  *          int level
  *          int health
+ *          ICard basicAttack
  *          IDeck deck
  *          IHand hand
  *      $PRE$
  *          level > 0
  *          health > 0
+ *          basicAttack != null
  *          deck != null
  *          hand != null
  *      $POST$
  *          getName() == name
  *          getLevel() == level
  *          getHealth() == health
+ *          getBasicAttack() == basicAttack
  *          getDeck() == deck
  *          getHand() == hand
  */

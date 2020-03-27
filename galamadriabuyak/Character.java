@@ -7,17 +7,20 @@ public abstract class Character implements ICharacter {
     private final String name;
     private int level;
     private int health;
-    private IDeck deck;
-    private IHand hand;
     private ICard basicAttack;
-    
+    private IDeck deck;
+    private IHand hand;    
 
     // CONSTRUCTEUR
 
-    Character() {
-        name = "";
-        health = 0;
-        deck = new Deck();
+    public Character(String name, int level, int health, ICard basicAttack,
+        IDeck deck, IHand hand) {
+        this.name = name;
+        this.level = level;
+        this.health = health;
+        this.basicAttack = basicAttack;
+        this.deck = deck;
+        this.hand = hand;
     }
 
     // REQUÊTES

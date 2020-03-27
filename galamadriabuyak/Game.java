@@ -13,8 +13,25 @@ public class Game {
     public Game() {
         scanner = new Scanner(System.in);
         combatParser = new CombatParser();
-        player = new Player(0); // NON SENS
-        enemy = new Enemy(); // NON SENS
+        player = new Player("Alice",
+            1,
+            10,
+            new BasicAttack("Picky Pike",
+                "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 5",
+                "An ancient and beautiful decorated pike",
+                createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
+            new Deck(),
+            new Hand(),
+            0);
+        enemy = new Enemy("Bob",
+            1,
+            5,
+            new BasicAttack("Useless Roar",
+                "[TARGET] player ; [TYPE] direct hit ; [POWER] 1",
+                "A useless capacity",
+                createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
+            new Deck(),
+            new Hand());
         startFight(player, enemy);
     }
     
@@ -64,6 +81,18 @@ public class Game {
         System.out.println(makeStringOfGame());
     }
     
+    /**
+     * Returns an array of IEffect created from the effects in argument.
+     * @pre
+     *      effects != null
+     */
+    private static IEffect[] createEffectsArray(IEffect... effects) {
+        if (effects == null) {
+            throw new AssertionError();
+        }
+        return effects;
+    }
+    
     private String makeStringOfGame() {
         return "================================ YOUR TURN! ====================================\n"
                + "                                                                                \n"
@@ -94,6 +123,8 @@ public class Game {
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
     }
+    
+    
     
     public static void main(String[] args) {
         new Game();

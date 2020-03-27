@@ -4,8 +4,9 @@ public class Enemy extends Character implements IEnemy {
     
     // Constructor
     
-    public Enemy() {
-        super();
+    public Enemy(String name, int level, int health, ICard basicAttack,
+        IDeck deck, IHand hand) {
+        super(name, level, health, basicAttack, deck, hand);
     }
     
     // COMMANDS
