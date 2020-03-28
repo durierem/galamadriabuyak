@@ -17,4 +17,14 @@ public enum Target {
     public String toString() {
         return name;
     }
+    
+    public static Target myValueOf(String arg) {
+        if (arg.equals("player")) {
+            return PLAYER;
+        } else if (arg.equals("enemy")) {
+            return ENEMY;
+        } else {
+            throw new AssertionError();
+        }
+    }
 }

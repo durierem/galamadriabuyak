@@ -16,4 +16,14 @@ public enum Type {
     public String toString() {
         return name;
     }
+    
+    public static Type myValueOf(String arg) {
+        if (arg.equals("hit")) {
+            return HIT;
+        } else if (arg.equals("heal")) {
+            return HEAL;
+        } else {
+            throw new AssertionError();
+        }
+    }
 }
