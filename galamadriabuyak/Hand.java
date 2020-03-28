@@ -28,7 +28,7 @@ public class Hand implements IHand {
      *      getSize() = old getSize()
      */
     public ICard getCard(int n) {
-        if (0 > n || getSize() - 1 > n){
+        if (0 > n || getSize() - 1 < n){
             throw new AssertionError();
         }
         return handTab[n];
@@ -44,13 +44,13 @@ public class Hand implements IHand {
     }
     
     public void deleteCard(int n) {
-        if (n < 0 || getSize() - 1 > n){
+        if (n < 0 || getSize() - 1 < n){
             throw new AssertionError();
         }
-        for(int i = n; i < MAX_SIZE; i++){
+        for(int i = n; i < MAX_SIZE - 1; i++){
             handTab[i] = handTab[i+1];
         }
-        handTab[getSize()] = null;
+        handTab[getSize() - 1] = null;
         size = getSize() - 1;
     }
     
@@ -59,7 +59,7 @@ public class Hand implements IHand {
             throw new AssertionError();
         }
         
-        handTab[size - 1] = card;
+        handTab[getSize()] = card;
         size += 1;
     }
 }
