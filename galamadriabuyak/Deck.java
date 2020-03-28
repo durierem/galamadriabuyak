@@ -54,12 +54,12 @@ public class Deck implements IDeck {
     /**
      * Returns a random number between a and b inclusive.
      * @pre <pre>
-     *     0 < a <= b </pre>
+     *     0 <= a <= b </pre>
      * @post <pre>
      *     a <= result <= b </pre>
      */
     private static int alea(int a, int b) {
-        assert (a > 0) && (b >= a);
+        assert (a >= 0) && (b >= a);
         return a + (int) (Math.random() * (b - a + 1));
     }
     
