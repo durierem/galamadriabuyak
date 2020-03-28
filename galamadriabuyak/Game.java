@@ -106,6 +106,21 @@ public class Game {
     }
     
     private String makeStringOfGame() {
+        String card0Name = "______________";
+        if (player.getHand().getSize() > 0) {
+            card0Name = player.getHand().getCard(0).getName();
+        }
+        
+        String card1Name = "______________";
+        if (player.getHand().getSize() > 1) {
+            card1Name = player.getHand().getCard(1).getName();
+        }
+        
+        String card2Name = "______________";
+        if (player.getHand().getSize() > 2) {
+            card2Name = player.getHand().getCard(2).getName();
+        }
+
         return "================================ YOUR TURN! ====================================  \n"
                + "                                                                                \n"
                + " Type 'help [card number]' for detailed informations about a card.              \n"
@@ -124,9 +139,9 @@ public class Game {
                + "                                                                                \n"
                + " HP: " + player.getHealth() + "                                                 \n"
                + " Deck (" + player.getDeck().getSize() +") / Hand (" + player.getHand().getSize() + ")\n"
-               + "   1 - " + player.getHand().getCard(0).getName() + "                            \n"
-               + "   2 - " + player.getHand().getCard(1).getName() + "                            \n"
-               + "   3 - " + player.getHand().getCard(2).getName() + "                            \n"
+               + "   1 - " + card0Name + "                                                        \n"
+               + "   2 - " + card1Name + "                                                        \n"
+               + "   3 - " + card2Name + "                                                        \n"
                + "                                                                                \n"
                + " + ---------------------------------------------------------------------------- \n";
     }
