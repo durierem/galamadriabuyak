@@ -15,9 +15,13 @@ import galamadriabuyak.util.json_simple.JSONObject;
 import galamadriabuyak.util.json_simple.parser.JSONParser;
 import galamadriabuyak.util.json_simple.parser.ParseException;
 
-public class Jsonizer {
+public class Jsonizer implements IJsonizer {
     
     public JSONObject cardToJson(ICard card) {
+        if (card == null) {
+            throw new AssertionError();
+        }
+        
         JSONObject jcard = new JSONObject();
         jcard.put("name", card.getName());
         jcard.put("description", card.getDescription());
@@ -38,6 +42,10 @@ public class Jsonizer {
     }
     
     public ICard jsonToCard(JSONObject jcard) {
+        if (jcard == null) {
+            throw new AssertionError();
+        }
+        
         String name = (String) jcard.get("name");
         String description = (String) jcard.get("description");
         String trivia = (String) jcard.get("trivia");
@@ -58,6 +66,10 @@ public class Jsonizer {
     }
     
     public void cardToFile(JSONObject jcard, String f) {
+        if (jcard == null || f == null) {
+            throw new AssertionError();
+        }
+        
         //Write JSON file.
         try(FileWriter file = new FileWriter(f)) {
             file.write(jcard.toJSONString());
@@ -68,6 +80,10 @@ public class Jsonizer {
     }
     
     public JSONObject fileToCard(String f) {
+        if (f == null) {
+            throw new AssertionError();
+        }
+        
         JSONParser jsonParser = new JSONParser();
         
         try (FileReader reader = new FileReader(f)) {
@@ -85,7 +101,8 @@ public class Jsonizer {
         return null;
     }
 }
-    
+
+//don't touch please
 // //Creating list Card.
 //   JSONArray cardList = new JSONArray();
 //   cardList.add(jcard);
