@@ -61,7 +61,7 @@ public interface IDeck {
      * Shuffle the deck.
      * 
      * @pre <pre>
-     *      getSize() != 0
+     *      getSize() >= 0
      *      
      * @post <pre>
      *      getSize() = old getSizeDeck()

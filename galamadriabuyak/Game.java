@@ -94,7 +94,7 @@ public class Game {
     }
     
     private String makeStringOfGame() {
-        return "================================ YOUR TURN! ====================================\n"
+        return "================================ YOUR TURN! ====================================  \n"
                + "                                                                                \n"
                + " Type 'help [card number]' for detailed informations about a card.              \n"
                + " Type 'use [card number]' to use a card.                                        \n"
@@ -112,9 +112,9 @@ public class Game {
                + "                                                                                \n"
                + " HP: " + player.getHealth() + "                                                 \n"
                + " Deck (" + player.getDeck().getSize() +") / Hand (" + player.getHand().getSize() + ")\n"
-               + "   1 - Dead's souls                                                             \n"
-               + "   2 - Fussy Hammer                                                             \n"
-               + "   3 - Angelic, the angelic angel                                               \n"
+               + "   1 - " + player.getHand().getCard(0).getName() + "                            \n"
+               + "   2 - " + player.getHand().getCard(1).getName() + "                            \n"
+               + "   3 - " + player.getHand().getCard(2).getName() + "                            \n"
                + "                                                                                \n"
                + " + ---------------------------------------------------------------------------- \n";
     }

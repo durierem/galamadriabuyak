@@ -64,11 +64,16 @@ public class Deck implements IDeck {
     }
     
     public void shuffleDeck() {
-        if (size <= 0) {
+        if (size < 0) {
             throw new AssertionError();
         }
         int random_factor = 7;
         Stack[] bufStack = new Stack[random_factor];
+        
+        //Initializing stacks.
+        for (int i = 0; i < random_factor; ++i) {
+            bufStack[i] = new Stack();
+        }
         
         //  Splitting the deck in random_factor stacks
         //  Card by card we randomly choose one of the stack and 
