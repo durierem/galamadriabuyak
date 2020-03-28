@@ -42,9 +42,20 @@ public class Game {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
         while (!player.isDead() && !enemy.isDead()) {
-            player.draw(IHand.MAX_SIZE - player.getHand().getSize());
-            while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
-            && !player.isDead()) {
+            
+            //If deck is not empty, Player draw cards to complete his hand. 
+            //If not enought cards in the deck, draws less cards.
+            int deckSize = player.getDeck().getSize();
+            if (deckSize > 0) {
+                int draw_number = IHand.MAX_SIZE - player.getHand().getSize();
+                if (draw_number > deckSize) {
+                    player.draw(deckSize);
+                } else {
+                    player.draw(IHand.MAX_SIZE - player.getHand().getSize());
+                }
+            }
+            
+            do {
                 draw();
                 waitForInput();
                 while (!combatParser.isLastCommandLegal()) {
@@ -61,7 +72,8 @@ public class Game {
                     player.getHand().getCard(combatParser.getLastTargetID())
                         .getTrivia();
                 }
-            }
+            } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
+            && !player.isDead());
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
             enemy.performTurn(this);
         }
