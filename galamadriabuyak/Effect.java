@@ -43,8 +43,6 @@ public class Effect implements IEffect {
             throw new AssertionError();
         }
         
-    }
-    
         switch (type) {
             case HEAL:
                 switch(target) {
@@ -65,8 +63,9 @@ public class Effect implements IEffect {
                         game.getEnemy().setHealthDown(power);
                         break;
                 }
-            }    
-        }  
+                break;
+           }    
+    }  
      
     /**
      * Returns an array of IEffect created from the effects in argument.
