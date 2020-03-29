@@ -35,6 +35,15 @@ public class Game {
         startFight(player, enemy);
     }
     
+    // Usefull for applyEffect
+    IPlayer getPlayer() {
+        return player;
+    }
+    
+    IEnemy getEnemy() {
+        return enemy;
+    }
+    
     /*
      * !!! NE GERE PAS ENCORE L'AFFICHAGE !!!
      */

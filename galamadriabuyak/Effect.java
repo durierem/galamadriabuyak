@@ -39,9 +39,35 @@ public class Effect implements IEffect {
     // COMMANDS
     
     public void applyEffect(Game game) {
+        if (game == null) {
+            throw new AssertionError();
+        }
         
     }
     
+        switch (type) {
+            case HEAL:
+                switch(target) {
+                    case PLAYER:
+                        game.getPlayer().setHealthUp(power);
+                        break;
+                    case ENEMY:
+                        game.getEnemy().setHealthUp(power);
+                        break;
+                }
+                break;
+            case HIT:
+                switch(target) {
+                    case PLAYER:
+                        game.getPlayer().setHealthDown(power);
+                        break;
+                    case ENEMY:
+                        game.getEnemy().setHealthDown(power);
+                        break;
+                }
+            }    
+        }  
+     
     /**
      * Returns an array of IEffect created from the effects in argument.
      * @pre
