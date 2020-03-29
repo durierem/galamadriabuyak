@@ -1,14 +1,15 @@
 package galamadriabuyak.util;
 
 public abstract class Parser implements IParser {
+    
     // ATTRIBUTES
     
-    private String command;
-    private int targetID;
+    protected String command;
+    protected int targetID;
     
     // CONSTRUCTOR
     
-    public CombatParser() {
+    public Parser() {
         command = "";
         targetID = -1;
     }
@@ -29,11 +30,11 @@ public abstract class Parser implements IParser {
         return targetID;
     }
 
-    public boolean isLastCommandLegal();
+    public abstract boolean isLastCommandLegal();
 
-    public boolean isLastCommandTargeted();
+    public abstract boolean isLastCommandTargeted();
 
     // COMMANDS
 
-    public void parseInput(String input);
+    public abstract void parseInput(String input);
 }

@@ -1,7 +1,7 @@
 package galamadriabuyak;
 
 public class Hand implements IHand {
-
+    
     // ATTRIBUTS    
     
     private ICard[] handTab = new ICard[MAX_SIZE];

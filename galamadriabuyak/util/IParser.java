@@ -39,10 +39,10 @@ public interface IParser {
     boolean isLastCommandLegal();
 
     /**
-    * Checks if the last command requires a target ID.
-    * @pre
-    *       isLastCommandLegal()
-    */
+     * Checks if the last command requires a target ID.
+     * @pre
+     *       isLastCommandLegal()
+     */
     boolean isLastCommandTargeted();
    
     // COMMANDS
