@@ -1,61 +1,26 @@
 package galamadriabuyak.util;
 
 /**
- * A simple parser able to handle a basic command syntax:
- * A correct command is made of a keyword and a target ID when necessary.
+ * A parser to handle all the commands related to a fight.
+ *
  * @inv
- *      x := ((getLastCommand().equals(CMD_USE)
-*       || getLastCommand().equals(CMD_HELP)
-*       || getLastCommand().equals(CMD_ENDTURN))
-*       && getLastTargetID() >= 0) 
- *      x <==> isLastCommandLegal()
- * @cons
- *      $DESC$ An empty parser.
- *      $POST$
- *          !isLastCommandLegal()
+ *      x := (getLastCommand().equals(CMD_USE)
+ *              || getLastCommand().equals(CMD_HELP)
+ *              && getLastTargetID() >= 0)
+ *              || (getLastCommand().equals(CMD_ENDTURN)
+ *              || getLastCommend().equals(CMD_EXIT))
+ *           
+ *      x ==> isLastCommandLegal()
  */
-
-public interface ICombatParser {
+public interface ICombatParser extends IParser {
     
     // CONSTANTS
+
     /**
      * The commands to use a card and to get details about a card.
      */
-    public static final String CMD_USE = "use";
-    public static final String CMD_HELP = "help";
-    public static final String CMD_ENDTURN = "endturn";
-   
-    // REQUESTS
-    
-    /**
-     * The last player command.
-     * @pre
-     *      isLastCommandLegal()
-     */
-    String getLastCommand();
-  
-    /**
-     * The card ID associated with the last command.
-     * @pre
-     *      isLastCommandLegal()
-     */
-    int getLastTargetID();
-    
-    /**
-     * Checks if the last input given by the player is a correct command.
-     */
-    boolean isLastCommandLegal();
-   
-    // COMMANDS
-    
-    /**
-     * Parse the given input.
-     * @pre
-     *      input != null && !input.trims().equals("")
-     * @post
-     *      !isLastCommandLegal() ==>
-     *          getLastCommand().equals("")
-     *          && getLastTargetID() == -1
-     */
-    void parseInput(String input);
+    public static final String CMD_USE = "use"; // Use a card
+    public static final String CMD_HELP = "help"; // Get details about a card
+    public static final String CMD_ENDTURN = "endturn"; // End the turn
+    public static final String CMD_EXIT = "exit"; // Exit the game
 }

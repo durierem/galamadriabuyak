@@ -3,42 +3,26 @@ package galamadriabuyak.util;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
 
-public class CombatParser implements ICombatParser {
+public class CombatParser extends Parser implements ICombatParser {
     
-    // ATTRIBUTES
-    
-    private String command;
-    private int targetID;
-    
-    // CONSTRUCTOR
-    
-    public CombatParser() {
-        command = "";
-        targetID = -1;
-    }
-    
-    // COMMANDS
-    
-    public String getLastCommand() {
-        if (!isLastCommandLegal()) {
-            throw new AssertionError();
-        }
-        return command;
-    }
-    
-    public int getLastTargetID() {
-        if (!isLastCommandLegal()) {
-            throw new AssertionError();
-        }
-        return targetID;
-    }
-    
+    // REQUESTS
+
     public boolean isLastCommandLegal() {
         return (command.equals(CMD_USE)
             || command.equals(CMD_HELP)
-            || command.equals(CMD_ENDTURN))
-            && targetID >= 0;
+            && targetID >= 0)
+            || (command.equals(CMD_ENDTURN)
+            || command.equals(CMD_EXIT));
     }
+
+    public boolean isLastCommandTargeted() {
+        if (!isLastCommandLegal()) {
+            throw new AssertionError();
+        }
+        return command.equals(CMD_USE) || command.equals(CMD_HELP);
+    }
+
+    // COMMANDS
     
     public void parseInput(String input) {
         if (input == null || input.trim().equals("")) {
@@ -57,5 +41,5 @@ public class CombatParser implements ICombatParser {
             command = "";
             targetID = -1;
         }
-    }
+    } 
 }
