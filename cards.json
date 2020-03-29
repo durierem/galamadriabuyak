@@ -1,1 +1,41 @@
-{"effect":[{"power":2,"type":"hit","target":"enemy"}],"name":"Dead's souls","description":"Inflict 2 damages to the ennemy","trivia":"No one lived enougth to know their stories"}
+[
+  {
+    "name": "The Soul of the Dead",
+    "descritpion": "Inflict 5 damages to the enemy.",
+    "trivia": "The wandering souls of the Surfacian era will remain forever prisoners of the Galamadriabuyak tower.",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 5
+      }
+    ]
+  },
+  {
+    "name": "Fussy Hammer",
+    "descritpion": "Inflict 10 damages to the enemy.",
+    "trivia": "A possessed hammer that spends eternity hitting the slightest trinket that stick out from the wall. The sound it produces is unbearable to the human ear. ",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 10
+      }
+    ]
+  },
+  {
+    "name": "Angelica, the angelic angel",
+    "descritpion": "Heal 10 of your health points",
+    "trivia": "Angelica's obsession for healing people has been reincarnated  into a cute little angel that does nothing but smiling at you. It's very effective!",
+    "effects":
+    [
+      {
+        "type": "heal",
+        "target": "player",
+        "power": 10
+      }
+    ]
+  }
+]
