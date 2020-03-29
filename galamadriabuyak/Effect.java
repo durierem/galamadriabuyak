@@ -2,7 +2,6 @@ package galamadriabuyak;
 
 import galamadriabuyak.util.Target;
 import galamadriabuyak.util.Type;
-import galamadriabuyak.util.json_simple.*;
 
 public class Effect implements IEffect {
     
@@ -37,13 +36,6 @@ public class Effect implements IEffect {
         return power;
     }
     
-    public String getJSONEffect() {
-        JSONObject jeffect = new JSONObject();
-        jeffect.put("type", type.toString());
-        jeffect.put("target", target.toString());
-        jeffect.put("power", power);
-        return jeffect.toJSONString();
-    }
     // COMMANDS
     
     public void applyEffect(Game game) {

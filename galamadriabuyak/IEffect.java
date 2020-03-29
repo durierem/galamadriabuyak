@@ -41,11 +41,6 @@ public interface IEffect {
      */
     int getPower();
     
-    /**
-     *  Returns the JSON argument of the effect.
-     */
-    String getJSONEffect();
-    
     // Commands
     /**
      * Apply the effect on the game.

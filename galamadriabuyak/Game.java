@@ -19,7 +19,7 @@ public class Game {
             new BasicAttack("Picky Pike",
                 "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 5",
                 "An ancient and beautiful decorated pike",
-                createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
+                CardMaker.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
             new Deck(),
             new Hand(),
             0);
@@ -29,7 +29,7 @@ public class Game {
             new BasicAttack("Useless Roar",
                 "[TARGET] player ; [TYPE] direct hit ; [POWER] 1",
                 "A useless capacity",
-                createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
+                CardMaker.createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
             new Deck(),
             new Hand());
         startFight(player, enemy);
@@ -91,18 +91,6 @@ public class Game {
     private void draw() {
         clear();
         System.out.println(makeStringOfGame());
-    }
-    
-    /**
-     * Returns an array of IEffect created from the effects in argument.
-     * @pre
-     *      effects != null
-     */
-    private static IEffect[] createEffectsArray(IEffect... effects) {
-        if (effects == null) {
-            throw new AssertionError();
-        }
-        return effects;
     }
     
     private String makeStringOfGame() {

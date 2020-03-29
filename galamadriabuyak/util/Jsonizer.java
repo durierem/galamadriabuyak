@@ -15,9 +15,9 @@ import galamadriabuyak.util.json_simple.JSONObject;
 import galamadriabuyak.util.json_simple.parser.JSONParser;
 import galamadriabuyak.util.json_simple.parser.ParseException;
 
-public class Jsonizer implements IJsonizer {
+public class JSONizer implements IJSONizer {
     
-    public JSONObject cardToJson(ICard card) {
+    public JSONObject cardToJSON(ICard card) {
         if (card == null) {
             throw new AssertionError();
         }
@@ -41,7 +41,7 @@ public class Jsonizer implements IJsonizer {
         //Adding the card to the list.
     }
     
-    public ICard jsonToCard(JSONObject jcard) {
+    public ICard cardFromJSON(JSONObject jcard) {
         if (jcard == null) {
             throw new AssertionError();
         }

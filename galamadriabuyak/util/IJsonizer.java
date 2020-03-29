@@ -15,7 +15,7 @@ import galamadriabuyak.util.json_simple.JSONObject;
  * @inv void
  * @pre void
  */
-public interface IJsonizer {
+public interface IJSONizer {
     
     /**
      * Convert the given card into a Json object.
@@ -23,7 +23,7 @@ public interface IJsonizer {
      * @pre 
      *      card != null
      */
-    JSONObject cardToJson(ICard card);
+    JSONObject cardToJSON(ICard card);
     
     /**
      * Convert the given card's Json Object.
@@ -36,7 +36,7 @@ public interface IJsonizer {
      *      jcard.contains("trivia")
      *      jcard.contains("effect")
      */
-    ICard jsonToCard(JSONObject jcard);
+    ICard cardFromJSON(JSONObject jcard);
     
     /**
      * Saves the given Json Object into a new file named f.
