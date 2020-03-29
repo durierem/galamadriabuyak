@@ -19,7 +19,7 @@ public class Game {
             new BasicAttack("Picky Pike",
                 "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 5",
                 "An ancient and beautiful decorated pike",
-                CardMaker.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
+                Effect.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
             new Deck(),
             new Hand(),
             0);
@@ -29,7 +29,7 @@ public class Game {
             new BasicAttack("Useless Roar",
                 "[TARGET] player ; [TYPE] direct hit ; [POWER] 1",
                 "A useless capacity",
-                CardMaker.createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
+                Effect.createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
             new Deck(),
             new Hand());
         startFight(player, enemy);

@@ -41,4 +41,16 @@ public class Effect implements IEffect {
     public void applyEffect(Game game) {
         
     }
+    
+    /**
+     * Returns an array of IEffect created from the effects in argument.
+     * @pre
+     *      effects != null
+     */
+    public static IEffect[] createEffectsArray(IEffect... effects) {
+        if (effects == null) {
+            throw new AssertionError();
+        }
+        return effects;
+    }
 }
