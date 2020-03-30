@@ -78,7 +78,7 @@ public abstract class Character implements ICharacter {
     
     public void draw(int n) {
         if (n < 1 || n > getDeck().getSize() 
-            || n > getHand().MAX_SIZE - getHand().getSize()) {
+                || n > getHand().MAX_SIZE - getHand().getSize()) {
             throw new AssertionError();
         }
         for(int i = 0; i < n; i++) {
