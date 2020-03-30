@@ -64,14 +64,16 @@ public class Game {
                 
                 Tools.waitForInput(combatParser);
                 
-                int targetId = combatParser.getLastTargetID();
-                if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
-                    player.getHand().getCard(targetId).applyEffects(this);
-                    Tools.drawInterface(makeStringOfGame());
-                } else if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
-                    System.out.println(player.getHand().getCard(targetId).getDescription());
-                    System.out.println(player.getHand().getCard(targetId).getTrivia());
-                }
+                if (combatParser.isLastCommandTargeted()) {
+                    int targetId = combatParser.getLastTargetID();
+                    if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
+                        player.getHand().getCard(targetId).applyEffects(this);
+                        Tools.drawInterface(makeStringOfGame());
+                    } else if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
+                        System.out.println(player.getHand().getCard(targetId).getDescription());
+                        System.out.println(player.getHand().getCard(targetId).getTrivia());
+                    }
+                }  
                 
             } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
                     && !player.isDead());     
