@@ -58,7 +58,7 @@ public class Game {
                     player.draw(draw_number);
                 }
             }
-            
+
             do {
                 Tools.drawInterface(makeStringOfGame());
                 

@@ -11,6 +11,7 @@ public class Tools {
     
     public static void waitForInput(IParser wparser){
         Scanner scanner = new Scanner(System.in);
+        wparser.parseInput(scanner.nextLine());
         while (!wparser.isLastCommandLegal()) {
             wparser.parseInput(scanner.nextLine());
         }
