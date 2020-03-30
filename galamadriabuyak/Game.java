@@ -71,37 +71,24 @@ public class Game {
                 while (!combatParser.isLastCommandLegal()) {
                     combatParser.parseInput(waitForInput());
                 }
+                
+                int targetId = combatParser.getLastTargetID();
                 if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
-                    player.getHand().getCard(combatParser.getLastTargetID())
-                        .applyEffects(this);
+                    player.getHand().getCard(targetId).applyEffects(this);
                     drawInterface();
+                } else if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
+                    System.out.println(player.getHand().getCard(targetId).getDescription());
+                    System.out.println(player.getHand().getCard(targetId).getTrivia());
                 }
-                if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
-                    player.getHand().getCard(combatParser.getLastTargetID())
-                        .getDescription();
-                    player.getHand().getCard(combatParser.getLastTargetID())
-                        .getTrivia();
-                }
+                
             } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
-                    && !player.isDead());
+                    && !player.isDead());     
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
             enemy.performTurn(this);
         }
     }
     
-   
     private String waitForInput(){
-        /* Not working, infinite loop
-        
-        StringBuffer result = new StringBuffer();
-        while (scanner.hasNext()) {
-            result.append(scanner.next());
-        }
-        return result.toString(); 
-        
-        */
-        
-        // Returns the last line entered by the user.
         return scanner.nextLine();
     }
     
