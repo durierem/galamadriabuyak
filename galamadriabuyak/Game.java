@@ -1,18 +1,14 @@
 package galamadriabuyak;
 
-import java.io.IOException;
 import galamadriabuyak.util.*;
-import java.util.Scanner;
 
 public class Game {
     
-    private Scanner scanner;
-    private IParser combatParser;
+    private ICombatParser combatParser;
     private IPlayer player;
     private IEnemy enemy;
     
     public Game() {
-        scanner = new Scanner(System.in);
         combatParser = new CombatParser();
         player = new Player("Alice",
             1,
@@ -37,17 +33,15 @@ public class Game {
     }
     
     // Usefull for applyEffect
-    IPlayer getPlayer() {
+    public IPlayer getPlayer() {
         return player;
     }
     
-    IEnemy getEnemy() {
+    public IEnemy getEnemy() {
         return enemy;
     }
     
-    /*
-     * !!! NE GERE PAS ENCORE L'AFFICHAGE !!!
-     */
+   
     private void startFight(IPlayer player, IEnemy enemy) {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
@@ -66,14 +60,14 @@ public class Game {
             }
             
             do {
-                drawInterface();
+                Tools.drawInterface(makeStringOfGame());
                 
-                waitForInput(combatParser);
+                Tools.waitForInput(combatParser);
                 
                 int targetId = combatParser.getLastTargetID();
                 if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
                     player.getHand().getCard(targetId).applyEffects(this);
-                    drawInterface();
+                    Tools.drawInterface(makeStringOfGame());
                 } else if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
                     System.out.println(player.getHand().getCard(targetId).getDescription());
                     System.out.println(player.getHand().getCard(targetId).getTrivia());
@@ -84,17 +78,6 @@ public class Game {
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
             enemy.performTurn(this);
         }
-    }
-    
-    private void waitForInput(IParser wparser){
-        while (!wparser.isLastCommandLegal()) {
-            wparser.parseInput(scanner.nextLine());
-        }
-    }
-    
-    private void drawInterface() {
-        clear();
-        System.out.println(makeStringOfGame());
     }
     
     private String makeStringOfGame() {
@@ -136,19 +119,6 @@ public class Game {
                + "   3 - " + card2Name + "                                                        \n"
                + "                                                                                \n"
                + " + ---------------------------------------------------------------------------- \n";
-    }
-    
-    private void clear() {
-        try {
-            if (System.getProperty("os.name").contains("Windows")) {
-                new ProcessBuilder("cmd", "/c", "cls")
-                    .inheritIO().start().waitFor();
-            } else {
-               Runtime.getRuntime().exec("clear");
-            }
-        } catch (IOException | InterruptedException e) {
-            // ...
-        }
     }
     
     public static void main(String[] args) {
