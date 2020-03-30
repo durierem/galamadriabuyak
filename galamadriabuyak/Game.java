@@ -4,7 +4,7 @@ import galamadriabuyak.util.*;
 
 public class Game {
     
-    private ICombatParser combatParser;
+    private IParser combatParser;
     private IPlayer player;
     private IEnemy enemy;
     
