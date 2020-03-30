@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Game {
     
     private Scanner scanner;
-    private ICombatParser combatParser;
+    private IParser combatParser;
     private IPlayer player;
     private IEnemy enemy;
     

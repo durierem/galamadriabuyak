@@ -3,9 +3,54 @@ package galamadriabuyak.util;
 import java.util.StringTokenizer;
 import java.util.NoSuchElementException;
 
-public class CombatParser extends Parser implements ICombatParser {
+/**
+ * A parser to handle all the commands related to a fight.
+ *
+ * @inv
+ *      x := (getLastCommand().equals(CMD_USE)
+ *              || getLastCommand().equals(CMD_HELP)
+ *              && getLastTargetID() >= 0)
+ *              || (getLastCommand().equals(CMD_ENDTURN)
+ *              || getLastCommend().equals(CMD_EXIT))
+ *           
+ *      x ==> isLastCommandLegal()
+ */
+public class CombatParser implements IParser {
+
+    // CONSTANTS
+
+    public static final String CMD_USE = "use"; // Use a card
+    public static final String CMD_HELP = "help"; // Get details about a card
+    public static final String CMD_ENDTURN = "endturn"; // End the turn
+    public static final String CMD_EXIT = "exit"; // Exit the game
+
+    // ATTRIBUTES
+    
+    private String command;
+    private int targetID;
+    
+    // CONSTRUCTOR
+    
+    public Parser() {
+        command = "";
+        targetID = -1;
+    }
     
     // REQUESTS
+    
+    public String getLastCommand() {
+        if (!isLastCommandLegal()) {
+            throw new AssertionError();
+        }
+        return command;
+    }
+    
+    public int getLastTargetID() {
+        if (!isLastCommandLegal() || !isLastCommandTargeted()) {
+            throw new AssertionError();
+        }
+        return targetID;
+    }
 
     public boolean isLastCommandLegal() {
         return ((command.equals(CMD_USE)
