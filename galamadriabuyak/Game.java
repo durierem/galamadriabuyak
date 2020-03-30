@@ -29,10 +29,13 @@ public class Game {
                 Effect.createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
             new Deck(),
             new Hand());
+    }
+
+    public void play() {
         startFight(player, enemy);
     }
     
-    // Usefull for applyEffect
+    // Useful for applyEffect
     public IPlayer getPlayer() {
         return player;
     }
@@ -69,8 +72,10 @@ public class Game {
                     if (cmd.equals(CombatParser.CMD_USE)) {
                         player.getHand().getCard(targetId).applyEffects(this);
                     } else if (cmd.equals(CombatParser.CMD_HELP)) {
-                        System.out.println(player.getHand().getCard(targetId).getDescription());
-                        System.out.println(player.getHand().getCard(targetId).getTrivia());
+                        System.out.println(player.getHand().getCard(targetId)
+                            .getDescription());
+                        System.out.println(player.getHand().getCard(targetId)
+                            .getTrivia());
                     }
                 } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                     player.getBasicAttack().applyEffects(this);
@@ -99,12 +104,12 @@ public class Game {
             card2Name = player.getHand().getCard(2).getName();
         }
 
-        return "================================ YOUR TURN! ====================================  \n"
+        return "================================ YOUR TURN! ====================================\n"
                + "                                                                                \n"
                + " Type 'help [card number]' for detailed informations about a card.              \n"
                + " Type 'use [card number]' to use a card.                                        \n"
                + "                                                                                \n" 
-               + " +----------------------------------------------------------------------------+ \n"
+               + " +-----------------------------------------------------------------------------+\n"
                + "                                                                                \n"
                + " [" + enemy.getName() + "]                                                      \n"
                + "                                                                                \n"
@@ -121,10 +126,11 @@ public class Game {
                + "   2 - " + card1Name + "                                                        \n"
                + "   3 - " + card2Name + "                                                        \n"
                + "                                                                                \n"
-               + " + ---------------------------------------------------------------------------- \n";
+               + "+------------------------------------------------------------------------------+\n"
+               + "> ";
     }
     
     public static void main(String[] args) {
-        new Game();
+        new Game().play();
     } 
 }
