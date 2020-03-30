@@ -2,20 +2,20 @@ package galamadriabuyak;
 
 public abstract class Character implements ICharacter {
     
-    // ATTRIBUTS
+    // ATTRIBUTES
 
     private final String name;
     private int level;
     private int health;
     private ICard basicAttack;
     private IDeck deck;
-    private IHand hand;    
+    private IHand hand;
 
-    // CONSTRUCTEUR
+    // CONSTRUCTORS
 
     public Character(String name, int level, int health, ICard basicAttack,
-        IDeck deck, IHand hand) {
-        this.name = name;
+            IDeck deck, IHand hand) {
+        this.name = name.trim();
         this.level = level;
         this.health = health;
         this.basicAttack = basicAttack;
@@ -23,7 +23,7 @@ public abstract class Character implements ICharacter {
         this.hand = hand;
     }
 
-    // REQUÊTES
+    // REQUESTS
     
     public String getName() {
         return name;
@@ -53,7 +53,7 @@ public abstract class Character implements ICharacter {
         return basicAttack;
     }
 
-    // COMMANDES
+    // COMMANDS
     
     public void setHealthTo(int q) {
         if (q < 0) {
@@ -76,13 +76,13 @@ public abstract class Character implements ICharacter {
         health -= q;
     }
     
-    public void draw(int n){
+    public void draw(int n) {
         if (n < 1 || n > getDeck().getSize() 
-            || n > getHand().MAX_SIZE - getHand().getSize()){
+            || n > getHand().MAX_SIZE - getHand().getSize()) {
             throw new AssertionError();
         }
-        for(int i = 0; i < n; i++){
-        getDeck().drawCard(getHand());
+        for(int i = 0; i < n; i++) {
+            getDeck().drawCard(getHand());
         }
     }
 }

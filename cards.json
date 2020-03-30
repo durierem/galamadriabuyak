@@ -28,13 +28,26 @@
   {
     "name": "Angelica, the angelic angel",
     "description": "Heal 10 of your health points",
-    "trivia": "Angelica's obsession for healing people has been reincarnated  into a cute little angel that does nothing but smiling at you. It's very effective!",
+    "trivia": "Angelica's obsession for healing people has been reincarnated into a cute little angel that does nothing but smiling at you. It's very effective!",
     "effects":
     [
       {
         "type": "heal",
         "target": "player",
         "power": 10
+      }
+    ]
+  },
+  {
+    "name": "The Void",
+    "description": "Does nothing.",
+    "trivia": "The representation of Humans' enslavement by the Gods for eternity.",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 0
       }
     ]
   }

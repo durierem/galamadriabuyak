@@ -2,14 +2,16 @@ package galamadriabuyak;
    
 /**
  * Represents a character of the game.
+ *
  * A character is composed of his name, his remaining health points, his
- * current level, his deck and his hand.
+ * current level, his basic attack, his deck and his hand.
  * When a character's health points fall under zero, he dies.
  * @inv
  *      getName() != null
  *      getHealth() <= 0 ==> isDead()
  *      getHealth() > 0 ==> !isDead()
  *      getLevel() > 0
+ *      getBasicAttack() != null
  *      getDeck() != null
  *      getHand() != null
  * @cons
@@ -22,13 +24,14 @@ package galamadriabuyak;
  *          IDeck deck
  *          IHand hand
  *      $PRE$
+ *          name != null
  *          level > 0
  *          health > 0
  *          basicAttack != null
  *          deck != null
  *          hand != null
  *      $POST$
- *          getName() == name
+ *          getName() == name.trim()
  *          getLevel() == level
  *          getHealth() == health
  *          getBasicAttack() == basicAttack
@@ -37,7 +40,7 @@ package galamadriabuyak;
  */
 public interface ICharacter {
     
-    // REQUÊTES
+    // REQUESTS
 
     /**
      * The name of this character.
@@ -55,7 +58,7 @@ public interface ICharacter {
     int getHealth();
     
     /**
-     * Returns the basicAttack of the hand.
+     * The basic attack of this character.
      */
     ICard getBasicAttack();
     
@@ -70,16 +73,16 @@ public interface ICharacter {
     IDeck getDeck();
 
     /**
-     * Tells if this character is dead.
+     * Checks if this character is dead.
      */
     boolean isDead();
 
-    // COMMANDES
+    // COMMANDS
     
     /**
      * Draws n cards for this character.
      * @pre
-     *      n >= 1
+     *      n >= 1 
      *      && n <= getDeck().getSize()
      *      && n <= IHand.MAX_SIZE - getHand().getSize()
      * @post

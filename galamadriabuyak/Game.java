@@ -60,12 +60,12 @@ public class Game {
                 if (draw_number > deckSize) {
                     player.draw(deckSize);
                 } else {
-                    player.draw(IHand.MAX_SIZE - player.getHand().getSize());
+                    draw_number;
                 }
             }
             
             do {
-                draw();
+                drawInterface();
                 waitForInput();
                 while (!combatParser.isLastCommandLegal()) {
                     waitForInput();
@@ -82,7 +82,7 @@ public class Game {
                         .getTrivia();
                 }
             } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
-            && !player.isDead());
+                    && !player.isDead());
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
             enemy.performTurn(this);
         }
@@ -97,7 +97,7 @@ public class Game {
         return result.toString();
     }
     
-    private void draw() {
+    private void drawInterface() {
         clear();
         System.out.println(makeStringOfGame());
     }
