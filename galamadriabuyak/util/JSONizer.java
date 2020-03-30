@@ -15,11 +15,21 @@ import galamadriabuyak.util.json_simple.JSONObject;
 import galamadriabuyak.util.json_simple.parser.JSONParser;
 import galamadriabuyak.util.json_simple.parser.ParseException;
 
+/**
+ * Class used to convert cards to Json and Json to cards.
+ * Including methods to save/backup json to/from file.
+ */
 public class JSONizer {
     
     private JSONizer() {
     }
     
+    /**
+     * Returns the JSON encoded cards array written in the file f.
+     * 
+     * @pre
+     *      f != null
+     */
     public static ICard[] cardsFromFile(String f) {
         if (f == null) {
             throw new AssertionError();
@@ -73,7 +83,7 @@ public class JSONizer {
     }
     
     /**
-     * Convert the given card's Json Object.
+     * Convert the given card's Json Object
      * to the original ICard object.
      * 
      * @pre 
