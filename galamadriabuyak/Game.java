@@ -14,9 +14,9 @@ public class Game {
             1,
             10,
             new BasicAttack("Picky Pike",
-                "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 5",
+                "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 3",
                 "An ancient and beautiful decorated pike",
-                Effect.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 5))),
+                Effect.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 3))),
             new Deck(),
             new Hand(),
             0);
@@ -63,16 +63,24 @@ public class Game {
                 Tools.drawInterface(makeStringOfGame());
                 
                 Tools.waitForInput(combatParser);
-                
+
                 if (combatParser.isLastCommandTargeted()) {
                     int targetId = combatParser.getLastTargetID();
-                    if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
-                        player.getHand().getCard(targetId).applyEffects(this);
-                        Tools.drawInterface(makeStringOfGame());
-                    } else if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
+                    
+                    if (combatParser.getLastCommand().equals(ICombatParser.CMD_USE)) {
+                        
+                        if (targetId == 0) {
+                            player.getBasicAttack().applyEffects(this);
+                        } else {
+                            player.getHand().getCard(targetId).applyEffects(this);
+                            Tools.drawInterface(makeStringOfGame());
+                        }
+                        
+                    } else if (combatParser.getLastCommand().equals(ICombatParser.CMD_HELP)) {
                         System.out.println(player.getHand().getCard(targetId).getDescription());
                         System.out.println(player.getHand().getCard(targetId).getTrivia());
                     }
+                    
                 }  
                 
             } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
