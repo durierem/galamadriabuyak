@@ -23,6 +23,7 @@ public class CombatParser implements IParser {
     public static final String CMD_HELP = "help"; // Get details about a card
     public static final String CMD_ENDTURN = "endturn"; // End the turn
     public static final String CMD_EXIT = "exit"; // Exit the game
+    public static final String CMD_SKILL = "skill"; // Use the basic attack
 
     // ATTRIBUTES
     
@@ -56,7 +57,8 @@ public class CombatParser implements IParser {
         return ((command.equals(CMD_USE)
             || command.equals(CMD_HELP))
             && targetID >= 0)
-            || (command.equals(CMD_ENDTURN)
+            || (command.equals(CMD_SKILL)
+            || command.equals(CMD_ENDTURN)
             || command.equals(CMD_EXIT));
     }
 
@@ -101,7 +103,8 @@ public class CombatParser implements IParser {
         return input.equals(CMD_USE)
             || input.equals(CMD_HELP)
             || input.equals(CMD_ENDTURN)
-            || input.equals(CMD_EXIT);
+            || input.equals(CMD_EXIT)
+            || input.equals(CMD_SKILL);
     }
 
     /**
