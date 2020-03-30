@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  * @inv
  *      x := (getLastCommand().equals(CMD_USE)
  *              || getLastCommand().equals(CMD_HELP)
- *              && getLastTargetID() >= 0)
+ *              && getLastTargetID() > 0)
  *              || (getLastCommand().equals(CMD_ENDTURN)
  *              || getLastCommend().equals(CMD_EXIT))
  *           
@@ -34,7 +34,7 @@ public class CombatParser implements IParser {
     
     public CombatParser() {
         command = "";
-        targetID = -1;
+        targetID = 0;
     }
     
     // REQUESTS
@@ -56,7 +56,7 @@ public class CombatParser implements IParser {
     public boolean isLastCommandLegal() {
         return ((command.equals(CMD_USE)
             || command.equals(CMD_HELP))
-            && targetID >= 0)
+            && targetID > 0)
             || (command.equals(CMD_SKILL)
             || command.equals(CMD_ENDTURN)
             || command.equals(CMD_EXIT));
@@ -84,13 +84,13 @@ public class CombatParser implements IParser {
                     try {
                         targetID = Integer.parseInt(st.nextToken());
                     } catch (NumberFormatException e) {
-                        targetID = -1;
+                        targetID = 0;
                     }
                 }
             }            
         } catch (NoSuchElementException e) {
             command = "";
-            targetID = -1;
+            targetID = 0;
         }
     }
 
