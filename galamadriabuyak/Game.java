@@ -86,9 +86,9 @@ public class Game {
         }
     }
     
-    private void waitForInput(IParser Parser){
-        while (!combatParser.isLastCommandLegal()) {
-            combatParser.parseInput(scanner.nextLine());
+    private void waitForInput(IParser wparser){
+        while (!wparser.isLastCommandLegal()) {
+            wparser.parseInput(scanner.nextLine());
         }
     }
     
