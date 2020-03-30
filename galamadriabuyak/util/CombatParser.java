@@ -31,7 +31,7 @@ public class CombatParser implements IParser {
     
     // CONSTRUCTOR
     
-    public Parser() {
+    public CombatParser() {
         command = "";
         targetID = -1;
     }
