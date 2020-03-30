@@ -61,29 +61,22 @@ public class Game {
 
             do {
                 Tools.drawInterface(makeStringOfGame());
-                
                 Tools.waitForInput(combatParser);
-
+                
+                String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
                     int targetId = combatParser.getLastTargetID();
-                    
-                    if (combatParser.getLastCommand().equals(ICombatParser.CMD_USE)) {
-                        
-                        if (targetId == 0) {
-                            player.getBasicAttack().applyEffects(this);
-                        } else {
-                            player.getHand().getCard(targetId).applyEffects(this);
-                            Tools.drawInterface(makeStringOfGame());
-                        }
-                        
-                    } else if (combatParser.getLastCommand().equals(ICombatParser.CMD_HELP)) {
+                    if (cmd.equals(CombatParser.CMD_USE)) {
+                        player.getHand().getCard(targetId).applyEffects(this);
+                    } else if (cmd.equals(CombatParser.CMD_HELP)) {
                         System.out.println(player.getHand().getCard(targetId).getDescription());
                         System.out.println(player.getHand().getCard(targetId).getTrivia());
                     }
-                    
-                }  
+                } else if (cmd.equals(CombatParser.CMD_SKILL)) {
+                    player.getBasicAttack().applyEffects(this);
+                }
                 
-            } while (combatParser.getLastCommand() != ICombatParser.CMD_ENDTURN
+            } while (combatParser.getLastCommand() != CombatParser.CMD_ENDTURN
                     && !player.isDead());     
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
             enemy.performTurn(this);
