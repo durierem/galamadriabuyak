@@ -15,9 +15,12 @@ import galamadriabuyak.util.json_simple.JSONObject;
 import galamadriabuyak.util.json_simple.parser.JSONParser;
 import galamadriabuyak.util.json_simple.parser.ParseException;
 
-public class JSONizer implements IJSONizer {
+public class JSONizer {
     
-    public ICard[] cardsFromFile(String f) {
+    private JSONizer() {
+    }
+    
+    public static ICard[] cardsFromFile(String f) {
         if (f == null) {
             throw new AssertionError();
         }
@@ -33,7 +36,7 @@ public class JSONizer implements IJSONizer {
      *      f exists
      *      f not empty of JSONObject
      */
-    private JSONArray fileToJArray(String f) {
+    private static JSONArray fileToJArray(String f) {
         assert (f != null);
         
         JSONParser jsonParser = new JSONParser();
@@ -59,7 +62,7 @@ public class JSONizer implements IJSONizer {
      * @pre
      *      array != null
      */
-    private ICard[] cardsFromJArray(JSONArray array) {
+    private static ICard[] cardsFromJArray(JSONArray array) {
         assert (array != null);
         
         ICard[] cards = new Card[array.size()];
@@ -80,7 +83,7 @@ public class JSONizer implements IJSONizer {
      *      jcard.contains("trivia")
      *      jcard.contains("effect")
      */
-    private ICard cardFromJSON(JSONObject jcard) {
+    private static ICard cardFromJSON(JSONObject jcard) {
         assert (jcard != null);
         
         String name = (String) jcard.get("name");
