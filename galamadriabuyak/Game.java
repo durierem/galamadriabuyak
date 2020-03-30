@@ -1,5 +1,6 @@
 package galamadriabuyak;
 
+import java.io.IOException;
 import galamadriabuyak.util.*;
 import java.util.Scanner;
 
@@ -60,20 +61,20 @@ public class Game {
                 if (draw_number > deckSize) {
                     player.draw(deckSize);
                 } else {
-                    draw_number;
+                    player.draw(draw_number);
                 }
             }
             
             do {
                 drawInterface();
-                waitForInput();
+                combatParser.parseInput(waitForInput());
                 while (!combatParser.isLastCommandLegal()) {
-                    waitForInput();
+                    combatParser.parseInput(waitForInput());
                 }
                 if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
                     player.getHand().getCard(combatParser.getLastTargetID())
                         .applyEffects(this);
-                    draw();
+                    drawInterface();
                 }
                 if (combatParser.getLastCommand() == ICombatParser.CMD_HELP) {
                     player.getHand().getCard(combatParser.getLastTargetID())
@@ -90,11 +91,18 @@ public class Game {
     
    
     private String waitForInput(){
+        /* Not working, infinite loop
+        
         StringBuffer result = new StringBuffer();
         while (scanner.hasNext()) {
             result.append(scanner.next());
         }
-        return result.toString();
+        return result.toString(); 
+        
+        */
+        
+        // Returns the last line entered by the user.
+        return scanner.nextLine();
     }
     
     private void drawInterface() {
@@ -144,11 +152,16 @@ public class Game {
     }
     
     private void clear() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } 
+            else {
+               Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException ex) {
+        }
     }
-    
-    
     
     public static void main(String[] args) {
         new Game();
