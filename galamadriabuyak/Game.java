@@ -67,10 +67,8 @@ public class Game {
             
             do {
                 drawInterface();
-                combatParser.parseInput(waitForInput());
-                while (!combatParser.isLastCommandLegal()) {
-                    combatParser.parseInput(waitForInput());
-                }
+                
+                waitForInput(combatParser);
                 
                 int targetId = combatParser.getLastTargetID();
                 if (combatParser.getLastCommand() == ICombatParser.CMD_USE) {
@@ -88,8 +86,10 @@ public class Game {
         }
     }
     
-    private String waitForInput(){
-        return scanner.nextLine();
+    private void waitForInput(ICombatParser combatParser){
+        while (!combatParser.isLastCommandLegal()) {
+            combatParser.parseInput(scanner.nextLine());
+        }
     }
     
     private void drawInterface() {
