@@ -10,6 +10,7 @@ public abstract class Character implements ICharacter {
     private ICard basicAttack;
     private IDeck deck;
     private IHand hand;
+    private boolean isDead;
 
     // CONSTRUCTORS
 
@@ -21,6 +22,7 @@ public abstract class Character implements ICharacter {
         this.basicAttack = basicAttack;
         this.deck = deck;
         this.hand = hand;
+        this.isDead = false;
     }
 
     // REQUESTS
@@ -46,7 +48,7 @@ public abstract class Character implements ICharacter {
     }
     
     public boolean isDead() {
-        return getHealth() <= 0;
+        return isDead;
     }
     
     public ICard getBasicAttack(){
@@ -60,6 +62,9 @@ public abstract class Character implements ICharacter {
           throw new AssertionError();
         }
         health = q;
+        if (health == 0) {
+            isDead = true;
+        }
     }
 
     public void setHealthUp(int q) {
@@ -73,7 +78,12 @@ public abstract class Character implements ICharacter {
         if (q < 0) {
           throw new AssertionError();
         }
-        health -= q;
+        if (q > health) {
+            health = 0;
+            isDead = true;
+        } else {
+            health -= q;
+        }
     }
     
     public void draw(int n) {
