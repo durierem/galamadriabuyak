@@ -120,4 +120,11 @@ public interface ICharacter {
      *      getHealth() == 0 ==> isDead()
      */
     void setHealthDown(int q);
+    
+    /**
+     *  If deck is not empty, Player draw cards to complete his hand. 
+     *  If not enought cards in the deck, draws cards until 
+     *  the deck becomes empty.
+     */
+    void completeHand();
 }
