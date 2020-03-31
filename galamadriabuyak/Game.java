@@ -70,7 +70,7 @@ public class Game {
                     int targetId = combatParser.getLastTargetID();
                     if (cmd.equals(CombatParser.CMD_USE)) {
                         if (targetId > player.getHand().getSize()) {
-                            System.out.println("Their is no card number " 
+                            System.out.println(" -> Their is no card number " 
                                                     + targetId + " ."); 
                             continue;                    
                         }
@@ -130,8 +130,7 @@ public class Game {
                + "   2 - " + card1Name + "                                                        \n"
                + "   3 - " + card2Name + "                                                        \n"
                + "                                                                                \n"
-               + "+------------------------------------------------------------------------------+\n"
-               + "> ";
+               + "+------------------------------------------------------------------------------+\n";       
     }
     
     public static void main(String[] args) {

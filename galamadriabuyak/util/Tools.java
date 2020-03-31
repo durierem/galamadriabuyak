@@ -11,8 +11,10 @@ public class Tools {
     
     public static void waitForInput(IParser wparser){
         Scanner scanner = new Scanner(System.in);
+        System.out.print("> ");
         wparser.parseInput(scanner.nextLine());
         while (!wparser.isLastCommandLegal()) {
+            System.out.print("> ");
             wparser.parseInput(scanner.nextLine());
         }
     }
