@@ -12,8 +12,14 @@ public class Enemy extends Character implements IEnemy {
     // COMMANDS
     
     public void performTurn(Game game){
-        for (int i = alea(0,2) ; i < this.getHand().getSize() ; i++){
-            this.getHand().getCard(i).applyEffects(game);
+        System.out.print("enemy turn");
+        if (alea(0, 100) <= 65) {
+            this.getBasicAttack().applyEffects(game);
+            if (alea(0, 100) <= 33) {
+                chooseAndUseCards(game);
+            }
+        } else if (alea(0, 100) <= 50) {
+            chooseAndUseCards(game);
         }
     }
     
@@ -24,5 +30,14 @@ public class Enemy extends Character implements IEnemy {
      */
     private int alea(int min,int max) {
         return min + (int) (Math.random() * (max - min + 1));
-    }  
+    } 
+    
+    /**
+     * Make the enemy randomly choose and use cards.
+     */
+    private void chooseAndUseCards(Game game) {
+        for (int i = alea(0,2); i < this.getHand().getSize(); i++) {
+            this.getHand().getCard(i).applyEffects(game);
+        }
+    }
 }
