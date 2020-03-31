@@ -1,7 +1,8 @@
 package galamadriabuyak.util;
 
-import java.util.StringTokenizer;
-import java.util.NoSuchElementException;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * A parser to handle all the commands related to a fight.
@@ -19,22 +20,29 @@ public class CombatParser implements IParser {
 
     // CONSTANTS
 
-    public static final String CMD_USE = "use"; // Use a card
-    public static final String CMD_HELP = "help"; // Get details about a card
-    public static final String CMD_ENDTURN = "endturn"; // End the turn
+    public static final String CMD_CARD = "use card"; // Use a card
+    public static final String CMD_SKILL = "use skill"; // Use the basic attack
+    public static final String CMD_HELP = "help card"; // Get details about a card
+    public static final String CMD_ENDTURN = "end turn"; // End the turn
     public static final String CMD_EXIT = "exit"; // Exit the game
-    public static final String CMD_SKILL = "skill"; // Use the basic attack
+
+    private static final Map COMMANDS = new HashMap();
+    static {
+        COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true, 0));
+        COMMANDS.put(CMD_SKILL, new Command(CMD_SKILL, true, 0));
+        COMMANDS.put(CMD_HELP, new Command(CMD_HELP));
+        COMMANDS.put(CMD_ENDTURN, new Command(CMD_ENDTURN));
+        COMMANDS.put(CMD_EXIT, new Command(CMD_EXIT));
+    }
 
     // ATTRIBUTES
     
-    private String command;
-    private int targetID;
+    private Command lastCommand;
     
     // CONSTRUCTOR
     
     public CombatParser() {
-        command = "";
-        targetID = 0;
+        lastCommand = new Command("");
     }
     
     // REQUESTS
@@ -43,30 +51,25 @@ public class CombatParser implements IParser {
         if (!isLastCommandLegal()) {
             throw new AssertionError();
         }
-        return command;
+        return lastCommand.getName();
     }
     
     public int getLastTargetID() {
         if (!isLastCommandLegal() || !isLastCommandTargeted()) {
             throw new AssertionError();
         }
-        return targetID;
+        return lastCommand.getTargetID();
     }
 
     public boolean isLastCommandLegal() {
-        return ((command.equals(CMD_USE)
-            || command.equals(CMD_HELP))
-            && targetID > 0)
-            || (command.equals(CMD_SKILL)
-            || command.equals(CMD_ENDTURN)
-            || command.equals(CMD_EXIT));
+        return COMMANDS.get(lastCommand.getName()) != null;
     }
 
     public boolean isLastCommandTargeted() {
         if (!isLastCommandLegal()) {
             throw new AssertionError();
         }
-        return command.equals(CMD_USE) || command.equals(CMD_HELP);
+        return lastCommand.isTargeted();
     }
 
     // COMMANDS
@@ -75,45 +78,29 @@ public class CombatParser implements IParser {
         if (input == null || input.trim().equals("")) {
             throw new AssertionError();
         }
-        StringTokenizer st = new StringTokenizer(input);
-        try {
-            String c = st.nextToken();
-            if (isCommandLegal(c)) {
-                command = c;
-                if (isCommandTargeted(command)) {
-                    try {
-                        targetID = Integer.parseInt(st.nextToken());
-                    } catch (NumberFormatException e) {
-                        targetID = 0;
-                    }
+        Scanner sc = new Scanner(input);
+        StringBuffer buffer = new StringBuffer();
+        while (sc.hasNext()) {
+            buffer.append(sc.next());
+        }
+        if (isCommandLegal(buffer.toString())) {
+            Command c = (Command) COMMANDS.get(buffer.toString());
+            if (c.isTargeted()) {
+                if (sc.hasNextInt()) {
+                    c.setTargetID(sc.nextInt());
+                } else {
+                    lastCommand = new Command("");
                 }
-            }            
-        } catch (NoSuchElementException e) {
-            command = "";
-            targetID = 0;
+            }   
+            lastCommand = c;
+        } else {
+            lastCommand = new Command("");
         }
     }
 
     // TOOLS
 
-    /**
-     * Checks if the given input is a legal command.
-     */
-    private boolean isCommandLegal(String input) {
-        return input.equals(CMD_USE)
-            || input.equals(CMD_HELP)
-            || input.equals(CMD_ENDTURN)
-            || input.equals(CMD_EXIT)
-            || input.equals(CMD_SKILL);
-    }
-
-    /**
-     * Checks if the given command is a targeted command.
-     * @pre
-     *      isCommandLegal(command)
-     */
-    private boolean isCommandTargeted(String command) {
-        assert isCommandLegal(command);
-        return command.equals(CMD_USE) || command.equals(CMD_HELP);
+    public static boolean isCommandLegal(String input) {
+        return COMMANDS.get(input) != null;
     }
 }

@@ -58,7 +58,7 @@ public class Game {
                 String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
                     int targetId = combatParser.getLastTargetID();
-                    if (cmd.equals(CombatParser.CMD_USE)) {
+                    if (cmd.equals(CombatParser.CMD_CARD)) {
                         if (targetId > player.getHand().getSize()) {
                             System.out.println(" -> Their is no card number " 
                                                     + targetId + " ."); 
