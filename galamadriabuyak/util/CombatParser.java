@@ -6,32 +6,25 @@ import java.util.Scanner;
 
 /**
  * A parser to handle all the commands related to a fight.
- *
- * @inv
- *      x := (getLastCommand().equals(CMD_USE)
- *              || getLastCommand().equals(CMD_HELP)
- *              && getLastTargetID() > 0)
- *              || (getLastCommand().equals(CMD_ENDTURN)
- *              || getLastCommend().equals(CMD_EXIT))
- *           
- *      x ==> isLastCommandLegal()
  */
 public class CombatParser implements IParser {
 
     // CONSTANTS
 
-    public static final String CMD_CARD = "use card"; // Use a card
-    public static final String CMD_SKILL = "use skill"; // Use the basic attack
-    public static final String CMD_HELP = "help card"; // Get details about a card
-    public static final String CMD_ENDTURN = "end turn"; // End the turn
-    public static final String CMD_EXIT = "exit"; // Exit the game
+    public static final String CMD_CARD = "use card";
+    public static final String CMD_SKILL = "use skill";
+    public static final String CMD_HELP_CARD = "help card";
+    public static final String CMD_HELP_SKILL = "help skill";
+    public static final String CMD_END_TURN = "end turn";
+    public static final String CMD_EXIT = "exit";
 
     private static final Map COMMANDS = new HashMap();
     static {
-        COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true, 0));
-        COMMANDS.put(CMD_SKILL, new Command(CMD_SKILL, true, 0));
-        COMMANDS.put(CMD_HELP, new Command(CMD_HELP));
-        COMMANDS.put(CMD_ENDTURN, new Command(CMD_ENDTURN));
+        COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true));
+        COMMANDS.put(CMD_SKILL, new Command(CMD_SKILL));
+        COMMANDS.put(CMD_HELP_CARD, new Command(CMD_HELP_CARD, true));
+        COMMANDS.put(CMD_HELP_SKILL, new Command(CMD_HELP_SKILL));
+        COMMANDS.put(CMD_END_TURN, new Command(CMD_END_TURN));
         COMMANDS.put(CMD_EXIT, new Command(CMD_EXIT));
     }
 
@@ -75,14 +68,25 @@ public class CombatParser implements IParser {
     // COMMANDS
     
     public void parseInput(String input) {
-        if (input == null || input.trim().equals("")) {
+        if (input == null) {
             throw new AssertionError();
         }
+
+        /*
+         * Separates the command from the potential target ID.
+         */
         Scanner sc = new Scanner(input);
         StringBuffer buffer = new StringBuffer();
-        while (sc.hasNext()) {
-            buffer.append(sc.next());
+        while (sc.hasNext() && !sc.hasNextInt()) {
+            buffer.append(sc.next() + " ");
         }
+        buffer.deleteCharAt(buffer.length() - 1); // Removes the trailing space
+
+        /* 
+         * If the command is legal, attempts to retrieve the target ID.
+         * If the command is illegal or if there is no valid target ID, ensures
+         * that the last command is illegal (==> !isLastCommandLegal()).
+         */
         if (isCommandLegal(buffer.toString())) {
             Command c = (Command) COMMANDS.get(buffer.toString());
             if (c.isTargeted()) {
@@ -100,7 +104,13 @@ public class CombatParser implements IParser {
 
     // TOOLS
 
+    /**
+     * Checks if input is a legal command.
+     * @pre
+     *      input != null
+     */
     public static boolean isCommandLegal(String input) {
+        assert input != null;
         return COMMANDS.get(input) != null;
     }
 }

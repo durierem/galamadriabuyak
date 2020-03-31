@@ -65,7 +65,7 @@ public class Game {
                             continue;                    
                         }
                         player.getHand().getCard(targetId).applyEffects(this);
-                    } else if (cmd.equals(CombatParser.CMD_HELP)) {
+                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
                         System.out.println(player.getHand().getCard(targetId)
                             .getDescription());
                         System.out.println(player.getHand().getCard(targetId)
@@ -81,7 +81,7 @@ public class Game {
                 }
                 
                 Tools.drawInterface(makeStringOfGame());
-            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_ENDTURN));     
+            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_END_TURN));     
             
             if (player.isDead() || enemy.isDead()) {
                 break;
