@@ -89,7 +89,12 @@ public class Game {
             
             enemy.completeHand();
             enemy.performTurn(this);
+            
+            if (player.isDead() || enemy.isDead()) {
+                break;
+            }
         }
+        Tools.drawInterface(makeStringOfGame());
     }
     
     private String makeStringOfGame() {

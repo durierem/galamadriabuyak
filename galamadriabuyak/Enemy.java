@@ -15,6 +15,11 @@ public class Enemy extends Character implements IEnemy {
         System.out.print("enemy turn");
         if (alea(0, 100) <= 65) {
             this.getBasicAttack().applyEffects(game);
+            
+            if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
+                return;
+            }
+                
             if (alea(0, 100) <= 33) {
                 chooseAndUseCards(game);
             }
@@ -38,6 +43,9 @@ public class Enemy extends Character implements IEnemy {
     private void chooseAndUseCards(Game game) {
         for (int i = alea(0,2); i < this.getHand().getSize(); i++) {
             this.getHand().getCard(i).applyEffects(game);
+            if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
+                return;
+            }
         }
     }
 }
