@@ -8,7 +8,8 @@ package galamadriabuyak;
  * When a character's health points fall under zero, he dies.
  * @inv
  *      getName() != null
- *      getHealth() <= 0 ==> isDead()
+ *      getHealth() >= 0
+ *      getHealth() == 0 ==> isDead()
  *      getHealth() > 0 ==> !isDead()
  *      getLevel() > 0
  *      getBasicAttack() != null
@@ -97,6 +98,7 @@ public interface ICharacter {
      *      q >= 0
      * @post
      *      getHealth() == q
+     *      q == 0 => isDead()
      */
     void setHealthTo(int q);
 
@@ -114,7 +116,8 @@ public interface ICharacter {
      * @pre
      *      q >= 0
      * @post
-     *      getHealth() == old getHealth() - q
+     *      getHealth() == min(0, old getHealth() - q)
+     *      getHealth() == 0 ==> isDead()
      */
     void setHealthDown(int q);
 }
