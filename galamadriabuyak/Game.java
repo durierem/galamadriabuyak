@@ -61,15 +61,19 @@ public class Game {
                     player.draw(draw_number);
                 }
             }
-
+            Tools.drawInterface(makeStringOfGame());
             do {
-                Tools.drawInterface(makeStringOfGame());
                 Tools.waitForInput(combatParser);
                 
                 String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
                     int targetId = combatParser.getLastTargetID();
                     if (cmd.equals(CombatParser.CMD_USE)) {
+                        if (targetId > player.getHand().getSize()) {
+                            System.out.println("Their is no card number " 
+                                                    + targetId + " ."); 
+                            continue;                    
+                        }
                         player.getHand().getCard(targetId).applyEffects(this);
                     } else if (cmd.equals(CombatParser.CMD_HELP)) {
                         System.out.println(player.getHand().getCard(targetId)
@@ -80,7 +84,7 @@ public class Game {
                 } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                     player.getBasicAttack().applyEffects(this);
                 }
-                
+                Tools.drawInterface(makeStringOfGame());
             } while (combatParser.getLastCommand() != CombatParser.CMD_ENDTURN
                     && !player.isDead());     
             enemy.draw(IHand.MAX_SIZE - player.getHand().getSize());
