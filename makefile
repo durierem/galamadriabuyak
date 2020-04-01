@@ -2,9 +2,8 @@
 # define compiler and compiler flag variables
 #
 
-JFLAGS = -g
+JFLAGS = -g -Xlint:all
 JC = javac
-
 
 #
 # Clear any default targets for building .class files from .java files; we 
@@ -18,7 +17,6 @@ JC = javac
 
 .SUFFIXES: .java .class
 
-
 #
 # Here is our target entry for creating .class files from .java files 
 # This is a target entry that uses the suffix rule syntax:
@@ -31,8 +29,7 @@ JC = javac
 #
 
 .java.class:
-	$(JC) $(JFLAGS) $*.java
-
+        $(JC) $(JFLAGS) $*.java
 
 #
 # CLASSES is a macro consisting of 4 words (one for each java source file)
@@ -67,4 +64,5 @@ classes: $(CLASSES:.java=.class)
 #
 
 clean:
-	$(RM) *.class
+	find . -type f -name '*.ctxt' -delete
+	find . -type f -name '*.class' -delete
