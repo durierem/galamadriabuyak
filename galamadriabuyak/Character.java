@@ -46,6 +46,10 @@ public abstract class Character implements ICharacter {
     public IHand getHand(){
         return hand;    
     }
+
+    public ICard getHand(int n) {
+        return getHand().getCard(n);
+    }
     
     public boolean isDead() {
         return isDead;

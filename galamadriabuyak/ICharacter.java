@@ -69,6 +69,13 @@ public interface ICharacter {
     IHand getHand();
     
     /**
+     * The n-th card in the hand of this character.
+     * @pre
+     *      n > 0 && n <= IHand.MAX_SIZE
+     */
+    ICard getHand(int n);
+
+    /**
      * The deck of this character.
      */
     IDeck getDeck();

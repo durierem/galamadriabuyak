@@ -18,7 +18,7 @@ public class CombatParser implements IParser {
     public static final String CMD_END_TURN = "end turn";
     public static final String CMD_EXIT = "exit";
 
-    private static final Map COMMANDS = new HashMap();
+    private static final Map<String, Command> COMMANDS = new HashMap<>();
     static {
         COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true));
         COMMANDS.put(CMD_SKILL, new Command(CMD_SKILL));

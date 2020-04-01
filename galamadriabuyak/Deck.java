@@ -1,4 +1,5 @@
 package galamadriabuyak;
+
 import java.util.Stack;
 
 public class Deck implements IDeck {
@@ -6,13 +7,13 @@ public class Deck implements IDeck {
     // Attributes
     
     private int size;
-    private Stack deck;
+    private Stack<ICard> deck;
     
     //Constructor
     
     public Deck() {
         size = 0;
-        deck = new Stack();
+        deck = new Stack<>();
     }
     
     // Requestes
@@ -47,7 +48,7 @@ public class Deck implements IDeck {
                 throw new AssertionError();
             }
             
-        hand.addCard((ICard) deck.pop());
+        hand.addCard(deck.pop());
         size -= 1;
     }
     
@@ -68,11 +69,11 @@ public class Deck implements IDeck {
             throw new AssertionError();
         }
         int random_factor = 7;
-        Stack[] bufStack = new Stack[random_factor];
+        Stack<ICard>[] bufStack = new Stack[random_factor];
         
         //Initializing stacks.
         for (int i = 0; i < random_factor; ++i) {
-            bufStack[i] = new Stack();
+            bufStack[i] = new Stack<>();
         }
         
         //  Splitting the deck in random_factor stacks
