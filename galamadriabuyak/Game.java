@@ -45,7 +45,6 @@ public class Game {
         startFight(player, enemy);
     }
     
-    // Useful for applyEffect
     public IPlayer getPlayer() {
         return player;
     }
