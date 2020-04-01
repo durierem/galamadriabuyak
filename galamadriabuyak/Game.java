@@ -5,20 +5,18 @@ import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Target;
 import galamadriabuyak.util.Type;
 import galamadriabuyak.util.Tools;
+import galamadriabuyak.util.JSONizer;
 
 public class Game {
     
     private final IParser combatParser;
-    //private final ICard[] cardDataBase;
+    private final ICard[] cardDataBase;
     private final IPlayer player;
     private final IEnemy enemy;
     
     public Game() {
         combatParser = new CombatParser();
-        
-        /*
-         * TODO: fill cardDataBase
-         */
+        cardDataBase = JSONizer.cardsFromFile("./cards.json");
 
         player = new Player("Alice",
             1,
@@ -47,7 +45,6 @@ public class Game {
         startFight(player, enemy);
     }
     
-    // Useful for applyEffect
     public IPlayer getPlayer() {
         return player;
     }
