@@ -2,64 +2,64 @@ package galamadriabuyak;
 
 public class Hand implements IHand {
     
-    // ATTRIBUTS    
+    // ATTRIBUTES    
     
-    private ICard[] handTab = new ICard[MAX_SIZE];
+    private ICard[] data;
     private int size;
     
-    // CONSTRUCTEUR
+    // CONSTRUCTORS
     
     public Hand() {
+        data = new ICard[MAX_SIZE];
         size = 0;
     }
     
-    // REQUETES
-    
+    // REQUESTS
+
     public int getSize() {
         return size;
     }
-    
-    /**
-     * Returns the nth card of the hand.
-     * 
-     * @pre 
-     *      0 <= n <= getSize() - 1
-     * @post
-     *      getSize() = old getSize()
-     */
+
     public ICard getCard(int n) {
-        if (n < 0 || getSize() - 1 < n){
+        if (n <= 0 || n > getSize()) {
             throw new AssertionError();
         }
-        return handTab[n];
+        return data[n - 1];
     }
     
-    // COMMANDES
-   
+    // COMMANDS
+
     public void setSize(int n) {
-        if (0 > n || MAX_SIZE > n){
+        if (n < 0 || n > MAX_SIZE) {
             throw new AssertionError();
         }
         size = n;
     }
     
     public void deleteCard(int n) {
-        if (n < 0 || getSize() - 1 < n){
+        if (n < 1 || n > getSize()) {
             throw new AssertionError();
         }
-        for(int i = n; i < MAX_SIZE - 1; i++){
-            handTab[i] = handTab[i+1];
+        for (int i = n; i < MAX_SIZE; i++) {
+            data[i] = data[i + 1];
         }
-        handTab[getSize() - 1] = null;
-        size = getSize() - 1;
+        data[getSize() - 1] = null;
+        size = getSize();
     }
     
+    /**
+     *  Adds card to this hand.
+     *  @pre 
+     *      card != null
+     *      getSize() < MAX_SIZE
+     *  @post
+     *      getSize() = old getSize() + 1
+     */
     public void addCard(ICard card) {
-        if (size >= MAX_SIZE || card == null) {
+        if (getSize() >= MAX_SIZE || card == null) {
             throw new AssertionError();
         }
-        
-        handTab[getSize()] = card;
+        data[getSize()] = card;
         size += 1;
     }
 }

@@ -1,72 +1,70 @@
 package galamadriabuyak;
 
 /**
- * Models a player's hand. 
+ * Represents a player's hand. 
  * 
- * @pre 
- *      0 >= getSize() >= MAX_SIZE
- *      
+ * @inv
+ *      0 <= getSize() <= MAX_SIZE   
  * @cons
- *      $DESC$ A new empty  hand
- *      $ARGS$
- *      $PRE$
+ *      $DESC$ A new empty hand
  *      $POST$
  *          getSize() == 0
  */
-public interface IHand
-{
-    // Constants
+public interface IHand {
     
-    final static int MAX_SIZE = 3;
-    
-    // Requests
+    // CONSTANTS
     
     /**
-     * Returns the size of the hand.
+     * The maximum size of a hand.
+     */
+    static final int MAX_SIZE = 3;
+    
+    // REQUESTS
+    
+    /**
+     * The current size of this hand.
      */
     int getSize();
     
     /**
-     * Returns the nth card of the hand.
-     * 
+     * The nth card of this hand.
      * @pre 
-     *      0 <= n <= getSize() - 1
+     *      0 < n <= getSize()
      * @post
      *      getSize() = old getSize()
      */
     ICard getCard(int n);
     
-    // COMMANDES
+    // COMMANDS
     
     /**
-     * Set the size of hand
-     * 
+     * Sets the current size of this hand to n.
      * @pre 
      *      0 <= n <= MAX_SIZE
      */
     void setSize(int n);
     
     /**
-    *  Delete the Nth card of the deck
-    *  
-    *  @pre
-    *       0 <= n <= getSize() - 1
-    *  @post
-    *       getSize() = old getSize() - 1
-    *       the Nth card was deleted
-    *       the Cards at positon Nth + x in handTab was reposition on Nth + x - 1
-    */
+     *  Deletes the nth card of this hand.
+     *  @pre
+     *       1 <= n <= getSize()
+     *  @post
+     *       getSize() = old getSize() - 1
+     *       forall i:[1...MAX_SIZE]:
+     *          if i >= n:
+     *              getCard(i) = old getCard(i + 1)
+     *          else:
+     *              getCard(i) = old getCard(i)
+     */
     void deleteCard(int n);
     
     /**
-     *  Add card to the hand. At the first available position.
-     *  
+     *  Adds card to this hand.
      *  @pre 
      *      card != null
-     *      getSize() <= 2
-     *      
+     *      getSize() < MAX_SIZE
      *  @post
      *      getSize() = old getSize() + 1
      */
-    public void addCard(ICard card);
+    void addCard(ICard card);
 }
