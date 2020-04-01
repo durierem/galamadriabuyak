@@ -58,14 +58,14 @@ public class Game {
                 String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
                     int targetId = combatParser.getLastTargetID();
-                    if (cmd.equals(CombatParser.CMD_USE)) {
+                    if (cmd.equals(CombatParser.CMD_CARD)) {
                         if (targetId > player.getHand().getSize()) {
                             System.out.println(" -> Their is no card number " 
                                                     + targetId + " ."); 
                             continue;                    
                         }
                         player.getHand().getCard(targetId).applyEffects(this);
-                    } else if (cmd.equals(CombatParser.CMD_HELP)) {
+                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
                         System.out.println(player.getHand().getCard(targetId)
                             .getDescription());
                         System.out.println(player.getHand().getCard(targetId)
@@ -81,7 +81,7 @@ public class Game {
                 }
                 
                 Tools.drawInterface(makeStringOfGame());
-            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_ENDTURN));     
+            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_END_TURN));     
             
             if (player.isDead() || enemy.isDead()) {
                 break;

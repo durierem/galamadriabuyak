@@ -3,11 +3,15 @@ package galamadriabuyak.util;
 /**
  * A simple parser able to handle a basic command syntax.
  *
- * A correct command is made of a keyword and a target ID when necessary.
+ * A correct command is made of command and a target ID when necessary.
  * The parser only handles the correctness of the command, and does not
  * perform actions by itself.
  * One can only retrieve a command if it is a legal command
  * (isLastCommandLegal() == true)
+ *
+ * @inv
+ *      lc := the string representation of a legal command
+ *      getLastCommand().equals(lc) <==> isLastCommandLegal()
  *
  * @cons
  *      $DESC$ An empty parser.
@@ -50,7 +54,7 @@ public interface IParser {
     /**
      * Parse the given input.
      * @pre
-     *      input != null && !input.trims().equals("")
+     *      input != null
      */
     void parseInput(String input);
 }
