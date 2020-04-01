@@ -32,7 +32,7 @@ public class CombatParser implements IParser {
     
     private Command lastCommand;
     
-    // CONSTRUCTOR
+    // CONSTRUCTORS
     
     public CombatParser() {
         lastCommand = new Command("");
@@ -88,7 +88,7 @@ public class CombatParser implements IParser {
          * that the last command is illegal (==> !isLastCommandLegal()).
          */
         if (isCommandLegal(buffer.toString())) {
-            Command c = (Command) COMMANDS.get(buffer.toString());
+            Command c = COMMANDS.get(buffer.toString());
             if (c.isTargeted()) {
                 if (sc.hasNextInt()) {
                     c.setTargetID(sc.nextInt());

@@ -1,16 +1,25 @@
 package galamadriabuyak;
 
-import galamadriabuyak.util.*;
+import galamadriabuyak.util.IParser;
+import galamadriabuyak.util.CombatParser;
+import galamadriabuyak.util.Target;
+import galamadriabuyak.util.Type;
+import galamadriabuyak.util.Tools;
 
 public class Game {
     
-    private IParser combatParser;
-    private IPlayer player;
-    private IEnemy enemy;
+    private final IParser combatParser;
+    //private final ICard[] cardDataBase;
+    private final IPlayer player;
+    private final IEnemy enemy;
     
     public Game() {
         combatParser = new CombatParser();
         
+        /*
+         * TODO: fill cardDataBase
+         */
+
         player = new Player("Alice",
             1,
             10,
@@ -57,17 +66,16 @@ public class Game {
 
             do {
                 Tools.waitForInput(combatParser);
-                
                 // Processes the command entered by the player
                 String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
                     int targetID = combatParser.getLastTargetID();
+                    if (targetID > player.getHand().getSize()) {
+                        System.out.println(" -> There is no card number " 
+                                               + targetID + "!"); 
+                        continue;
+                    }
                     if (cmd.equals(CombatParser.CMD_CARD)) {
-                        if (targetID > player.getHand().getSize()) {
-                            System.out.println(" -> There is no card number " 
-                                                    + targetID + "!"); 
-                            continue;
-                        }
                         player.getHand(targetID).applyEffects(this);
                     } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
                         System.out.println(player.getHand(targetID)
@@ -77,9 +85,14 @@ public class Game {
                     }
                 } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                     player.getBasicAttack().applyEffects(this);
+                } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
+                    // TODO
+                    System.out.println(" -> This functionality is not"
+                        + " implemented yet!");
+                    continue;
                 } else if (cmd.equals(CombatParser.CMD_EXIT)) {
                     System.exit(0);
-                }
+                } 
                 
                 // Checking if one of the character died after applying a command.
                 if (player.isDead() || enemy.isDead()) {
@@ -129,14 +142,14 @@ public class Game {
                + " [" + enemy.getName() + "]                                                      \n"
                + "                                                                                \n"
                + " HP: " + enemy.getHealth() + "                                                  \n"
-               + " Deck (" + enemy.getDeck().getSize() +") / Hand (" + enemy.getHand().getSize() + ")\n"
+               + " Deck (" + enemy.getDeck().getSize() + ") / Hand (" + enemy.getHand().getSize() + ")\n"
                + "                                                                                \n"
                + " -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-\n"
                + "                                                                                \n"
                + " [" + player.getName() + "]                                                     \n"
                + "                                                                                \n"
                + " HP: " + player.getHealth() + "                                                 \n"
-               + " Deck (" + player.getDeck().getSize() +") / Hand (" + player.getHand().getSize() + ")\n"
+               + " Deck (" + player.getDeck().getSize() + ") / Hand (" + player.getHand().getSize() + ")\n"
                + "   1 - " + card0Name + "                                                        \n"
                + "   2 - " + card1Name + "                                                        \n"
                + "   3 - " + card2Name + "                                                        \n"
