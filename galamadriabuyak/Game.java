@@ -10,6 +10,7 @@ public class Game {
     
     public Game() {
         combatParser = new CombatParser();
+        
         player = new Player("Alice",
             1,
             10,
@@ -20,7 +21,9 @@ public class Game {
             new Deck(),
             new Hand(),
             0);
-        enemy = new Enemy("Bob",
+
+        enemy = new Enemy(
+            "Bob",
             1,
             5,
             new BasicAttack("Useless Roar",
@@ -49,35 +52,38 @@ public class Game {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
         while (!player.isDead() && !enemy.isDead()) {
-            
             player.completeHand();
             Tools.drawInterface(makeStringOfGame());
+
             do {
                 Tools.waitForInput(combatParser);
                 
+                // Processes the command entered by the player
                 String cmd = combatParser.getLastCommand();
                 if (combatParser.isLastCommandTargeted()) {
-                    int targetId = combatParser.getLastTargetID();
+                    int targetID = combatParser.getLastTargetID();
                     if (cmd.equals(CombatParser.CMD_CARD)) {
-                        if (targetId > player.getHand().getSize()) {
-                            System.out.println(" -> Their is no card number " 
-                                                    + targetId + " ."); 
-                            continue;                    
+                        if (targetID > player.getHand().getSize()) {
+                            System.out.println(" -> There is no card number " 
+                                                    + targetID + "!"); 
+                            continue;
                         }
-                        player.getHand().getCard(targetId).applyEffects(this);
+                        player.getHand(targetID).applyEffects(this);
                     } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
-                        System.out.println(player.getHand().getCard(targetId)
+                        System.out.println(player.getHand(targetID)
                             .getDescription());
-                        System.out.println(player.getHand().getCard(targetId)
+                        System.out.println(player.getHand(targetID)
                             .getTrivia());
                     }
                 } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                     player.getBasicAttack().applyEffects(this);
+                } else if (cmd.equals(CombatParser.CMD_EXIT)) {
+                    System.exit(0);
                 }
                 
                 // Checking if one of the character died after applying a command.
                 if (player.isDead() || enemy.isDead()) {
-                    break;
+                    break; // TODO: display a end game screen / informations
                 }
                 
                 Tools.drawInterface(makeStringOfGame());
@@ -87,11 +93,11 @@ public class Game {
                 break;
             }
             
-            enemy.completeHand();
+            enemy.completeHand(); // This has to be in Enemy.performTurn()
             enemy.performTurn(this);
             
             if (player.isDead() || enemy.isDead()) {
-                break;
+                break; // TODO: display a end game screen / informations
             }
         }
         Tools.drawInterface(makeStringOfGame());
