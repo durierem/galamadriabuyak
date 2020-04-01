@@ -13,6 +13,19 @@
     ]
   },
   {
+    "name": "Cursed Child's Scream ",
+    "description": "Inflict 8 damage to the enemy.",
+    "trivia": "The piercing scream of a cursed child, locked up in a smelly jar. Warning: manipulate with caution!",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 8
+      }
+    ]
+  },
+  {
     "name": "Fussy Hammer",
     "description": "Inflict 10 damages to the enemy.",
     "trivia": "A possessed hammer that spends eternity hitting the slightest trinket that stick out from the wall. The sound it produces is unbearable to the human ear. ",
@@ -26,7 +39,7 @@
     ]
   },
   {
-    "name": "Angelica, the angelic angel",
+    "name": "Angelica, the Angelic Angel",
     "description": "Heal 10 of your health points",
     "trivia": "Angelica's obsession for healing people has been reincarnated into a cute little angel that does nothing but smiling at you. It's very effective!",
     "effects":
@@ -48,6 +61,37 @@
         "type": "hit",
         "target": "enemy",
         "power": 0
+      }
+    ]
+  },
+  {
+    "name": "Used Match",
+    "description": "Inflict 1 damage to the enemy.",
+    "trivia": "Where is the candle?",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 1
+      }
+    ]
+  },
+  {
+    "name": "Waters of Chaos",
+    "description": "Inflict 20 damages to the enemy and heal 15 of your health points.",
+    "trivia": "In these deep and troubled waters, legends say only a true hero can see flying whales.",
+    "effects":
+    [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 20
+      },
+      {
+        "type": "heal",
+        "target": "player",
+        "power": 10
       }
     ]
   }
