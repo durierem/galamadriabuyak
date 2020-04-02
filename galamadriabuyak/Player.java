@@ -1,5 +1,9 @@
 package galamadriabuyak;
 
+import galamadriabuyak.util.IParser;
+import galamadriabuyak.util.CombatParser;
+import galamadriabuyak.util.Tools;
+
 public class Player extends Character implements IPlayer {
     // Attributes
     
@@ -43,5 +47,51 @@ public class Player extends Character implements IPlayer {
           throw new AssertionError();
         }
         money -= q;
+    }
+    
+    public void performTurn(Game game, IParser combatParser) {
+        if (isDead() || game == null || game.getEnemy().isDead() || combatParser == null) {
+            throw new AssertionError();
+        }   
+        
+        completeHand();
+        
+        do {
+                Tools.waitForInput(combatParser);
+                // Processes the command entered by the player
+                String cmd = combatParser.getLastCommand();
+                if (combatParser.isLastCommandTargeted()) {
+                    int targetID = combatParser.getLastTargetID();
+                    if (targetID > getHand().getSize()) {
+                        System.out.println(" -> There is no card number " 
+                                               + targetID + "!"); 
+                        continue;
+                    }
+                    if (cmd.equals(CombatParser.CMD_CARD)) {
+                        getHand(targetID).applyEffects(game);
+                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
+                        System.out.println(getHand(targetID)
+                            .getDescription());
+                        System.out.println(getHand(targetID)
+                            .getTrivia());
+                    }
+                } else if (cmd.equals(CombatParser.CMD_SKILL)) {
+                    getBasicAttack().applyEffects(game);
+                } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
+                    // TODO
+                    System.out.println(" -> This functionality is not"
+                        + " implemented yet!");
+                    continue;
+                } else if (cmd.equals(CombatParser.CMD_EXIT)) {
+                    System.exit(0);
+                } 
+                
+                // Checking if one of the character died after applying a command.
+                if (isDead() || game.getEnemy().isDead()) {
+                    break; // TODO: display a end game screen / informations
+                }
+                
+                Tools.drawInterface(game.makeStringOfGame());
+            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_END_TURN));
     }
 }

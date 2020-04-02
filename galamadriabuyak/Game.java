@@ -58,52 +58,19 @@ public class Game {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
         while (!player.isDead() && !enemy.isDead()) {
-            player.completeHand();
-            Tools.drawInterface(makeStringOfGame());
 
-            do {
-                Tools.waitForInput(combatParser);
-                // Processes the command entered by the player
-                String cmd = combatParser.getLastCommand();
-                if (combatParser.isLastCommandTargeted()) {
-                    int targetID = combatParser.getLastTargetID();
-                    if (targetID > player.getHand().getSize()) {
-                        System.out.println(" -> There is no card number " 
-                                               + targetID + "!"); 
-                        continue;
-                    }
-                    if (cmd.equals(CombatParser.CMD_CARD)) {
-                        player.getHand(targetID).applyEffects(this);
-                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
-                        System.out.println(player.getHand(targetID)
-                            .getDescription());
-                        System.out.println(player.getHand(targetID)
-                            .getTrivia());
-                    }
-                } else if (cmd.equals(CombatParser.CMD_SKILL)) {
-                    player.getBasicAttack().applyEffects(this);
-                } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
-                    // TODO
-                    System.out.println(" -> This functionality is not"
-                        + " implemented yet!");
-                    continue;
-                } else if (cmd.equals(CombatParser.CMD_EXIT)) {
-                    System.exit(0);
-                } 
-                
-                // Checking if one of the character died after applying a command.
-                if (player.isDead() || enemy.isDead()) {
-                    break; // TODO: display a end game screen / informations
-                }
-                
-                Tools.drawInterface(makeStringOfGame());
-            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_END_TURN));     
+            Tools.drawInterface(makeStringOfGame());
+            
+            if (player.isDead() || enemy.isDead()) {
+                break; // TODO: display a end game screen / informations
+            }
+            
+            player.performTurn(this, combatParser);     
             
             if (player.isDead() || enemy.isDead()) {
                 break;
             }
             
-            enemy.completeHand(); // This has to be in Enemy.performTurn()
             enemy.performTurn(this);
             
             if (player.isDead() || enemy.isDead()) {
@@ -113,7 +80,7 @@ public class Game {
         Tools.drawInterface(makeStringOfGame());
     }
     
-    private String makeStringOfGame() {
+    public String makeStringOfGame() {
         String card0Name = "______________";
         if (player.getHand().getSize() > 0) {
             card0Name = player.getHand().getCard(0).getName();

@@ -1,5 +1,7 @@
 package galamadriabuyak;
 
+import galamadriabuyak.util.IParser;
+
 /**
  * Models the player.
  * @inv 
@@ -46,4 +48,12 @@ public interface IPlayer extends ICharacter {
      *      getMoney() == old getMoney() - q
      */
     void setMoneyDown(int q);
+    
+    /**
+     * Performs the player's turn.
+     * 
+     * @pre 
+     *      !isDead();
+     */
+    void performTurn(Game game, IParser combatParser);
 }

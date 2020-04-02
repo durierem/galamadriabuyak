@@ -12,7 +12,12 @@ public class Enemy extends Character implements IEnemy {
     // COMMANDS
     
     public void performTurn(Game game){
-        System.out.print("enemy turn");
+        if (isDead() || game == null || game.getPlayer().isDead()) {
+            throw new AssertionError();
+        }
+        
+        completeHand();
+        
         if (alea(0, 100) <= 65) {
             this.getBasicAttack().applyEffects(game);
             
