@@ -49,19 +49,21 @@ public class Player extends Character implements IPlayer {
         money -= q;
     }
     
-    public void performTurn(Game game, IParser combatParser) {
-        if (isDead() || game == null || game.getEnemy().isDead() || combatParser == null) {
+    public void performTurn(Game game) {
+        if (isDead() || game == null || game.getEnemy().isDead() || Game.combatParser == null) {
             throw new AssertionError();
         }   
+        
+        IParser parser = Game.combatParser;
         
         completeHand();
         
         do {
-                Tools.waitForInput(combatParser);
+                Tools.waitForInput(parser);
                 // Processes the command entered by the player
-                String cmd = combatParser.getLastCommand();
-                if (combatParser.isLastCommandTargeted()) {
-                    int targetID = combatParser.getLastTargetID();
+                String cmd = parser.getLastCommand();
+                if (parser.isLastCommandTargeted()) {
+                    int targetID = parser.getLastTargetID();
                     if (targetID > getHand().getSize()) {
                         System.out.println(" -> There is no card number " 
                                                + targetID + "!"); 
@@ -92,6 +94,6 @@ public class Player extends Character implements IPlayer {
                 }
                 
                 Tools.drawInterface(game.makeStringOfGame());
-            } while (!combatParser.getLastCommand().equals(CombatParser.CMD_END_TURN));
+            } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
     }
 }

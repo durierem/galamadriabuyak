@@ -55,5 +55,5 @@ public interface IPlayer extends ICharacter {
      * @pre 
      *      !isDead();
      */
-    void performTurn(Game game, IParser combatParser);
+    void performTurn(Game game);
 }

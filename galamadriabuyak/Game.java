@@ -11,20 +11,18 @@ public class Game {
     
     // CONSTANTS
 
-    public static final ICard[] cardDataBase;
-
+    public static final ICard[] cardDataBase 
+                = JSONizer.cardsFromFile("./cards.json");;
+    
+    public static final IParser combatParser = new CombatParser();
     // ATTRIBUTES
 
-    private static final IParser combatParser;
     private final IPlayer player;
     private IEnemy enemy;
     
     // CONSTRUCTORS
 
     public Game() {
-        combatParser = new CombatParser();
-        cardDataBase = JSONizer.cardsFromFile("./cards.json");
-
         player = new Player("Alice",
             1,
             10,
@@ -76,7 +74,7 @@ public class Game {
                 break; // TODO: display a end game screen / informations
             }
             
-            player.performTurn(this, combatParser);     
+            player.performTurn(this);     
             
             if (player.isDead() || enemy.isDead()) {
                 break;
