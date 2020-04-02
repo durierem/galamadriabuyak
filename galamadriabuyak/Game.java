@@ -9,11 +9,18 @@ import galamadriabuyak.util.JSONizer;
 
 public class Game {
     
-    private final IParser combatParser;
-    private final ICard[] cardDataBase;
+    // CONSTANTS
+
+    public static final ICard[] cardDataBase;
+
+    // ATTRIBUTES
+
+    private static final IParser combatParser;
     private final IPlayer player;
-    private final IEnemy enemy;
+    private IEnemy enemy;
     
+    // CONSTRUCTORS
+
     public Game() {
         combatParser = new CombatParser();
         cardDataBase = JSONizer.cardsFromFile("./cards.json");
@@ -41,16 +48,20 @@ public class Game {
             new Hand());
     }
 
-    public void play() {
-        startFight(player, enemy);
-    }
-    
+    // REQUESTS
+
     public IPlayer getPlayer() {
         return player;
     }
     
     public IEnemy getEnemy() {
         return enemy;
+    }
+
+    // COMMANDS
+
+    public void play() {
+        startFight(player, enemy);
     }
     
    
@@ -79,6 +90,8 @@ public class Game {
         }
         Tools.drawInterface(makeStringOfGame());
     }
+
+    // TOOLS
     
     public String makeStringOfGame() {
         String card0Name = "______________";
@@ -120,6 +133,8 @@ public class Game {
                + "                                                                                \n"
                + "+------------------------------------------------------------------------------+\n";       
     }
+    
+    // MAIN
     
     public static void main(String[] args) {
         new Game().play();
