@@ -88,7 +88,7 @@ public class Player extends Character implements IPlayer {
                 System.out.println(" [ERROR] This functionality is not"
                                    + " implemented yet!");
                 continue;
-            } else if (cmd.equals(CombatParser.CMD_EXIT)) {
+            } else if (cmd.equals(CombatParser.CMD_QUIT)) {
                 System.exit(0);
             } 
             

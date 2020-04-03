@@ -16,7 +16,7 @@ public class CombatParser implements IParser {
     public static final String CMD_HELP_CARD = "help card";
     public static final String CMD_HELP_SKILL = "help skill";
     public static final String CMD_END_TURN = "end turn";
-    public static final String CMD_EXIT = "exit";
+    public static final String CMD_QUIT = "quit";
 
     private static final Map<String, Command> COMMANDS = new HashMap<>();
     static {
@@ -25,7 +25,7 @@ public class CombatParser implements IParser {
         COMMANDS.put(CMD_HELP_CARD, new Command(CMD_HELP_CARD, true));
         COMMANDS.put(CMD_HELP_SKILL, new Command(CMD_HELP_SKILL));
         COMMANDS.put(CMD_END_TURN, new Command(CMD_END_TURN));
-        COMMANDS.put(CMD_EXIT, new Command(CMD_EXIT));
+        COMMANDS.put(CMD_QUIT, new Command(CMD_QUIT));
     }
 
     // ATTRIBUTES
