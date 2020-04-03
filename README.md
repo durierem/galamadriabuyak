@@ -1,4 +1,4 @@
-# GALAMADRIABUYAK
+# Galamadriabuyak
 
 ## Synopsis
 A simple dungeon crowler in which the player fights increasingly powerful
@@ -24,14 +24,14 @@ Type 'use [card number]' to use a card.
 
 [CURSED SOUL]
 
-PV : 5
+HP : 5
 Deck (2) / Hand (1)
 
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 [PLAYER]
 
-PV: 15
+HP: 15
 Deck (7) / Hand (3)
   1 - Dead's souls
   2 - Fussy Hammer

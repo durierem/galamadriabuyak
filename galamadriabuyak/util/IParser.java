@@ -30,7 +30,7 @@ public interface IParser {
     String getLastCommand();
   
     /**
-     * The targer ID associated with the last command.
+     * The target ID associated with the last command.
      * @pre
      *      isLastCommandLegal()
      *      && isLastCommandTargeted()

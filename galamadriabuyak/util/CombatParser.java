@@ -100,6 +100,7 @@ public class CombatParser implements IParser {
         } else {
             lastCommand = new Command("");
         }
+        sc.close();
     }
 
     // TOOLS

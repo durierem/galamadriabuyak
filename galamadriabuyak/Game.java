@@ -12,7 +12,7 @@ public class Game {
     // CONSTANTS
 
     public static final ICard[] cardDataBase 
-                = JSONizer.cardsFromFile("./cards.json");;
+        = JSONizer.cardsFromFile("./cards.json");
     
     public static final IParser combatParser = new CombatParser();
     // ATTRIBUTES
@@ -29,7 +29,8 @@ public class Game {
             new BasicAttack("Picky Pike",
                 "[TARGET] enemy ; [TYPE] direct hit ; [POWER] 3",
                 "An ancient and beautiful decorated pike",
-                Effect.createEffectsArray(new Effect(Type.HIT, Target.ENEMY, 3))),
+                Effect.createEffectsArray(
+                    new Effect(Type.HIT, Target.ENEMY, 3))),
             new Deck(),
             new Hand(),
             0);
@@ -41,7 +42,8 @@ public class Game {
             new BasicAttack("Useless Roar",
                 "[TARGET] player ; [TYPE] direct hit ; [POWER] 1",
                 "A useless capacity",
-                Effect.createEffectsArray(new Effect(Type.HIT, Target.PLAYER, 1))),
+                Effect.createEffectsArray(
+                    new Effect(Type.HIT, Target.PLAYER, 1))),
             new Deck(),
             new Hand());
     }

@@ -19,10 +19,7 @@ import galamadriabuyak.util.json_simple.parser.ParseException;
  * Class used to convert cards to Json and Json to cards.
  * Including methods to save/backup json to/from file.
  */
-public class JSONizer {
-    
-    private JSONizer() {
-    }
+public abstract class JSONizer {
     
     /**
      * Returns the JSON encoded cards array written in the file f.

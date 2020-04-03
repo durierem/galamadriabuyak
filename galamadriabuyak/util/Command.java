@@ -19,8 +19,8 @@ class Command {
 	 * 		name != null
 	 * @post
 	 * 		getName() == name
-	 * 		getTargetID() == 0
-	 *		isTargeted() == false
+	 * 		&& getTargetID() == 0
+	 *		&& isTargeted() == false
 	 */
 	Command(String name) {
 		this(name, false);
@@ -32,8 +32,8 @@ class Command {
 	 * 		name != null
 	 * @post
 	 * 		getName() == name
-	 * 		getTargetID() == 0
-	 *		isTargeted() == true
+	 * 		&& getTargetID() == 0
+	 *		&& isTargeted() == true
 	 */
 	Command(String name, boolean isTargeted) {
 		if (name == null) {
