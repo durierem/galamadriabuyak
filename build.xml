@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<project name="Galamadriabuyak" default="build">
+    
+    <property name="src.dir" value="galamadriabuyak"/>
+
+    <target name="build">
+        <javac srcdir="${src.dir}"/>
+    </target>
+
+    <target name="clean">
+        <delete>
+            <fileset dir="${src.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
+    </target>
+</project>
