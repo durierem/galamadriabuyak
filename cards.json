@@ -3,8 +3,7 @@
     "name": "The Soul of the Dead",
     "description": "Inflict 5 damages to the enemy.",
     "trivia": "The wandering souls of the Surfacian era will remain forever prisoners of the Galamadriabuyak tower.",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -16,8 +15,7 @@
     "name": "Cursed Child's Scream ",
     "description": "Inflict 8 damage to the enemy.",
     "trivia": "The piercing scream of a cursed child, locked up in a smelly jar. Warning: manipulate with caution!",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -29,8 +27,7 @@
     "name": "Fussy Hammer",
     "description": "Inflict 10 damages to the enemy.",
     "trivia": "A possessed hammer that spends eternity hitting the slightest trinket that stick out from the wall. The sound it produces is unbearable to the human ear. ",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -42,8 +39,7 @@
     "name": "Angelica, the Angelic Angel",
     "description": "Heal 10 of your health points",
     "trivia": "Angelica's obsession for healing people has been reincarnated into a cute little angel that does nothing but smiling at you. It's very effective!",
-    "effects":
-    [
+    "effects": [
       {
         "type": "heal",
         "target": "player",
@@ -55,8 +51,7 @@
     "name": "The Void",
     "description": "Does nothing.",
     "trivia": "The representation of Humans' enslavement by the Gods for eternity.",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -68,8 +63,7 @@
     "name": "Used Match",
     "description": "Inflict 1 damage to the enemy.",
     "trivia": "Where is the candle?",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -81,8 +75,7 @@
     "name": "Waters of Chaos",
     "description": "Inflict 20 damages to the enemy and heal 15 of your health points.",
     "trivia": "In these deep and troubled waters, legends say only a true hero can see flying whales.",
-    "effects":
-    [
+    "effects": [
       {
         "type": "hit",
         "target": "enemy",
@@ -92,6 +85,18 @@
         "type": "heal",
         "target": "player",
         "power": 10
+      }
+    ]
+  },
+  {
+    "name": "Firebolt",
+    "description": "Inflict 16 damages to the enemy.",
+    "trivia": "A little spark, a flash in the night, and everything in the area is burning for five full days !",
+    "effects": [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 16
       }
     ]
   }
