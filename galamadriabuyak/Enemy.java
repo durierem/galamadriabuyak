@@ -2,7 +2,7 @@ package galamadriabuyak;
 
 public class Enemy extends Character implements IEnemy {
     
-    // Constructor
+    // CONSTRUCTORS
     
     public Enemy(String name, int level, int health, ICard basicAttack,
         IDeck deck, IHand hand) {
@@ -33,7 +33,7 @@ public class Enemy extends Character implements IEnemy {
         }
     }
     
-    // Outils
+    // TOOLS
     
     /**
      * Return a random number in range of [min, max] 

@@ -5,14 +5,14 @@ import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Tools;
 
 public class Player extends Character implements IPlayer {
-    // Attributes
+    // ATTRIBUTES
     
     private int money;
     
-    // Constructor
+    // CONSTRUCTORS
     
     public Player(String name, int level, int health, ICard basicAttack,
-        IDeck deck, IHand hand, int money) {
+                  IDeck deck, IHand hand, int money) {
         super(name, level, health, basicAttack, deck, hand);
         if (money < 0) {
             throw new AssertionError();
@@ -20,13 +20,13 @@ public class Player extends Character implements IPlayer {
         this.money = money;
     }
     
-    // Requests
+    // REQUESTS
     
     public int getMoney() {
         return money;
     }
     
-    // Commands
+    // COMMANDS
     
     public void setMoneyTo(int q) {
         if (q < 0) {
@@ -50,50 +50,53 @@ public class Player extends Character implements IPlayer {
     }
     
     public void performTurn(Game game) {
-        if (isDead() || game == null || game.getEnemy().isDead() || Game.combatParser == null) {
+        if (game == null) {
             throw new AssertionError();
-        }   
-        
+        }
+        if (isDead() || game.getEnemy().isDead()) {
+            throw new AssertionError();
+        }
+
         IParser parser = Game.combatParser;
         
         completeHand();
         
         do {
-                Tools.waitForInput(parser);
-                // Processes the command entered by the player
-                String cmd = parser.getLastCommand();
-                if (parser.isLastCommandTargeted()) {
-                    int targetID = parser.getLastTargetID();
-                    if (targetID > getHand().getSize()) {
-                        System.out.println(" -> There is no card number " 
-                                               + targetID + "!"); 
-                        continue;
-                    }
-                    if (cmd.equals(CombatParser.CMD_CARD)) {
-                        getHand(targetID).applyEffects(game);
-                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
-                        System.out.println(getHand(targetID)
-                            .getDescription());
-                        System.out.println(getHand(targetID)
-                            .getTrivia());
-                    }
-                } else if (cmd.equals(CombatParser.CMD_SKILL)) {
-                    getBasicAttack().applyEffects(game);
-                } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
-                    // TODO
-                    System.out.println(" -> This functionality is not"
-                        + " implemented yet!");
+            Tools.waitForInput(parser);
+
+            /* Process the command entered by the player */
+            String cmd = parser.getLastCommand();
+            if (parser.isLastCommandTargeted()) {
+                int targetID = parser.getLastTargetID();
+                if (targetID > getHand().getSize()) {
+                    System.out.println(" -> There is no card number " 
+                                        + targetID + "!"); 
                     continue;
-                } else if (cmd.equals(CombatParser.CMD_EXIT)) {
-                    System.exit(0);
-                } 
-                
-                // Checking if one of the character died after applying a command.
-                if (isDead() || game.getEnemy().isDead()) {
-                    break; // TODO: display a end game screen / informations
                 }
-                
-                Tools.drawInterface(game.makeStringOfGame());
-            } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
+                if (cmd.equals(CombatParser.CMD_CARD)) {
+                    getHand(targetID).applyEffects(game);
+                } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
+                    System.out.println(getHand(targetID)
+                                       .getDescription());
+                    System.out.println(getHand(targetID)
+                                       .getTrivia());
+                }
+            } else if (cmd.equals(CombatParser.CMD_SKILL)) {
+                getBasicAttack().applyEffects(game);
+            } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
+                // TODO
+                System.out.println(" [ERROR] This functionality is not"
+                                   + " implemented yet!");
+                continue;
+            } else if (cmd.equals(CombatParser.CMD_EXIT)) {
+                System.exit(0);
+            } 
+            
+            /* Checks if one of the character died after applying a command */
+            if (isDead() || game.getEnemy().isDead()) {
+                break;
+            }
+            
+        } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
     }
 }

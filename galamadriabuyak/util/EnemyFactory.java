@@ -10,13 +10,10 @@ import galamadriabuyak.Hand;
 import galamadriabuyak.BasicAttack;
 
 /**
- * None instantiable class made to make new Enemies 
- * with the same strenght than the player.
+ * Non instantiable class made to make new Enemies 
+ * with the same strength than the player.
  */
-public class EnemyFactory {
-    
-    private EnemyFactory() {
-    }
+public abstract class EnemyFactory {
     
     public static IEnemy createEnemy(IPlayer p) {
         String name = "Jesus"; //Still to do

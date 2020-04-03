@@ -11,7 +11,7 @@ public class Effect implements IEffect {
     private final Target target;
     private final int power;
     
-    // CONSTRUCTOR
+    // CONSTRUCTORS
     
     public Effect(Type type, Target target, int power) {
         if (type == null || target == null || power < 0) {

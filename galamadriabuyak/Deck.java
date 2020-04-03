@@ -4,25 +4,25 @@ import java.util.Stack;
 
 public class Deck implements IDeck {
     
-    // Attributes
+    // ATTRIBUTES
     
     private int size;
     private Stack<ICard> deck;
     
-    //Constructor
+    // CONSTRUCTORS
     
     public Deck() {
         size = 0;
         deck = new Stack<>();
     }
     
-    // Requestes
+    // REQUESTS
     
     public int getSize() {
         return size;
     }
     
-    // Commands
+    // COMMANDS
     
     public void addCard(ICard c) {
         if (c == null) {
@@ -52,18 +52,6 @@ public class Deck implements IDeck {
         size -= 1;
     }
     
-    /**
-     * Returns a random number between a and b inclusive.
-     * @pre <pre>
-     *     0 <= a <= b </pre>
-     * @post <pre>
-     *     a <= result <= b </pre>
-     */
-    private static int alea(int a, int b) {
-        assert (a >= 0) && (b >= a);
-        return a + (int) (Math.random() * (b - a + 1));
-    }
-    
     public void shuffleDeck() {
         if (size < 0) {
             throw new AssertionError();
@@ -89,5 +77,19 @@ public class Deck implements IDeck {
                 deck.push(bufStack[i].pop());
             }
         }
+    }
+
+    // TOOLS
+    
+    /**
+     * Returns a random number between a and b inclusive.
+     * @pre <pre>
+     *     0 <= a <= b </pre>
+     * @post <pre>
+     *     a <= result <= b </pre>
+     */
+    private static int alea(int a, int b) {
+        assert (a >= 0) && (b >= a);
+        return a + (int) (Math.random() * (b - a + 1));
     }
 }
