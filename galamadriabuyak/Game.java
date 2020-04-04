@@ -101,28 +101,33 @@ public class Game {
             card3Name = player.getHand().getCard(3).getName();
         }
 
-        return   "                                                                               \n"
-               + " =============================== YOUR TURN! ===================================\n"
-               + "                                                                               \n"
-               + " [" + enemy.getName() + "]                                                     \n"
-               + " HP: " + enemy.getHealth() + "                                                 \n"
-               + " Deck (" + enemy.getDeck().getSize() + ") / Hand (" + enemy.getHand().getSize() + ")\n"
-               + "                                                                               \n"
-               + " -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
-               + "                                                                               \n"
-               + " [" + player.getName() + "]                                                    \n"
-               + " HP: " + player.getHealth() + "                                                \n"
-               + " Deck (" + player.getDeck().getSize() + ") / Hand (" + player.getHand().getSize() + ")\n"
-               + "   1 - " + card1Name + "                                                       \n"
-               + "   2 - " + card2Name + "                                                       \n"
-               + "   3 - " + card3Name + "                                                       \n"
-               + "                                                                               \n"
-               + " ==============================================================================\n"
-               + "                                                                               \n"
-               + " Commands available:                                                           \n"
-               + " `use card [N]` / `help card [N]`                                              \n"
-               + " `use skill` / `help skill`                                                    \n"
-               + " `end turn` / `quit`                                                           \n";
+        return "\n"
+               + " =============================== YOUR TURN! ================="
+               + "==================\n"
+               + "\n"
+               + " [" + enemy.getName() + "]\n"
+               + " HP: " + enemy.getHealth() + "\n"
+               + " Deck (" + enemy.getDeck().getSize() + ") / Hand (" + enemy
+                        .getHand().getSize() + ")\n"
+               + "\n"
+               + " -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+               + "-+-+-+-+-+-+-+-+-+\n"
+               + "\n"
+               + " [" + player.getName() + "]\n"
+               + " HP: " + player.getHealth() + "\n"
+               + " Deck (" + player.getDeck().getSize() + ") / Hand (" + player
+                    .getHand().getSize() + ")\n"
+               + "   1 - " + card1Name + "\n"
+               + "   2 - " + card2Name + "\n"
+               + "   3 - " + card3Name + "\n"
+               + "\n"
+               + " ============================================================"
+               + "==================\n"
+               + "\n"
+               + " Commands available:\n"
+               + " `use card [N]` / `help card [N]`\n"
+               + " `use skill` / `help skill`\n"
+               + " `end turn` / `quit`\n";
     }
 
     public static void main(String[] args) {
