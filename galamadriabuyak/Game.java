@@ -29,11 +29,7 @@ public class Game {
                         new Deck(),
                         new Hand(),
                         0);
-        
-        for (int i = 0; i < cardDataBase.length; ++i) {
-            player.getDeck().addCard(cardDataBase[i]);
-        }
-                        
+
         enemy = new Enemy("Bob", 1, 5,
                         new BasicAttack("Useless Roar", "player/direct hit/5",
                                 "A useless capacity",
@@ -41,6 +37,9 @@ public class Game {
                                         Target.PLAYER, 5))),
                         new Deck(),
                         new Hand());
+
+        player.getDeck().randomFill(10, cardDataBase);
+        enemy.getDeck().randomFill(10, cardDataBase);
     }
 
     // REQUESTS
