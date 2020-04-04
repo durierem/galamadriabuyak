@@ -1,19 +1,19 @@
 package galamadriabuyak;
 
 public class Hand implements IHand {
-    
-    // ATTRIBUTES    
-    
+
+    // ATTRIBUTES
+
     private ICard[] data;
     private int size;
-    
+
     // CONSTRUCTORS
-    
+
     public Hand() {
         data = new ICard[MAX_SIZE];
         size = 0;
     }
-    
+
     // REQUESTS
 
     public int getSize() {

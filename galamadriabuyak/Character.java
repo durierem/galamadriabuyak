@@ -1,7 +1,7 @@
 package galamadriabuyak;
 
 public abstract class Character implements ICharacter {
-    
+
     // ATTRIBUTES
 
     private final String name;
@@ -26,11 +26,11 @@ public abstract class Character implements ICharacter {
     }
 
     // REQUESTS
-    
+
     public String getName() {
         return name;
     }
-    
+
     public int getLevel() {
         return level;
     }
@@ -43,28 +43,29 @@ public abstract class Character implements ICharacter {
         return deck;
     }
 
-    public IHand getHand(){
-        return hand;    
+    public IHand getHand() {
+        return hand;
     }
 
     public ICard getHand(int n) {
         return getHand().getCard(n);
     }
-    
+
     public boolean isDead() {
         return isDead;
     }
-    
-    public ICard getBasicAttack(){
+
+    public ICard getBasicAttack() {
         return basicAttack;
     }
 
     // COMMANDS
-    
+
     public void setHealthTo(int q) {
         if (q < 0) {
-          throw new AssertionError();
+            throw new AssertionError();
         }
+
         health = q;
         if (health == 0) {
             isDead = true;
@@ -72,16 +73,18 @@ public abstract class Character implements ICharacter {
     }
 
     public void setHealthUp(int q) {
-        if (q < 0 ) {
+        if (q < 0) {
             throw new AssertionError();
         }
+
         health += q;
     }
 
     public void setHealthDown(int q) {
         if (q < 0) {
-          throw new AssertionError();
+            throw new AssertionError();
         }
+
         if (q > health) {
             health = 0;
             isDead = true;
@@ -89,27 +92,27 @@ public abstract class Character implements ICharacter {
             health -= q;
         }
     }
-    
+
     public void draw(int n) {
-        if (n < 1 || n > getDeck().getSize() 
+        if (n < 1 || n > getDeck().getSize()
                 || n > getHand().MAX_SIZE - getHand().getSize()) {
             throw new AssertionError();
         }
-        for(int i = 0; i < n; i++) {
+
+        for (int i = 0; i < n; i++) {
             getDeck().drawCard(getHand());
         }
     }
-            
-    public void completeHand() {
-        int deckSize = this.getDeck().getSize();
+
+    public void fillHand() {
+        final int deckSize = getDeck().getSize();
+        final int drawNumber = IHand.MAX_SIZE - getHand().getSize();
         if (deckSize > 0) {
-         int draw_number = IHand.MAX_SIZE - this.getHand().getSize();
-            if (draw_number > deckSize) {
-                this.draw(deckSize);
-            } else if (draw_number > 0) {
-               this.draw(draw_number);
-         }
+            if (drawNumber > deckSize) {
+                draw(deckSize);
+            } else if (drawNumber > 0) {
+                draw(drawNumber);
+            }
         }
     }
-    
 }
