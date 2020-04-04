@@ -4,7 +4,7 @@
     <property name="src.dir" value="galamadriabuyak"/>
 
     <target name="build">
-        <javac srcdir="${src.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}"/>
     </target>
 
     <target name="clean">
