@@ -106,7 +106,7 @@ public abstract class Character implements ICharacter {
          int draw_number = IHand.MAX_SIZE - this.getHand().getSize();
             if (draw_number > deckSize) {
                 this.draw(deckSize);
-            } else {
+            } else if (draw_number > 0) {
                this.draw(draw_number);
          }
         }

@@ -57,9 +57,7 @@ public class Player extends Character implements IPlayer {
             throw new AssertionError();
         }
 
-        IParser parser = Game.combatParser;
-        
-        completeHand();
+        IParser parser = Game.combatParser;  
         
         do {
             Tools.waitForInput(parser);

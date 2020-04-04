@@ -29,7 +29,11 @@ public class Game {
                         new Deck(),
                         new Hand(),
                         0);
-
+        
+        for (int i = 0; i < cardDataBase.length; ++i) {
+            player.getDeck().addCard(cardDataBase[i]);
+        }
+                        
         enemy = new Enemy("Bob", 1, 5,
                         new BasicAttack("Useless Roar", "player/direct hit/5",
                                 "A useless capacity",
@@ -59,6 +63,7 @@ public class Game {
     private void startFight(IPlayer player, IEnemy enemy) {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
+        player.completeHand();
         Tools.drawInterface(makeStringOfGame());
 
         while (true) {
@@ -85,17 +90,17 @@ public class Game {
          * IHand.MAX_SIZE.
          */
         final String defaultCardName = "__________";
-        String card0Name = defaultCardName;
         String card1Name = defaultCardName;
         String card2Name = defaultCardName;
+        String card3Name = defaultCardName;
         if (player.getHand().getSize() > 0) {
-            card0Name = player.getHand().getCard(0).getName();
-        }
-        if (player.getHand().getSize() > 1) {
             card1Name = player.getHand().getCard(1).getName();
         }
-        if (player.getHand().getSize() > 2) {
+        if (player.getHand().getSize() > 1) {
             card2Name = player.getHand().getCard(2).getName();
+        }
+        if (player.getHand().getSize() > 2) {
+            card3Name = player.getHand().getCard(3).getName();
         }
 
         return   "                                                                                \n"
@@ -110,9 +115,9 @@ public class Game {
                + " [" + player.getName() + "]                                                     \n"
                + " HP: " + player.getHealth() + "                                                 \n"
                + " Deck (" + player.getDeck().getSize() + ") / Hand (" + player.getHand().getSize() + ")\n"
-               + "   1 - " + card0Name + "                                                        \n"
-               + "   2 - " + card1Name + "                                                        \n"
-               + "   3 - " + card2Name + "                                                        \n"
+               + "   1 - " + card1Name + "                                                        \n"
+               + "   2 - " + card2Name + "                                                        \n"
+               + "   3 - " + card3Name + "                                                        \n"
                + "                                                                                \n"
                + " ===============================================================================\n"
                + "                                                                                \n"
