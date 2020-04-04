@@ -29,24 +29,24 @@ public class CombatParser implements IParser {
     }
 
     // ATTRIBUTES
-    
+
     private Command lastCommand;
-    
+
     // CONSTRUCTORS
-    
+
     public CombatParser() {
         lastCommand = new Command("");
     }
-    
+
     // REQUESTS
-    
+
     public String getLastCommand() {
         if (!isLastCommandLegal()) {
             throw new AssertionError();
         }
         return lastCommand.getName();
     }
-    
+
     public int getLastTargetID() {
         if (!isLastCommandLegal() || !isLastCommandTargeted()) {
             throw new AssertionError();
@@ -66,7 +66,7 @@ public class CombatParser implements IParser {
     }
 
     // COMMANDS
-    
+
     public void parseInput(String input) {
         if (input == null) {
             throw new AssertionError();
@@ -82,7 +82,7 @@ public class CombatParser implements IParser {
         }
         buffer.deleteCharAt(buffer.length() - 1); // Removes the trailing space
 
-        /* 
+        /*
          * If the command is legal, attempts to retrieve the target ID.
          * If the command is illegal or if there is no valid target ID, ensures
          * that the last command is illegal (==> !isLastCommandLegal()).
@@ -95,7 +95,7 @@ public class CombatParser implements IParser {
                 } else {
                     lastCommand = new Command("");
                 }
-            }   
+            }
             lastCommand = c;
         } else {
             lastCommand = new Command("");
