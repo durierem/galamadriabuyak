@@ -1,6 +1,7 @@
 package galamadriabuyak;
 
 import java.util.Stack;
+import java.lang.Math;
 
 public class Deck implements IDeck {
     
@@ -79,14 +80,27 @@ public class Deck implements IDeck {
         }
     }
 
+    public void randomFill(int n, final ICard[] possibleCards) {
+        if (n <= 0 || n > MAX_SIZE - getSize()) {
+            throw new AssertionError();
+        }
+        if (possibleCards == null || possibleCards.length == 0) {
+            throw new AssertionError();
+        }
+
+        for (int i = 0; i < n; i++) {
+            addCard(possibleCards[alea(0, possibleCards.length - 1)]);
+        }
+    }
+
     // TOOLS
     
     /**
      * Returns a random number between a and b inclusive.
-     * @pre <pre>
-     *     0 <= a <= b </pre>
-     * @post <pre>
-     *     a <= result <= b </pre>
+     * @pre
+     *     0 <= a <= b
+     * @post
+     *     a <= result <= b
      */
     private static int alea(int a, int b) {
         assert (a >= 0) && (b >= a);

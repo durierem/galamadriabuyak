@@ -4,31 +4,32 @@ package galamadriabuyak;
  * Models a deck of size getSizeDeck(). 
  * You can shuffle it or draw the top card.
  * 
- * @inv <pre>
- *      getSizeDeck() >= 0;
- *      0 <= getSizeDeck() <= MAX_CARD
+ * @inv
+ *      getSize() >= 0;
+ *      0 <= getSize() <= MAX_SIZE
  */
 public interface IDeck {
-    // Constants
     
-    int MAX_CARD = 100;
+    // CONSTANTS
     
-    // Requests
+    final int MAX_SIZE = 100;
+    
+    // REQUESTS
     
     /**
      * Gives the size of the deck.
      */
     int getSize();
    
-    // Commands
+    // COMMANDS
     
     /**
      * Add the given card to the deck.
      * 
-     * @pre <pre>
+     * @pre
      *      c != null
      *      
-     * @post <pre>
+     * @post
      *      getSizeDeck() = old getSizeDeck + 1
      */
     void addCard(ICard c);
@@ -36,10 +37,10 @@ public interface IDeck {
     /**
      * Remove from the deck an occurence of the card named by m.
      * 
-     * @pre <pre>
+     * @pre
      *      getSize() > 0
      *      
-     * @post <pre>
+     * @post
      *      getSize() = old getSizeDeck() - 1
      */
     void rmTopCard();
@@ -47,11 +48,11 @@ public interface IDeck {
     /**
      * Put the top card in the given hand.
      * 
-     * @pre <pre>
+     * @pre
      *      hand != null
      *      getSize() > 0
      *      hand.getSize() < IHand.MAX_SIZE
-     * @post <pre>
+     * @post
      *      getSizeDeck() = old getSizeDeck - 1
      *      hand.getSize() = old hand.getSize() + 1
      */
@@ -60,11 +61,21 @@ public interface IDeck {
     /**
      * Shuffle the deck.
      * 
-     * @pre <pre>
+     * @pre
      *      getSize() >= 0
      *      
-     * @post <pre>
+     * @post
      *      getSize() = old getSizeDeck()
      */
     void shuffleDeck();
+
+    /**
+     * Add n randomly picked cards from possibleCards in this deck.
+     * @pre
+     *      n > 0 && n <= MAX_SIZE - getSize()
+     *      possibleCards != null && possibleCards.length > 0
+     * @post
+     *      getSize() = old getSize() + n
+     */
+    void randomFill(int n, final ICard[] possibleCards);
 }
