@@ -1,5 +1,7 @@
 package galamadriabuyak;
 
+import galamadriabuyak.util.Tools;
+
 public class Enemy extends Character implements IEnemy {
     
     // CONSTRUCTORS
@@ -16,8 +18,9 @@ public class Enemy extends Character implements IEnemy {
             throw new AssertionError();
         }
         
-        completeHand();
-        
+        fillHand();
+        Tools.drawInterface(game.makeStringOfGame());
+
         if (alea(0, 100) <= 65) {
             this.getBasicAttack().applyEffects(game);
             
@@ -31,6 +34,8 @@ public class Enemy extends Character implements IEnemy {
         } else if (alea(0, 100) <= 50) {
             chooseAndUseCards(game);
         }
+
+        Tools.drawInterface(game.makeStringOfGame());
     }
     
     // TOOLS
@@ -46,8 +51,9 @@ public class Enemy extends Character implements IEnemy {
      * Make the enemy randomly choose and use cards.
      */
     private void chooseAndUseCards(Game game) {
-        for (int i = alea(0,2); i < this.getHand().getSize(); i++) {
-            this.getHand().getCard(i).applyEffects(game);
+        for (int i = 1; i <= this.getHand().getSize(); i++) {
+            getHand(i).applyEffects(game);
+            getHand().deleteCard(i);
             if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
                 return;
             }

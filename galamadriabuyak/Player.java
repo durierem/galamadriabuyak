@@ -59,10 +59,15 @@ public class Player extends Character implements IPlayer {
 
         IParser parser = Game.COMBAT_PARSER;
 
+        /* Fills the player's hand. Woah, such comment :O */
+        fillHand();
+
+        /* Draws the interface at the beginning of the action */
+        Tools.drawInterface(game.makeStringOfGame());
+
+        /* Process the command entered by the player */
         do {
             Tools.waitForInput(parser);
-
-            /* Process the command entered by the player */
             String cmd = parser.getLastCommand();
             if (parser.isLastCommandTargeted()) {
                 int targetID = parser.getLastTargetID();
@@ -73,6 +78,7 @@ public class Player extends Character implements IPlayer {
                 }
                 if (cmd.equals(CombatParser.CMD_CARD)) {
                     getHand(targetID).applyEffects(game);
+                    getHand().deleteCard(targetID);
                 } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
                     System.out.println(getHand(targetID)
                                        .getDescription());
@@ -82,10 +88,8 @@ public class Player extends Character implements IPlayer {
             } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                 getBasicAttack().applyEffects(game);
             } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
-                // TODO
-                System.out.println(" [ERROR] This functionality is not"
-                                   + " implemented yet!");
-                continue;
+                System.out.println(getBasicAttack().getDescription());
+                System.out.println(getBasicAttack().getTrivia());
             } else if (cmd.equals(CombatParser.CMD_QUIT)) {
                 System.exit(0);
             }
@@ -95,7 +99,9 @@ public class Player extends Character implements IPlayer {
                 break;
             }
 
+            /* Draws the interface at the end of the action */
             Tools.drawInterface(game.makeStringOfGame());
+
         } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
     }
 }

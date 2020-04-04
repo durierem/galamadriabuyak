@@ -57,10 +57,10 @@ public interface IHand {
      *              getCard(i) = old getCard(i)
      */
     void deleteCard(int n);
-    
+
     /**
      *  Adds card to this hand.
-     *  @pre 
+     *  @pre
      *      card != null
      *      getSize() < MAX_SIZE
      *  @post

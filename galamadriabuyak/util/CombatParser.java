@@ -75,8 +75,8 @@ public class CombatParser implements IParser {
         /*
          * Separates the command from the potential target ID.
          */
-        Scanner sc = new Scanner(input);
-        StringBuffer buffer = new StringBuffer();
+        final Scanner sc = new Scanner(input);
+        final StringBuffer buffer = new StringBuffer();
         while (sc.hasNext() && !sc.hasNextInt()) {
             buffer.append(sc.next() + " ");
         }
@@ -88,10 +88,15 @@ public class CombatParser implements IParser {
          * that the last command is illegal (==> !isLastCommandLegal()).
          */
         if (isCommandLegal(buffer.toString())) {
-            Command c = COMMANDS.get(buffer.toString());
+            final Command c = COMMANDS.get(buffer.toString());
             if (c.isTargeted()) {
                 if (sc.hasNextInt()) {
-                    c.setTargetID(sc.nextInt());
+                    final int targetID = sc.nextInt();
+                    if (targetID <= 0) {
+                        lastCommand = new Command(""); 
+                    } else {
+                        c.setTargetID(targetID);    
+                    }
                 } else {
                     lastCommand = new Command("");
                 }

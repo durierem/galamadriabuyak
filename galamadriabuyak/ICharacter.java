@@ -129,9 +129,12 @@ public interface ICharacter {
     void setHealthDown(int q);
     
     /**
-     *  If deck is not empty, Player draw cards to complete his hand. 
-     *  If not enought cards in the deck, draws cards until 
-     *  the deck becomes empty.
+     * Fills the hand of this player with the top cards from his deck.
+     * @post
+     *      Let:    dsize := getDeck().getSize()
+     *              hsize := getHand().getSize()
+     *      hsize == max(IHand.MAX_SIZE, old dsize - old hsize)
+     *      dsize == old dsize - max(old dsize, IHand.MAX_SIZE - old hsize)
      */
-    void completeHand();
+    void fillHand();
 }

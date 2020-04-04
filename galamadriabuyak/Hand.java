@@ -24,41 +24,37 @@ public class Hand implements IHand {
         if (n <= 0 || n > getSize()) {
             throw new AssertionError();
         }
+
         return data[n - 1];
     }
-    
+
     // COMMANDS
 
     public void setSize(int n) {
         if (n < 0 || n > MAX_SIZE) {
             throw new AssertionError();
         }
+
         size = n;
     }
-    
+
     public void deleteCard(int n) {
         if (n < 1 || n > getSize()) {
             throw new AssertionError();
         }
-        for (int i = n; i < MAX_SIZE; i++) {
+
+        for (int i = n - 1; i < getSize() - 1; i++) {
             data[i] = data[i + 1];
         }
         data[getSize() - 1] = null;
-        size = getSize();
+        size -= 1;
     }
-    
-    /**
-     *  Adds card to this hand.
-     *  @pre 
-     *      card != null
-     *      getSize() < MAX_SIZE
-     *  @post
-     *      getSize() = old getSize() + 1
-     */
+
     public void addCard(ICard card) {
         if (getSize() >= MAX_SIZE || card == null) {
             throw new AssertionError();
         }
+
         data[getSize()] = card;
         size += 1;
     }

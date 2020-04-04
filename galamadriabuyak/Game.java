@@ -21,7 +21,7 @@ public class Game {
     // CONSTRUCTORS
 
     public Game() {
-        player = new Player("You", 1, 10,
+        player = new Player("You", 1, 20,
                         new BasicAttack("Picky Pike", "enemy/direct hit/3",
                                 "An ancient and beautiful decorated pike.",
                                 Effect.createEffectsArray(new Effect(Type.HIT,
@@ -30,16 +30,13 @@ public class Game {
                         new Hand(),
                         0);
 
-        enemy = new Enemy("Bob", 1, 5,
+        enemy = new Enemy("Bob", 1, 30,
                         new BasicAttack("Useless Roar", "player/direct hit/5",
                                 "A useless capacity",
                                 Effect.createEffectsArray(new Effect(Type.HIT,
                                         Target.PLAYER, 5))),
                         new Deck() ,
                         new Hand());
-
-        player.getDeck().randomFill(10, CARD_DATABASE);
-        enemy.getDeck().randomFill(10, CARD_DATABASE);
     }
 
     // REQUESTS
@@ -55,29 +52,29 @@ public class Game {
     // COMMANDS
 
     public void play() {
+        player.getDeck().randomFill(7, CARD_DATABASE);
+        enemy.getDeck().randomFill(7, CARD_DATABASE);
         startFight();
     }
 
     private void startFight() {
         player.getDeck().shuffleDeck();
         enemy.getDeck().shuffleDeck();
-        player.completeHand();
-        Tools.drawInterface(makeStringOfGame());
-
         while (true) {
             player.performTurn(this);
-            Tools.drawInterface(makeStringOfGame());
             if (player.isDead() || enemy.isDead()) {
                 break; // TODO: display a end game screen / informations
             }
             enemy.performTurn(this);
-            Tools.drawInterface(makeStringOfGame());
             if (player.isDead() || enemy.isDead()) {
                 break; // TODO: display a end game screen / informations
             }
         }
-
-        Tools.drawInterface(makeStringOfGame());
+        if (player.isDead()) {
+            System.out.println("YOU LOSE!");
+        } else  {
+            System.out.println("YOU WIN!");
+        }
     }
 
     // TOOLS

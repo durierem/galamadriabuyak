@@ -10,8 +10,10 @@ package galamadriabuyak.util;
  * (isLastCommandLegal() == true)
  *
  * @inv
- *      lc := the string representation of a legal command
+ *      Let: lc := the string representation of a legal command
+ *      
  *      getLastCommand().equals(lc) <==> isLastCommandLegal()
+ *      getLastTargetID() > 0
  *
  * @cons
  *      $DESC$ An empty parser.
