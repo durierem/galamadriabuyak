@@ -1,7 +1,5 @@
 package galamadriabuyak;
 
-import galamadriabuyak.util.IParser;
-
 /**
  * Models the player.
  * @inv 

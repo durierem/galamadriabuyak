@@ -1,11 +1,12 @@
 package galamadriabuyak;
 
-import galamadriabuyak.util.IParser;
+import galamadriabuyak.util.Parser;
 import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Target;
 import galamadriabuyak.util.Type;
 import galamadriabuyak.util.Tools;
 import galamadriabuyak.util.JSONizer;
+import galamadriabuyak.util.StatusBar;
 
 public class Game {
 
@@ -13,7 +14,8 @@ public class Game {
 
     public static final ICard[] CARD_DATABASE = JSONizer
             .cardsFromFile("./cards.json");
-    public static final IParser COMBAT_PARSER = new CombatParser();
+    public static final Parser COMBAT_PARSER = new CombatParser();
+    public static final StatusBar STATUS_BAR = new StatusBar();
 
     private final IPlayer player;
     private IEnemy enemy;
@@ -71,10 +73,12 @@ public class Game {
             }
         }
         if (player.isDead()) {
-            System.out.println("YOU LOSE!");
+            STATUS_BAR.setStatus("YOU LOSE!");
         } else  {
-            System.out.println("YOU WIN!");
+            STATUS_BAR.setStatus("YOU WIN!");
         }
+        STATUS_BAR.display();
+        Tools.drawInterface(makeStringOfGame());
     }
 
     // TOOLS
@@ -98,8 +102,9 @@ public class Game {
             card3Name = player.getHand().getCard(3).getName();
         }
 
-        return "\n"
-               + " =============================== YOUR TURN! ================="
+        return STATUS_BAR.getStatus()
+               + "\n"
+               + " ============================================================"
                + "==================\n"
                + "\n"
                + " [" + enemy.getName() + "]\n"
@@ -119,12 +124,7 @@ public class Game {
                + "   3 - " + card3Name + "\n"
                + "\n"
                + " ============================================================"
-               + "==================\n"
-               + "\n"
-               + " Commands available:\n"
-               + " `use card [N]` / `help card [N]`\n"
-               + " `use skill` / `help skill`\n"
-               + " `end turn` / `quit`\n";
+               + "==================\n";
     }
 
     public static void main(String[] args) {

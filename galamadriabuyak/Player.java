@@ -1,6 +1,6 @@
 package galamadriabuyak;
 
-import galamadriabuyak.util.IParser;
+import galamadriabuyak.util.Parser;
 import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Tools;
 
@@ -57,7 +57,7 @@ public class Player extends Character implements IPlayer {
             throw new AssertionError();
         }
 
-        IParser parser = Game.COMBAT_PARSER;
+        Parser parser = Game.COMBAT_PARSER;
 
         /* Fills the player's hand. Woah, such comment :O */
         fillHand();

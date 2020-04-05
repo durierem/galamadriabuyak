@@ -3,18 +3,14 @@ package galamadriabuyak.util;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class Tools {
-    
-    private Tools() {
-        
-    }
-    
-    public static void waitForInput(IParser wparser){
+public abstract class Tools {
+
+    public static void waitForInput(Parser wparser){
         Scanner scanner = new Scanner(System.in);
-        System.out.print("> ");
+        System.out.print(" > ");
         wparser.parseInput(scanner.nextLine());
         while (!wparser.isLastCommandLegal()) {
-            System.out.print("> ");
+            System.out.print(" > ");
             wparser.parseInput(scanner.nextLine());
         }
     }

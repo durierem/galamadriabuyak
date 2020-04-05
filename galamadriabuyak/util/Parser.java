@@ -10,7 +10,7 @@ package galamadriabuyak.util;
  * (isLastCommandLegal() == true)
  *
  * @inv
- *      Let: lc := the string representation of a legal command
+ *      Let: lc ::= the string representation of a legal command
  *      
  *      getLastCommand().equals(lc) <==> isLastCommandLegal()
  *      getLastTargetID() > 0
@@ -20,7 +20,7 @@ package galamadriabuyak.util;
  *      $POST$
  *          !isLastCommandLegal()
  */
-public interface IParser {
+public interface Parser {
    
     // REQUESTS
     

@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * A parser to handle all the commands related to a fight.
  */
-public class CombatParser implements IParser {
+public class CombatParser implements Parser {
 
     // CONSTANTS
 
