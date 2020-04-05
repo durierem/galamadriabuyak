@@ -10,10 +10,8 @@ public class StatusBar {
 
     // CONSTANTS
 
-    /**
-     * The maximum (and exact) number of lines a StatusBar can display.
-     */
     public static final int MAX_LINES = 5;
+    public static final int WINDOW_WIDTH = 78;
 
     // ATTRIBUTES
 
@@ -55,15 +53,36 @@ public class StatusBar {
     public void setStatus(final String... lines) {
         final StringBuffer sb = new StringBuffer();
         final int linesNumber = Math.min(lines.length, MAX_LINES);
+        int splitLinesNumber = 0;
 
         /* Fills the first lines (or all lines if lines.length >= MAX_LINES) */
         for (int i = 0; i < linesNumber; i++) {
-            sb.append(lines[i]);
-            sb.append("\n");
+
+            /**
+             * If the line doesn't fit, split it into two lines
+             *
+             * NOTE: this is enough in the case of this game since the only
+             * things that doesn't fit within the default 80 characters are
+             * likely to be cards' descriptions ans shuch. However, for the sake
+             * of corectness, the status bar should handle even longer strings.
+             */
+            if (lines[i].length() >= WINDOW_WIDTH) {
+                sb.append(" ");
+                sb.append(lines[i].substring(0, WINDOW_WIDTH));
+                sb.append("\n");
+                sb.append(" ");
+                sb.append(lines[i].substring(WINDOW_WIDTH));
+                sb.append("\n");
+                splitLinesNumber++;
+            } else {
+                sb.append(" ");
+                sb.append(lines[i]);
+                sb.append("\n");
+            }
         }
 
-        /* Fills the remaining lines (if any) */
-        for (int i = 0; i < MAX_LINES - linesNumber; i++) {
+        /* Fills the remaining lines (if any) with "\n" */
+        for (int i = 0; i < MAX_LINES - linesNumber - splitLinesNumber; i++) {
             sb.append("\n");
         }
 

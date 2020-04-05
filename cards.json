@@ -91,7 +91,7 @@
   {
     "name": "Firebolt",
     "description": "Inflict 16 damages to the enemy.",
-    "trivia": "A little spark, a flash in the night, and everything in the area is burning for five full days !",
+    "trivia": "A little spark, a flash in the night, and everything in the area is burning for five full days!",
     "effects": [
       {
         "type": "hit",

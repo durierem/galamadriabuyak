@@ -102,8 +102,7 @@ public class Game {
             card3Name = player.getHand().getCard(3).getName();
         }
 
-        return STATUS_BAR.getStatus()
-               + "\n"
+        return "\n"
                + " ============================================================"
                + "==================\n"
                + "\n"

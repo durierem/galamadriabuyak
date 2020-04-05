@@ -63,33 +63,37 @@ public class Player extends Character implements IPlayer {
         fillHand();
 
         /* Draws the interface at the beginning of the action */
+        Game.STATUS_BAR.display();
         Tools.drawInterface(game.makeStringOfGame());
 
-        /* Process the command entered by the player */
+        /* Processes the command entered by the player */
         do {
             Tools.waitForInput(parser);
             String cmd = parser.getLastCommand();
             if (parser.isLastCommandTargeted()) {
                 int targetID = parser.getLastTargetID();
                 if (targetID > getHand().getSize()) {
-                    System.out.println(" -> There is no card number "
-                                        + targetID + "!");
-                    continue;
-                }
-                if (cmd.equals(CombatParser.CMD_CARD)) {
-                    getHand(targetID).applyEffects(game);
-                    getHand().deleteCard(targetID);
-                } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
-                    System.out.println(getHand(targetID)
-                                       .getDescription());
-                    System.out.println(getHand(targetID)
-                                       .getTrivia());
+                    Game.STATUS_BAR.setStatus("There is no card number "
+                            + targetID + "!");
+                } else {
+                    final ICard card = getHand(targetID);
+                    if (cmd.equals(CombatParser.CMD_CARD)) {
+                        card.applyEffects(game);
+                        getHand().deleteCard(targetID);
+                        Game.STATUS_BAR.setStatus("You use: " + card.getName());
+                    } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
+                        Game.STATUS_BAR.setStatus(card.getName(),
+                                card.getDescription(), card.getTrivia());
+                    }
                 }
             } else if (cmd.equals(CombatParser.CMD_SKILL)) {
                 getBasicAttack().applyEffects(game);
+                Game.STATUS_BAR.setStatus("You use: " + game.getPlayer()
+                        .getBasicAttack().getName());
             } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
-                System.out.println(getBasicAttack().getDescription());
-                System.out.println(getBasicAttack().getTrivia());
+                final ICard ba = getBasicAttack();
+                Game.STATUS_BAR.setStatus(ba.getName(), ba.getDescription(),
+                        ba.getTrivia());
             } else if (cmd.equals(CombatParser.CMD_QUIT)) {
                 System.exit(0);
             }
@@ -100,6 +104,7 @@ public class Player extends Character implements IPlayer {
             }
 
             /* Draws the interface at the end of the action */
+            Game.STATUS_BAR.display();
             Tools.drawInterface(game.makeStringOfGame());
 
         } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
