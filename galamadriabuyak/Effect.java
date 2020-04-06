@@ -38,8 +38,20 @@ public class Effect implements IEffect {
     
     // COMMANDS
     
-    public void applyEffect(Game game) {
-        if (game == null) {
+    public void applyEffect(Game game, Object caller) {
+        if (game == null || caller == null) {
+            throw new AssertionError();
+        }
+        
+        ICharacter user = null;
+        ICharacter targ = null;
+        if (caller instanceof Player) {
+            user = game.getPlayer();
+            targ = game.getEnemy();
+        } else if (caller instanceof Enemy) {
+            user = game.getEnemy();
+            targ = game.getPlayer();
+        } else {
             throw new AssertionError();
         }
         
@@ -47,20 +59,20 @@ public class Effect implements IEffect {
             case HEAL:
                 switch(target) {
                     case PLAYER:
-                        game.getPlayer().setHealthUp(power);
+                        user.setHealthUp(power);
                         break;
                     case ENEMY:
-                        game.getEnemy().setHealthUp(power);
+                        targ.setHealthUp(power);
                         break;
                 }
                 break;
             case HIT:
                 switch(target) {
                     case PLAYER:
-                        game.getPlayer().setHealthDown(power);
+                        user.setHealthDown(power);
                         break;
                     case ENEMY:
-                        game.getEnemy().setHealthDown(power);
+                        targ.setHealthDown(power);
                         break;
                 }
                 break;

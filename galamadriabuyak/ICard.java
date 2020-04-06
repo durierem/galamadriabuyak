@@ -39,7 +39,8 @@ public interface ICard {
      * @pre
      *      getEffects() != null 
      *      game != null
+     *      caller != null
      * @post
      */
-    void applyEffects(Game game);
+    void applyEffects(Game game, Object caller);
 }

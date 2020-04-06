@@ -43,12 +43,15 @@ public class Card implements ICard {
     
     // Commands
     
-    public void applyEffects(Game game) {
-        if( game == null || effects == null) {
+    public void applyEffects(Game game, Object caller) {
+        if (game == null || effects == null) {
+            throw new AssertionError();
+        }
+        if (caller == null) {
             throw new AssertionError();
         }
         for (int i = 0;  i < effects.length; ++i) {
-            effects[i].applyEffect(game);
+            effects[i].applyEffect(game, caller);
         }
     }
 }

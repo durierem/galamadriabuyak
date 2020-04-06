@@ -3,6 +3,8 @@ package galamadriabuyak;
 import galamadriabuyak.util.Parser;
 import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Tools;
+import galamadriabuyak.util.Type;
+import galamadriabuyak.util.Target;
 
 public class Player extends Character implements IPlayer {
 
@@ -78,7 +80,7 @@ public class Player extends Character implements IPlayer {
                 } else {
                     final ICard card = getHand(targetID);
                     if (cmd.equals(CombatParser.CMD_CARD)) {
-                        card.applyEffects(game);
+                        card.applyEffects(game, this);
                         getHand().deleteCard(targetID);
                         Game.STATUS_BAR.setStatus("You use: " + card.getName());
                     } else if (cmd.equals(CombatParser.CMD_HELP_CARD)) {
@@ -87,7 +89,7 @@ public class Player extends Character implements IPlayer {
                     }
                 }
             } else if (cmd.equals(CombatParser.CMD_SKILL)) {
-                getBasicAttack().applyEffects(game);
+                getBasicAttack().applyEffects(game, this);
                 Game.STATUS_BAR.setStatus("You use: " + game.getPlayer()
                         .getBasicAttack().getName());
             } else if (cmd.equals(CombatParser.CMD_HELP_SKILL)) {
@@ -108,5 +110,5 @@ public class Player extends Character implements IPlayer {
             Tools.drawInterface(game.makeStringOfGame());
 
         } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
-    }
+    } 
 }

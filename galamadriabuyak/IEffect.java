@@ -41,14 +41,14 @@ public interface IEffect {
      */
     int getPower();
     
-    // Commands
     /**
      * Apply the effect on the game.
      * 
      * @pre
      *      game != null
+     *      caller != null
      * @post
      *      The internal state of getTarget() has been altered by this effect
      */
-    void applyEffect(Game game);
+    void applyEffect(Game game, Object caller);
 }

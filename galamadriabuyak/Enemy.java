@@ -22,7 +22,7 @@ public class Enemy extends Character implements IEnemy {
         Tools.drawInterface(game.makeStringOfGame());
 
         if (alea(0, 100) <= 65) {
-            this.getBasicAttack().applyEffects(game);
+            this.getBasicAttack().applyEffects(game, this);
             
             if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
                 return;
@@ -52,7 +52,7 @@ public class Enemy extends Character implements IEnemy {
      */
     private void chooseAndUseCards(Game game) {
         for (int i = 1; i <= this.getHand().getSize(); i++) {
-            getHand(i).applyEffects(game);
+            getHand(i).applyEffects(game, this);
             getHand().deleteCard(i);
             if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
                 return;
