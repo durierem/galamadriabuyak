@@ -1,5 +1,41 @@
 [
   {
+    "name": "The Void",
+    "description": "Does nothing.",
+    "trivia": "The representation of Humans' enslavement by the Gods for eternity.",
+    "effects": [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 0
+      }
+    ]
+  },
+  {
+    "name": "A Used Match",
+    "description": "Inflict 1 damage to the enemy.",
+    "trivia": "Where is the candle?",
+    "effects": [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 1
+      }
+    ]
+  },
+  {
+    "name": "The Nuns' Tears",
+    "description": "Heal 5 of your health points.",
+    "trivia": "A part of their devotion for the Holy Spirit is preserved in these precious droplets. Spare their use!",
+    "effects": [
+      {
+        "type": "heal",
+        "target": "self",
+        "power": 5
+      }
+    ]
+  },
+  {
     "name": "The Soul of the Dead",
     "description": "Inflict 5 damages to the enemy.",
     "trivia": "The wandering souls of the Surfacian era will remain forever prisoners of the Galamadriabuyak tower.",
@@ -12,7 +48,7 @@
     ]
   },
   {
-    "name": "Cursed Child's Scream",
+    "name": "A Cursed Child's Scream",
     "description": "Inflict 8 damage to the enemy.",
     "trivia": "The piercing scream of a cursed child, locked up in a smelly jar. Warning: manipulate with caution!",
     "effects": [
@@ -24,7 +60,7 @@
     ]
   },
   {
-    "name": "Fussy Hammer",
+    "name": "The Fussy Hammer",
     "description": "Inflict 10 damages to the enemy.",
     "trivia": "A possessed hammer that spends eternity hitting the slightest trinket that stick out from the wall. The sound it produces is unbearable to the human ear. ",
     "effects": [
@@ -48,31 +84,19 @@
     ]
   },
   {
-    "name": "The Void",
-    "description": "Does nothing.",
-    "trivia": "The representation of Humans' enslavement by the Gods for eternity.",
+    "name": "Firebolt",
+    "description": "Inflict 16 damages to the enemy.",
+    "trivia": "A little spark, a flash in the night, and everything in the area is burning for five full days!",
     "effects": [
       {
         "type": "hit",
         "target": "enemy",
-        "power": 0
+        "power": 16
       }
     ]
   },
   {
-    "name": "Used Match",
-    "description": "Inflict 1 damage to the enemy.",
-    "trivia": "Where is the candle?",
-    "effects": [
-      {
-        "type": "hit",
-        "target": "enemy",
-        "power": 1
-      }
-    ]
-  },
-  {
-    "name": "Waters of Chaos",
+    "name": "The Waters of Chaos",
     "description": "Inflict 20 damages to the enemy and heal 15 of your health points.",
     "trivia": "In these deep and troubled waters, legends say only a true hero can see flying whales.",
     "effects": [
@@ -89,14 +113,38 @@
     ]
   },
   {
-    "name": "Firebolt",
-    "description": "Inflict 16 damages to the enemy.",
-    "trivia": "A little spark, a flash in the night, and everything in the area is burning for five full days!",
+    "name": "The Tesseract of Doom",
+    "description": "Inflict 25 damages to the enemy.",
+    "trivia": "Anything that comes in the range of this osbcure thing may not survive to it's hypnotic field.",
     "effects": [
       {
         "type": "hit",
         "target": "enemy",
-        "power": 16
+        "power": 25
+      }
+    ]
+  },
+  {
+    "name": "The Master of Pain",
+    "description": "Inflict 30 damages to the enemy.",
+    "trivia": "All the knowledge about suffering that has ever been wrote down is contained in this grimoire.",
+    "effects": [
+      {
+        "type": "hit",
+        "target": "enemy",
+        "power": 30
+      }
+    ]
+  },
+  {
+    "name": "The Wild Healer",
+    "description": "Heal 30 of your health points",
+    "trivia": "Anything that comes in the range of this osbcure thing may not survive to it's hypnotic field.",
+    "effects": [
+      {
+        "type": "heal",
+        "target": "self",
+        "power": 30
       }
     ]
   }
