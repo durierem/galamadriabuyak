@@ -10,8 +10,10 @@ public class StatusBar {
 
     // CONSTANTS
 
-    public static final int MAX_LINES = 5;
+    public static final int MAX_LINES = 4;
     public static final int WINDOW_WIDTH = 78;
+    private static final String TOP_LINE = " ============================ "
+            + "GALAMADRIABUYAK =================================\n";
 
     // ATTRIBUTES
 
@@ -58,7 +60,7 @@ public class StatusBar {
         /* Fills the first lines (or all lines if lines.length >= MAX_LINES) */
         for (int i = 0; i < linesNumber; i++) {
 
-            /**
+            /*
              * If the line doesn't fit, split it into two lines
              *
              * NOTE: this is enough in the case of this game since the only
@@ -106,6 +108,8 @@ public class StatusBar {
      * Displays this status bar.
      */
     public void display() {
+        System.out.print(TOP_LINE);
         System.out.print(status);
     }
 }
+ 
