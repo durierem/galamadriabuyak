@@ -1,7 +1,7 @@
 package galamadriabuyak.util;
 
 public enum Target {
-    PLAYER("player"),
+    SELF("self"),
     ENEMY("enemy"),
     BASIC_ATTACK("basicAttack");
     
@@ -19,8 +19,8 @@ public enum Target {
     }
     
     public static Target myValueOf(String arg) {
-        if (arg.equals("player")) {
-            return PLAYER;
+        if (arg.equals("self")) {
+            return SELF;
         } else if (arg.equals("enemy")) {
             return ENEMY;
         } else {

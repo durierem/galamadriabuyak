@@ -36,7 +36,7 @@ public class Game {
                         new BasicAttack("Useless Roar", "player/direct hit/5",
                                 "A useless capacity",
                                 Effect.createEffectsArray(new Effect(Type.HIT,
-                                        Target.PLAYER, 5))),
+                                        Target.ENEMY, 5))),
                         new Deck() ,
                         new Hand());
     }

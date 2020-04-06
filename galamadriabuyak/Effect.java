@@ -58,7 +58,7 @@ public class Effect implements IEffect {
         switch (type) {
             case HEAL:
                 switch(target) {
-                    case PLAYER:
+                    case SELF:
                         user.setHealthUp(power);
                         break;
                     case ENEMY:
@@ -68,7 +68,7 @@ public class Effect implements IEffect {
                 break;
             case HIT:
                 switch(target) {
-                    case PLAYER:
+                    case SELF:
                         user.setHealthDown(power);
                         break;
                     case ENEMY:
