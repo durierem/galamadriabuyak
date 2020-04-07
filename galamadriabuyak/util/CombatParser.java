@@ -19,16 +19,6 @@ public class CombatParser implements Parser {
     public static final String CMD_END_TURN = "end turn";
     public static final String CMD_QUIT = "quit";
 
-    private static final String[] AVAILABLE_COMMANDS = {
-        CMD_CARD,
-        CMD_SKILL,
-        CMD_HELP,
-        CMD_HELP_CARD,
-        CMD_HELP_SKILL,
-        CMD_END_TURN,
-        CMD_QUIT
-    };
-
     private static final Map<String, Command> COMMANDS = new HashMap<>();
     static {
         COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true));
@@ -85,9 +75,8 @@ public class CombatParser implements Parser {
 
     public String getAllCommands() {
         final StringBuffer sc = new StringBuffer();
-        for (int i = 0; i < AVAILABLE_COMMANDS.length; i++) {
-            Command c = COMMANDS.get(AVAILABLE_COMMANDS[i]);
-            sc.append("[" + c.getName() + "] ");
+        for (Map.Entry<String, Command> entry : COMMANDS.entrySet()) {
+            sc.append("[" + entry.getValue().getName() + "] ");
         }
         return sc.toString();
     }
@@ -98,7 +87,6 @@ public class CombatParser implements Parser {
         if (input == null) {
             throw new AssertionError("There is no input to parse.");
         }
-
 
         final Scanner sc = new Scanner(input);
         final StringBuffer buffer = new StringBuffer();
