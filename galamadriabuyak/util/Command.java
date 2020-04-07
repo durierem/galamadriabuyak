@@ -19,8 +19,8 @@ class Command {
      *      name != null
      * @post
      *      getName() == name
-     *      && getTargetID() == 0
-     *      && isTargeted() == false
+     *      getTargetID() == 0
+     *      !isTargeted()
      */
     Command(String name) {
         this(name, false);
@@ -32,13 +32,14 @@ class Command {
      *      name != null
      * @post
      *      getName() == name
-     *      && getTargetID() == 0
-     *      && isTargeted() == true
+     *      getTargetID() == 0
+     *      isTargeted() == isTargeted
      */
     Command(String name, boolean isTargeted) {
         if (name == null) {
-            throw new AssertionError();
+            throw new AssertionError("Parameter `name` is null");
         }
+
         this.name = name;
         this.isTargeted = isTargeted;
         this.targetID = 0;

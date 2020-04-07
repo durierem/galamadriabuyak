@@ -3,15 +3,14 @@ package galamadriabuyak.util;
 /**
  * A simple parser able to handle a basic command syntax.
  *
- * A correct command is made of command and a target ID when necessary.
  * The parser only handles the correctness of the command, and does not
  * perform actions by itself.
  * One can only retrieve a command if it is a legal command
  * (isLastCommandLegal() == true)
  *
  * @inv
- *      Let: lc ::= the string representation of a legal command
- *      
+ *      Let: lc := the string representation of a legal command
+ *
  *      getLastCommand().equals(lc) <==> isLastCommandLegal()
  *      getLastTargetID() > 0
  *
@@ -21,24 +20,24 @@ package galamadriabuyak.util;
  *          !isLastCommandLegal()
  */
 public interface Parser {
-   
+
     // REQUESTS
-    
+
     /**
      * The last player command.
      * @pre
      *      isLastCommandLegal()
      */
     String getLastCommand();
-  
+
     /**
      * The target ID associated with the last command.
      * @pre
      *      isLastCommandLegal()
-     *      && isLastCommandTargeted()
+     *      isLastCommandTargeted()
      */
     int getLastTargetID();
-    
+
     /**
      * Checks if the last input given by the player is a correct command.
      */
@@ -50,9 +49,14 @@ public interface Parser {
      *       isLastCommandLegal()
      */
     boolean isLastCommandTargeted();
-   
+
+    /**
+     * The list of all the available commands for this parser.
+     */
+    String getAllCommands();
+
     // COMMANDS
-    
+
     /**
      * Parse the given input.
      * @pre

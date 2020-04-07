@@ -13,15 +13,27 @@ public class CombatParser implements Parser {
 
     public static final String CMD_CARD = "use card";
     public static final String CMD_SKILL = "use skill";
+    public static final String CMD_HELP = "help";
     public static final String CMD_HELP_CARD = "help card";
     public static final String CMD_HELP_SKILL = "help skill";
     public static final String CMD_END_TURN = "end turn";
     public static final String CMD_QUIT = "quit";
 
+    private static final String[] AVAILABLE_COMMANDS = {
+        CMD_CARD,
+        CMD_SKILL,
+        CMD_HELP,
+        CMD_HELP_CARD,
+        CMD_HELP_SKILL,
+        CMD_END_TURN,
+        CMD_QUIT
+    };
+
     private static final Map<String, Command> COMMANDS = new HashMap<>();
     static {
         COMMANDS.put(CMD_CARD, new Command(CMD_CARD, true));
         COMMANDS.put(CMD_SKILL, new Command(CMD_SKILL));
+        COMMANDS.put(CMD_HELP, new Command(CMD_HELP));
         COMMANDS.put(CMD_HELP_CARD, new Command(CMD_HELP_CARD, true));
         COMMANDS.put(CMD_HELP_SKILL, new Command(CMD_HELP_SKILL));
         COMMANDS.put(CMD_END_TURN, new Command(CMD_END_TURN));
@@ -42,15 +54,20 @@ public class CombatParser implements Parser {
 
     public String getLastCommand() {
         if (!isLastCommandLegal()) {
-            throw new AssertionError();
+            throw new AssertionError("The last command is not legal.");
         }
+
         return lastCommand.getName();
     }
 
     public int getLastTargetID() {
-        if (!isLastCommandLegal() || !isLastCommandTargeted()) {
-            throw new AssertionError();
+        if (!isLastCommandLegal()) {
+            throw new AssertionError("The last command is not legal.");
         }
+        if (!isLastCommandTargeted()) {
+            throw new AssertionError("The last command is not targeted.");
+        }
+
         return lastCommand.getTargetID();
     }
 
@@ -60,23 +77,35 @@ public class CombatParser implements Parser {
 
     public boolean isLastCommandTargeted() {
         if (!isLastCommandLegal()) {
-            throw new AssertionError();
+            throw new AssertionError("The last command is not legal.");
         }
+
         return lastCommand.isTargeted();
+    }
+
+    public String getAllCommands() {
+        final StringBuffer sc = new StringBuffer();
+        for (int i = 0; i < AVAILABLE_COMMANDS.length; i++) {
+            Command c = COMMANDS.get(AVAILABLE_COMMANDS[i]);
+            sc.append("[" + c.getName() + "] ");
+        }
+        return sc.toString();
     }
 
     // COMMANDS
 
     public void parseInput(String input) {
         if (input == null) {
-            throw new AssertionError();
+            throw new AssertionError("There is no input to parse.");
         }
+
+
+        final Scanner sc = new Scanner(input);
+        final StringBuffer buffer = new StringBuffer();
 
         /*
          * Separates the command from the potential target ID.
          */
-        final Scanner sc = new Scanner(input);
-        final StringBuffer buffer = new StringBuffer();
         while (sc.hasNext() && !sc.hasNextInt()) {
             buffer.append(sc.next() + " ");
         }
@@ -87,36 +116,22 @@ public class CombatParser implements Parser {
          * If the command is illegal or if there is no valid target ID, ensures
          * that the last command is illegal (==> !isLastCommandLegal()).
          */
-        if (isCommandLegal(buffer.toString())) {
-            final Command c = COMMANDS.get(buffer.toString());
-            if (c.isTargeted()) {
-                if (sc.hasNextInt()) {
-                    final int targetID = sc.nextInt();
-                    if (targetID <= 0) {
-                        lastCommand = new Command(""); 
-                    } else {
-                        c.setTargetID(targetID);    
-                    }
-                } else {
-                    lastCommand = new Command("");
-                }
-            }
-            lastCommand = c;
-        } else {
+        Command c = COMMANDS.get(buffer.toString());
+        if (c == null) {
             lastCommand = new Command("");
+            sc.close();
+            return;
         }
+        if (c.isTargeted() && sc.hasNextInt()) {
+            final int targetID = sc.nextInt();
+            if (targetID <= 0) {
+                lastCommand = new Command("");
+                sc.close();
+                return;
+            }
+            c.setTargetID(targetID);
+        }
+        lastCommand = c;
         sc.close();
-    }
-
-    // TOOLS
-
-    /**
-     * Checks if input is a legal command.
-     * @pre
-     *      input != null
-     */
-    public static boolean isCommandLegal(String input) {
-        assert input != null;
-        return COMMANDS.get(input) != null;
     }
 }
