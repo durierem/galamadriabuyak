@@ -3,50 +3,43 @@ package galamadriabuyak;
 import galamadriabuyak.util.Tools;
 
 public class Enemy extends Character implements IEnemy {
-    
+
     // CONSTRUCTORS
-    
+
     public Enemy(String name, int level, int health, ICard basicAttack,
         IDeck deck, IHand hand) {
         super(name, level, health, basicAttack, deck, hand);
     }
-    
+
     // COMMANDS
-    
-    public void performTurn(Game game){
+
+    public void performTurn(Game game) {
         if (isDead() || game == null || game.getPlayer().isDead()) {
             throw new AssertionError();
         }
-        
-        fillHand();
-        Tools.drawInterface(game.makeStringOfGame());
 
-        if (alea(0, 100) <= 65) {
+        fillHand();
+        game.drawInterface();
+
+        if (Tools.alea(0, 100) <= 65) {
             this.getBasicAttack().applyEffects(game, this);
-            
+
             if (game.getPlayer().isDead() || game.getEnemy().isDead()) {
                 return;
             }
-                
-            if (alea(0, 100) <= 33) {
+
+            if (Tools.alea(0, 100) <= 33) {
                 chooseAndUseCards(game);
             }
-        } else if (alea(0, 100) <= 50) {
+        } else if (Tools.alea(0, 100) <= 50) {
             chooseAndUseCards(game);
         }
 
-        Tools.drawInterface(game.makeStringOfGame());
+        game.drawInterface();
     }
-    
+
     // TOOLS
-    
-    /**
-     * Return a random number in range of [min, max] 
-     */
-    private int alea(int min,int max) {
-        return min + (int) (Math.random() * (max - min + 1));
-    } 
-    
+
     /**
      * Make the enemy randomly choose and use cards.
      */
