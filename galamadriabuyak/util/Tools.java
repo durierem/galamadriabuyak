@@ -1,36 +1,37 @@
 package galamadriabuyak.util;
 
-import java.util.Scanner;
 import java.io.IOException;
 
 public abstract class Tools {
 
-    public static void waitForInput(Parser wparser){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(" > ");
-        wparser.parseInput(scanner.nextLine());
-        while (!wparser.isLastCommandLegal()) {
-            System.out.print(" > ");
-            wparser.parseInput(scanner.nextLine());
-        }
-    }
-    
-    public static void clear() {
+    /**
+     * Clears the terminal.
+     */
+    public static void clearTerminal() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls")
                     .inheritIO().start().waitFor();
             } else {
-               Runtime.getRuntime().exec("clear");
+                Runtime.getRuntime().exec("clear");
             }
         } catch (IOException | InterruptedException e) {
-            // ...
+            System.exit(1);
         }
     }
-    
-    public static void drawInterface(String s) {
-        clear();
-        System.out.println(s);
+
+    /**
+     * Returns a random number between min and max inclusive.
+     * @pre
+     *     0 <= min <= max
+     * @post
+     *     min <= result <= max
+     */
+    public static int alea(int min, int max) {
+        if (min < 0 || max < min) {
+            throw new AssertionError();
+        }
+
+        return min + (int) (Math.random() * (max - min + 1));
     }
-    
 }

@@ -1,13 +1,15 @@
 package galamadriabuyak;
 
+import java.util.Scanner;
+
 import galamadriabuyak.util.Parser;
 import galamadriabuyak.util.CombatParser;
-import galamadriabuyak.util.Tools;
 
 public class Player extends Character implements IPlayer {
 
     // ATTRIBUTES
 
+    private final Parser parser;
     private int money;
 
     // CONSTRUCTORS
@@ -19,6 +21,7 @@ public class Player extends Character implements IPlayer {
             throw new AssertionError();
         }
         this.money = money;
+        this.parser = new CombatParser();
     }
 
     // REQUESTS
@@ -33,12 +36,15 @@ public class Player extends Character implements IPlayer {
         if (q < 0) {
             throw new AssertionError();
         }
+
         money = q;
     }
+
     public void setMoneyUp(int q) {
         if (q < 0) {
             throw new AssertionError();
         }
+
         money += q;
     }
 
@@ -46,31 +52,37 @@ public class Player extends Character implements IPlayer {
         if (q < 0) {
             throw new AssertionError();
         }
+
         money -= q;
     }
 
     public void performTurn(Game game) {
         if (game == null) {
-            throw new AssertionError();
+            throw new AssertionError("Parameter `game` is null.");
         }
         if (isDead() || game.getEnemy().isDead()) {
-            throw new AssertionError();
+            throw new AssertionError("Can't start a fight with dead people.");
         }
 
-        Parser parser = Game.COMBAT_PARSER;
         boolean hasUsedBasicAttack = false;
 
         /* Fills the player's hand. Woah, such comment :O */
         fillHand();
 
         /* Draws the interface at the beginning of the action */
-        Game.STATUS_BAR.display();
-        Tools.drawInterface(game.makeStringOfGame());
+        game.drawInterface();
 
         /* Processes the command entered by the player */
         do {
-            Tools.waitForInput(parser);
+            waitForInput();
+            while (!parser.isLastCommandLegal()) {
+                Game.STATUS_BAR.setStatus("Unknown command!",
+                        "Type `help` for a list of supported commands.");
+                game.drawInterface();
+                waitForInput();
+            }
             String cmd = parser.getLastCommand();
+
             if (parser.isLastCommandTargeted()) {
                 int targetID = parser.getLastTargetID();
                 if (targetID > getHand().getSize()) {
@@ -114,9 +126,16 @@ public class Player extends Character implements IPlayer {
             }
 
             /* Draws the interface at the end of the action */
-            Game.STATUS_BAR.display();
-            Tools.drawInterface(game.makeStringOfGame());
+            game.drawInterface();
 
         } while (!parser.getLastCommand().equals(CombatParser.CMD_END_TURN));
+    }
+
+    // TOOLS
+
+    public void waitForInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(" > ");
+        parser.parseInput(scanner.nextLine());
     }
 }

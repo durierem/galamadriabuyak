@@ -1,7 +1,5 @@
 package galamadriabuyak;
 
-import galamadriabuyak.util.Parser;
-import galamadriabuyak.util.CombatParser;
 import galamadriabuyak.util.Target;
 import galamadriabuyak.util.Type;
 import galamadriabuyak.util.Tools;
@@ -14,7 +12,6 @@ public class Game {
 
     public static final ICard[] CARD_DATABASE = JSONizer
             .cardsFromFile("./cards.json");
-    public static final Parser COMBAT_PARSER = new CombatParser();
     public static final StatusBar STATUS_BAR = new StatusBar();
 
     private final IPlayer player;
@@ -23,8 +20,9 @@ public class Game {
     // CONSTRUCTORS
 
     public Game() {
-        player = new Player("You", 1, 20,
-                        new BasicAttack("Picky Pike", "enemy/direct hit/3",
+        player = new Player("You", 1, 30,
+                        new BasicAttack("Picky Pike",
+                                "Inflicts 3 damages to the enemy.",
                                 "An ancient and beautiful decorated pike.",
                                 Effect.createEffectsArray(new Effect(Type.HIT,
                                         Target.ENEMY, 3))),
@@ -32,8 +30,9 @@ public class Game {
                         new Hand(),
                         0);
 
-        enemy = new Enemy("Bob", 1, 30,
-                        new BasicAttack("Useless Roar", "player/direct hit/5",
+        enemy = new Enemy("Bob", 1, 50,
+                        new BasicAttack("Useless Roar",
+                                "Inflict 5 damages to the enemy.",
                                 "A useless capacity",
                                 Effect.createEffectsArray(new Effect(Type.HIT,
                                         Target.ENEMY, 5))),
@@ -78,12 +77,18 @@ public class Game {
             STATUS_BAR.setStatus("YOU WIN!");
         }
         STATUS_BAR.display();
-        Tools.drawInterface(makeStringOfGame());
+        drawInterface();
+    }
+
+    public void drawInterface() {
+        Tools.clearTerminal();
+        STATUS_BAR.display();
+        System.out.print(makeStringOfGame());
     }
 
     // TOOLS
 
-    public String makeStringOfGame() {
+    private String makeStringOfGame() {
         /*
          * TODO: Automate the default cards names: it should depends on
          * IHand.MAX_SIZE.
@@ -123,8 +128,10 @@ public class Game {
                + "   3 - " + card3Name + "\n"
                + "\n"
                + " ============================================================"
-               + "==================\n";
+               + "==================\n\n";
     }
+
+    // MAIN
 
     public static void main(String[] args) {
         new Game().play();
