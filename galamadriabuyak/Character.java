@@ -85,7 +85,7 @@ public abstract class Character implements ICharacter {
             throw new AssertionError();
         }
 
-        if (q > health) {
+        if (q >= health) {
             health = 0;
             isDead = true;
         } else {
