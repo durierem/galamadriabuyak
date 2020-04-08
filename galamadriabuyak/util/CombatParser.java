@@ -85,15 +85,13 @@ public class CombatParser implements Parser {
 
     public void parseInput(String input) {
         if (input == null) {
-            throw new AssertionError("There is no input to parse.");
+            throw new AssertionError("No input to parse.");
         }
 
         final Scanner sc = new Scanner(input);
         final StringBuffer buffer = new StringBuffer();
 
-        /*
-         * Separates the command from the potential target ID.
-         */
+        /* Separates the command from the potential target ID */
         while (sc.hasNext() && !sc.hasNextInt()) {
             buffer.append(sc.next() + " ");
         }
@@ -107,19 +105,23 @@ public class CombatParser implements Parser {
         Command c = COMMANDS.get(buffer.toString());
         if (c == null) {
             lastCommand = new Command("");
-            sc.close();
-            return;
+        } else {
+            if (c.isTargeted()) {
+                if (!sc.hasNextInt()) {
+                    lastCommand = new Command("");
+                } else {
+                    final int targetID = sc.nextInt();
+                    if (targetID <= 0) {
+                        lastCommand = new Command("");
+                    } else {
+                        c.setTargetID(targetID);
+                        lastCommand = c;
+                    }
+                }
+            } else {
+                lastCommand = c;    
+            }            
         }
-        if (c.isTargeted() && sc.hasNextInt()) {
-            final int targetID = sc.nextInt();
-            if (targetID <= 0) {
-                lastCommand = new Command("");
-                sc.close();
-                return;
-            }
-            c.setTargetID(targetID);
-        }
-        lastCommand = c;
         sc.close();
     }
 }

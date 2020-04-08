@@ -58,6 +58,7 @@ public class Player extends Character implements IPlayer {
         }
 
         Parser parser = Game.COMBAT_PARSER;
+        boolean hasUsedBasicAttack = false;
 
         /* Fills the player's hand. Woah, such comment :O */
         fillHand();
@@ -87,9 +88,15 @@ public class Player extends Character implements IPlayer {
                     }
                 }
             } else if (cmd.equals(CombatParser.CMD_SKILL)) {
-                getBasicAttack().applyEffects(game, this);
-                Game.STATUS_BAR.setStatus("You use: " + game.getPlayer()
+                if (hasUsedBasicAttack) {
+                    Game.STATUS_BAR.setStatus("You have already used "
+                            + getBasicAttack().getName() +" this turn!");
+                } else {
+                    getBasicAttack().applyEffects(game, this);
+                    Game.STATUS_BAR.setStatus("You use: " + game.getPlayer()
                         .getBasicAttack().getName());
+                    hasUsedBasicAttack = true;
+                }
             } else if (cmd.equals(CombatParser.CMD_HELP)) {
                 Game.STATUS_BAR.setStatus("Available commands:",
                         parser.getAllCommands());
