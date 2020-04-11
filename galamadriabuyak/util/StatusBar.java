@@ -1,58 +1,33 @@
 package galamadriabuyak.util;
 
-/**
- * Represents a status bar made of MAX_LINES lines.
- *
- * @inv
- *      getStatus().equals(a string containg exactly MAX_LINES "\n")
- */
-public class StatusBar {
-
-    // CONSTANTS
-
-    public static final int MAX_LINES = 4;
-    public static final int WINDOW_WIDTH = 78;
-    private static final String TOP_LINE = " ============================ "
-            + "GALAMADRIABUYAK =================================\n";
+public class StatusBar implements IStatusBar {
 
     // ATTRIBUTES
 
     private String status;
+    private String lines[];
 
     // CONSTRUCTORS
 
-    /**
-     * A new empty status bar.
-     * @post
-     *      getStatus().equals(the concatenation of MAX_LINES "\n")
-     */
     public StatusBar() {
+        lines = new String[MAX_LINES];
         setEmptyStatus();
     }
 
     // REQUESTS
 
-    /**
-     * The status of this status bar.
-     */
     public String getStatus() {
         return status;
     }
 
     // COMMANDS
 
-    /**
-     * Sets the status of this status bar according to the lines in parameter.
-     * @pre
-     *      lines != null
-     *      for all i in [1..MAX_LINES]:
-     *          lines[i] != null
-     * @post
-     *      lines.length <= MAX_LINES ==>
-     *          for all i in [1..min(lines.length, MAX_LINES)]:
-     *              getStatus().contains(lines[i] + "\n")
-     */
-    public void setStatus(final String... lines) {
+    // TODO: Use the lines array instead of manipulating the whole status.
+    public void setStatus(String... lines) {
+        if (lines == null || doesContainNull(lines)) {
+            throw new AssertionError("Null parameter");
+        }
+
         final StringBuffer sb = new StringBuffer();
         final int linesNumber = Math.min(lines.length, MAX_LINES);
         int splitLinesNumber = 0;
@@ -91,25 +66,46 @@ public class StatusBar {
         status = sb.toString();
     }
 
-    /**
-     * Sets the status of this status bar to an empty one.
-     * @post
-     *      getStatus().equals(the concatenation of MAX_LINES "\n")
-     */
+    public void setStatusLine(int lineNumber, String status) {
+        if (lineNumber < 1 || lineNumber > MAX_LINES) {
+            throw new AssertionError("Out of range line");
+        }
+        if (status == null) {
+            throw new AssertionError("Null parameter");
+        }
+
+        lines[lineNumber] = status;
+    }
+
     public void setEmptyStatus() {
         final StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < MAX_LINES; i++) {
-            sb.append("\n");
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = "\n";
+            sb.append(lines[i]);
         }
         status = sb.toString();
     }
 
-    /**
-     * Displays this status bar.
-     */
     public void display() {
-        System.out.print(TOP_LINE);
         System.out.print(status);
+    }
+
+    // TOOLS
+
+    /**
+     * Checks if the given array contains a null element.
+     * @pre
+     *      array != null
+     */
+    private boolean doesContainNull(Object[] array) {
+        assert array != null;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                return true;
+            }
+        }
+        return false;
     }
 }
  
