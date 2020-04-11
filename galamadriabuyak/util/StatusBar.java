@@ -1,7 +1,12 @@
 package galamadriabuyak.util;
 
 public class StatusBar implements IStatusBar {
-
+    
+    // CONSTANTES
+    
+    private final String TOP_LINE = " ============================ "
+            + "GALAMADRIABUYAK =================================\n";
+    
     // ATTRIBUTES
 
     private String status;
@@ -87,6 +92,7 @@ public class StatusBar implements IStatusBar {
     }
 
     public void display() {
+        System.out.println(TOP_LINE);
         System.out.print(status);
     }
 

@@ -56,13 +56,13 @@ public class Enemy extends Character implements IEnemy {
             chooseAndUseCards(game);
         }
         
-        
-        StringBuffer sb = new StringBuffer();
-        sb.append(getName() + " used : ");
-        for (int i = 0; i < actNb; ++i) {
-            sb.append( " " + actArr[i] + "\n" );  
+        if (actNb > 0) {
+            Game.STATUS_BAR.setStatusLine(1, 
+                        getName() + " used : " + actArr[0]);
+        }
+        for (int i = 1; i < actNb; ++i) {
+            Game.STATUS_BAR.setStatusLine(i + 1, actArr[i]);  
         }  
-        Game.STATUS_BAR.setStatus(sb.toString());
         actNb = 0;
     }
 
