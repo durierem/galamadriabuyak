@@ -76,7 +76,6 @@ public class Game {
         } else  {
             STATUS_BAR.setStatus("YOU WIN!");
         }
-        STATUS_BAR.display();
         drawInterface();
     }
 
