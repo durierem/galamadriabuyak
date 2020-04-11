@@ -80,9 +80,9 @@ public class Game {
     }
 
     public void drawInterface() {
+        Tools.clearTerminal();
         System.out.print(" ============================ GALAMADRIABUYAK ======="
                 + "==========================\n");
-        Tools.clearTerminal();
         STATUS_BAR.display();
         System.out.print(makeStringOfGame());
     }

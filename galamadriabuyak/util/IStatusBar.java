@@ -16,13 +16,6 @@ public interface IStatusBar {
     int MAX_LINES = 4;
     int WINDOW_WIDTH = 78;
 
-    // REQUESTS
-
-    /**
-     * The status of this status bar.
-     */
-    String getStatus();
-
     // COMMANDS
 
     /**

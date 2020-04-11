@@ -56,6 +56,7 @@ public class Enemy extends Character implements IEnemy {
             chooseAndUseCards(game);
         }
         
+        Game.STATUS_BAR.setEmptyStatus();
         if (actNb > 0) {
             Game.STATUS_BAR.setStatusLine(1, 
                         getName() + " used : " + actArr[0]);
