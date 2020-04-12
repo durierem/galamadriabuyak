@@ -4,7 +4,7 @@ package galamadriabuyak.util;
  * Represents a status bar made of MAX_LINES lines.
  *
  * @inv
- *      getStatus().equals(a string containg exactly MAX_LINES "\n")
+ *      getStatus().equals(a string containing exactly MAX_LINES "\n")
  * @cons
  *      $DESC$  A new empty status bar.
  *      $POST$  getStatus().equals(the concatenation of MAX_LINES "\n")
@@ -23,10 +23,10 @@ public interface IStatusBar {
      * @pre
      *      Let n ::= the number of lines given
      *          n <= MAX_LINES
-     *          forall i in [1..n]
+     *          forall i in [1..n]:
      *              lines[i] != null
      * @post
-     *      forall i in [1..min(lines.length, MAX_LINES)]:
+     *      forall i in [1..min(n, MAX_LINES)]:
      *          getStatus().contains(lines[i] + "\n")
      */
     void setStatus(String... lines);

@@ -10,19 +10,25 @@ public abstract class Character implements ICharacter {
     private ICard basicAttack;
     private IDeck deck;
     private IHand hand;
-    private boolean isDead;
 
     // CONSTRUCTORS
 
     public Character(String name, int level, int health, ICard basicAttack,
             IDeck deck, IHand hand) {
+        if (name == null || basicAttack == null || deck == null
+                || hand == null) {
+            throw new AssertionError("Null parameter");
+        }
+        if (level <= 0 || health <= 0) {
+            throw new AssertionError("Illegal parameter");
+        }
+
         this.name = name.trim();
         this.level = level;
         this.health = health;
         this.basicAttack = basicAttack;
         this.deck = deck;
         this.hand = hand;
-        this.isDead = false;
     }
 
     // REQUESTS
@@ -52,7 +58,7 @@ public abstract class Character implements ICharacter {
     }
 
     public boolean isDead() {
-        return isDead;
+        return health == 0;
     }
 
     public ICard getBasicAttack() {
@@ -66,10 +72,7 @@ public abstract class Character implements ICharacter {
             throw new AssertionError();
         }
 
-        health = q;
-        if (health == 0) {
-            isDead = true;
-        }
+        health = Math.max(0, q);
     }
 
     public void setHealthUp(int q) {
@@ -85,17 +88,12 @@ public abstract class Character implements ICharacter {
             throw new AssertionError();
         }
 
-        if (q >= health) {
-            health = 0;
-            isDead = true;
-        } else {
-            health -= q;
-        }
+        health -= Math.min(health, q);
     }
 
     public void draw(int n) {
         if (n < 1 || n > getDeck().getSize()
-                || n > getHand().MAX_SIZE - getHand().getSize()) {
+                || n > IHand.MAX_SIZE - getHand().getSize()) {
             throw new AssertionError();
         }
 

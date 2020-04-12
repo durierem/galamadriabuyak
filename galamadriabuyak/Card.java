@@ -2,28 +2,29 @@ package galamadriabuyak;
 
 public class Card implements ICard {
     
-    // Attributs
+    // ATTRIBUTES
     
     String name;
     String description;
     String trivia;
     IEffect[] effects;
    
-    // Constructor
+    // CONSTRUCTORS
     
     public Card(String name, String description, String trivia, 
-                    IEffect[] arrayEffect) {
-        if (name == null || description == null 
-            || trivia == null || arrayEffect == null) {
-            throw new AssertionError();
+            IEffect[] effects) {
+        if (name == null || description == null || trivia == null
+                || effects == null || doesArrayContainNull(effects)) {
+            throw new AssertionError("Null parameter");
         }
+
         this.name = name;
         this.description = description;
         this.trivia = trivia;
-        effects = arrayEffect;
+        this.effects = effects;
     }
     
-    // Requests
+    // REQUESTS
     
     public String getName() {
         return name;
@@ -41,17 +42,34 @@ public class Card implements ICard {
         return effects;
     }
     
-    // Commands
+    // COMMANDS
     
     public void applyEffects(Game game, Object caller) {
-        if (game == null || effects == null) {
-            throw new AssertionError();
+        if (game == null || caller == null) {
+            throw new AssertionError("Null parameter");
         }
-        if (caller == null) {
-            throw new AssertionError();
-        }
+
         for (int i = 0;  i < effects.length; ++i) {
             effects[i].applyEffect(game, caller);
         }
+    }
+
+    // TOOLS
+
+    /**
+     * Checks if the given array contains a null element.
+     * @pre
+     *      array != null
+     */
+    private boolean doesArrayContainNull(Object[] array) {
+        assert array != null;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

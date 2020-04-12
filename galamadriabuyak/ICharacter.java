@@ -1,5 +1,5 @@
 package galamadriabuyak;
-   
+
 /**
  * Represents a character of the game.
  *
@@ -9,14 +9,14 @@ package galamadriabuyak;
  * @inv
  *      getName() != null
  *      getHealth() >= 0
- *      getHealth() == 0 ==> isDead()
- *      getHealth() > 0 ==> !isDead()
+ *      isDead() <==> (getHealth() == 0)
  *      getLevel() > 0
  *      getBasicAttack() != null
  *      getDeck() != null
  *      getHand() != null
  * @cons
- *      $DESC$ A new character with given arguments
+ *      $DESC$
+ *          A new character with given arguments.
  *      $ARGS$
  *          String name
  *          int level
@@ -40,38 +40,38 @@ package galamadriabuyak;
  *          getHand() == hand
  */
 public interface ICharacter {
-    
+
     // REQUESTS
 
     /**
      * The name of this character.
      */
     String getName();
-    
+
     /**
      * The level of this character.
      */
     int getLevel();
-    
+
     /**
      * The remaining health of this character.
      */
     int getHealth();
-    
+
     /**
      * The basic attack of this character.
      */
     ICard getBasicAttack();
-    
+
     /**
      * The hand of this character.
      */
     IHand getHand();
-    
+
     /**
      * The n-th card in the hand of this character.
      * @pre
-     *      n > 0 && n <= IHand.MAX_SIZE
+     *      1 <= n <= IHand.MAX_SIZE
      */
     ICard getHand(int n);
 
@@ -86,26 +86,24 @@ public interface ICharacter {
     boolean isDead();
 
     // COMMANDS
-    
+
     /**
      * Draws n cards for this character.
      * @pre
-     *      n >= 1 
-     *      && n <= getDeck().getSize()
-     *      && n <= IHand.MAX_SIZE - getHand().getSize()
+     *      1 <= n <= max(getDeck().getSize(),
+     *                      IHand.MAX_SIZE - getHand().getSize())
      * @post
-     *      getDeck().getSize() = old getDeck().getSize() - n
-     *      getHand().getSize() = old getHand().getSize() + n
+     *      getDeck().getSize() == old getDeck().getSize() - n
+     *      getHand().getSize() == old getHand().getSize() + n
      */
     void draw(int n);
-    
+
     /**
      * Sets the health of this character to q.
      * @pre
      *      q >= 0
      * @post
      *      getHealth() == q
-     *      q == 0 => isDead()
      */
     void setHealthTo(int q);
 
@@ -123,16 +121,15 @@ public interface ICharacter {
      * @pre
      *      q >= 0
      * @post
-     *      getHealth() == min(0, old getHealth() - q)
-     *      getHealth() == 0 ==> isDead()
+     *      getHealth() == max(0, old getHealth() - q)
      */
     void setHealthDown(int q);
-    
+
     /**
      * Fills the hand of this player with the top cards from his deck.
      * @post
-     *      Let:    dsize := getDeck().getSize()
-     *              hsize := getHand().getSize()
+     *      Let:    dsize ::= getDeck().getSize()
+     *              hsize ::= getHand().getSize()
      *      hsize == max(IHand.MAX_SIZE, old dsize - old hsize)
      *      dsize == old dsize - max(old dsize, IHand.MAX_SIZE - old hsize)
      */
