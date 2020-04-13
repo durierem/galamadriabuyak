@@ -21,12 +21,12 @@ public interface IStatusBar {
     /**
      * Sets the status of this status bar from the given lines.
      * @pre
-     *      Let n ::= the number of lines given
+     *      Let n ::= the number of lines given in parameter
      *          n <= MAX_LINES
-     *          forall i in [1..n]:
+     *          forall i in [1...n]:
      *              lines[i] != null
      * @post
-     *      forall i in [1..min(n, MAX_LINES)]:
+     *      forall i in [1...min(n, MAX_LINES)]:
      *          getStatus().contains(lines[i] + "\n")
      */
     void setStatus(String... lines);
@@ -37,12 +37,11 @@ public interface IStatusBar {
      *      1 <= lineNumber <= MAX_LINES
      *      status != null
      * @post
-     *      Let 
-     *      forall i in [1..MAX_LINES]:
-     *      i != lineNumber ==>
-     *          line i in getStatus() == old line i in getStatus()
-     *      i == lineNumber ==>
-     *          line i in getStatus() == status
+     *      forall i in [1...MAX_LINES]:
+     *          i != lineNumber ==>
+     *              line i in getStatus() == old line i in getStatus()
+     *          i == lineNumber ==>
+     *              line i in getStatus() == status
      */
     void setStatusLine(int lineNumber, String status);
 

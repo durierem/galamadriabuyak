@@ -30,14 +30,6 @@ public class Hand implements IHand {
 
     // COMMANDS
 
-    public void setSize(int n) {
-        if (n < 0 || n > MAX_SIZE) {
-            throw new AssertionError();
-        }
-
-        size = n;
-    }
-
     public void deleteCard(int n) {
         if (n < 1 || n > getSize()) {
             throw new AssertionError();

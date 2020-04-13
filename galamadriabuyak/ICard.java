@@ -2,6 +2,7 @@ package galamadriabuyak;
 
 /**
  * Represents a card.
+ *
  * Cards have a name, a description of their effects, and a bit of trivia. Their
  * effects can be applied to the game by a specified caller (be it the player
  * or an enemy).
@@ -46,7 +47,7 @@ public interface ICard {
     String getDescription();
 
     /**
-     * Returns trivias's card.
+     * Returns the trivia of the card.
      */
     String getTrivia();
 
@@ -58,8 +59,7 @@ public interface ICard {
     // COMMANDS
 
     /**
-     * Apply the different effects of the cards on the different targets.
-     * 
+     * Applies the different effects of the cards on the game.
      * @pre
      *      game != null
      *      caller != null

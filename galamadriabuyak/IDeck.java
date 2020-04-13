@@ -1,7 +1,7 @@
 package galamadriabuyak;
 
 /**
- * Models a deck of size getSizeDeck().
+ * Models a deck of size getSize().
  * You can shuffle it or draw the top card.
  *
  * @inv
@@ -41,7 +41,7 @@ public interface IDeck {
      *      getSize() > 0
      *
      * @post
-     *      getSize() = old getSizeDeck() - 1
+     *      getSize() == old getSizeDeck() - 1
      */
     void rmTopCard();
 
@@ -53,8 +53,8 @@ public interface IDeck {
      *      getSize() > 0
      *      hand.getSize() < IHand.MAX_SIZE
      * @post
-     *      getSizeDeck() = old getSizeDeck - 1
-     *      hand.getSize() = old hand.getSize() + 1
+     *      getSizeDeck() == old getSizeDeck - 1
+     *      hand.getSize() == old hand.getSize() + 1
      */
     void drawCard(IHand hand);
 
@@ -64,9 +64,10 @@ public interface IDeck {
      * @pre
      *      getSize() >= 0
      * @post
-     *      getSize() = old getSizeDeck()
+     *      getSize() == old getSizeDeck()
      */
     void shuffleDeck();
+
     /**
      * Add n randomly picked cards from possibleCards in this deck.
      * @pre

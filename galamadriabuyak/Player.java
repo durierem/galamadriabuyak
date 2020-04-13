@@ -20,6 +20,7 @@ public class Player extends Character implements IPlayer {
         if (money < 0) {
             throw new AssertionError();
         }
+        
         this.money = money;
         this.parser = new CombatParser();
     }

@@ -108,7 +108,7 @@ public interface ICharacter {
     void setHealthTo(int q);
 
     /**
-     * Increase the health of this character by q.
+     * Increases the health of this character by q.
      * @pre
      *      q >= 0
      * @post

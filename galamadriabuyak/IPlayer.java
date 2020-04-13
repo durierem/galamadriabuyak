@@ -2,7 +2,7 @@ package galamadriabuyak;
 
 /**
  * Models the player.
- * @inv 
+ * @inv
  *      getMoney() >= 0
  * @cons
  *      $DESC$ Creates a new Player.
@@ -10,16 +10,16 @@ package galamadriabuyak;
  *      $PRE$ money >= 0
  */
 public interface IPlayer extends ICharacter {
-  
+
     // REQUESTS
-    
+
     /**
      * The money of this player.
      */
     int getMoney();
-    
+
     // COMMANDS
-    
+
     /**
      * Sets the money of this player to q.
      * @pre
@@ -46,11 +46,10 @@ public interface IPlayer extends ICharacter {
      *      getMoney() == old getMoney() - q
      */
     void setMoneyDown(int q);
-    
+
     /**
      * Performs the player's turn.
-     * 
-     * @pre 
+     * @pre
      *      !isDead();
      */
     void performTurn(Game game);
