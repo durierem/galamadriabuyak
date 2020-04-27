@@ -139,7 +139,7 @@
   {
     "name": "The Wild Healer",
     "description": "Heal 30 of your health points",
-    "trivia": "Anything that comes in the range of this osbcure thing may not survive to it's hypnotic field.",
+    "trivia": "Legends say he can be found under rare circumstances in deep and dangerous forests.",
     "effects": [
       {
         "type": "heal",
